@@ -47,6 +47,16 @@ ModelImporter:
     100078: Weapon_Body
     100080: Weapon_Cylinder
     100082: Weapon_TypeWriter
+    100084: Display_01
+    100086: Display_02
+    100088: Display_03
+    100090: Display_04
+    100092: Display_05
+    100094: Display_06
+    100096: Display_07
+    100098: Display_08
+    100100: Display_09
+    100102: Display_10
     400000: Cylinder003
     400002: Cylinder004
     400004: Cylinder005
@@ -89,6 +99,16 @@ ModelImporter:
     400078: Weapon_Body
     400080: Weapon_Cylinder
     400082: Weapon_TypeWriter
+    400084: Display_01
+    400086: Display_02
+    400088: Display_03
+    400090: Display_04
+    400092: Display_05
+    400094: Display_06
+    400096: Display_07
+    400098: Display_08
+    400100: Display_09
+    400102: Display_10
     2300000: Cylinder003
     2300002: Cylinder004
     2300004: Cylinder005
@@ -130,6 +150,16 @@ ModelImporter:
     2300076: Weapon_Body
     2300078: Weapon_Cylinder
     2300080: Weapon_TypeWriter
+    2300082: Display_01
+    2300084: Display_02
+    2300086: Display_03
+    2300088: Display_04
+    2300090: Display_05
+    2300092: Display_06
+    2300094: Display_07
+    2300096: Display_08
+    2300098: Display_09
+    2300100: Display_10
     3300000: Cylinder003
     3300002: Cylinder004
     3300004: Cylinder005
@@ -171,6 +201,16 @@ ModelImporter:
     3300076: Weapon_Body
     3300078: Weapon_Cylinder
     3300080: Weapon_TypeWriter
+    3300082: Display_01
+    3300084: Display_02
+    3300086: Display_03
+    3300088: Display_04
+    3300090: Display_05
+    3300092: Display_06
+    3300094: Display_07
+    3300096: Display_08
+    3300098: Display_09
+    3300100: Display_10
     4300000: Weapon_Body
     4300002: Cylinder003
     4300004: Cylinder004
@@ -212,6 +252,16 @@ ModelImporter:
     4300076: Key_V
     4300078: Key_Return
     4300080: Key_Delete
+    4300082: Display_01
+    4300084: Display_02
+    4300086: Display_03
+    4300088: Display_04
+    4300090: Display_05
+    4300092: Display_06
+    4300094: Display_07
+    4300096: Display_08
+    4300098: Display_09
+    4300100: Display_10
     7400000: Idle
     7400002: Fire
     7400004: FireLastRound
