@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityStandardAssets.Utility;
-using UnityStandardAssets.Characters.FirstPerson;
 using Random = UnityEngine.Random;
 
 public enum GroundType
@@ -12,7 +11,8 @@ public enum GroundType
 
 public enum PlayerMoveState
 {
-    Grounded,
+    Idle,
+    GroundedMove,
     Jumping,
     Falling
 }
@@ -24,7 +24,7 @@ public class FPSPlayerController : MonoBehaviour
 
     public float m_WalkSpeed;
     public float m_RunSpeed;
-    [Range(0f, 1f)] public float m_RunstepScale = 0.7f;
+    [Range(0f, 1f)] public float m_RunStepScale = 0.7f;
     public float m_JumpSpeed;
     public float m_StickToGroundForce;
     public float m_GravityMultiplier;
@@ -35,25 +35,19 @@ public class FPSPlayerController : MonoBehaviour
     public float m_headBobBlendRate = 0.1f;
     public CurveControlledBob m_HeadBob = new CurveControlledBob();
     public LerpControlledBob m_JumpBob = new LerpControlledBob();
-    public float m_StepInterval;
+    public float m_StepCycleDistance = 1.0f;
     public FootAudioController m_FootAudio;
 
-    private PlayerMoveState m_moveState = PlayerMoveState.Grounded;
+    private PlayerMoveState m_moveState = PlayerMoveState.Idle;
     private float m_maxSpeed = 0.0f;
-    private Vector3 m_velocity = Vector3.zero;
-    private Vector3 m_acceleration = Vector3.zero;
-
+    private Vector3 m_desiredVelocity = Vector3.zero;
 
     private Camera m_Camera;
-    private bool m_Jump;
     private float m_YRotation;
     private CharacterController m_CharacterController;
     private CollisionFlags m_CollisionFlags;
-    private bool m_PreviouslyGrounded;
     private Vector3 m_OriginalCameraPosition;
-    private float m_StepCycle;
-    private float m_NextStep;
-    private bool m_Jumping;
+    private float m_stepTravel;
     private float m_bobBlend = 0.0f;
 
     // Use this for initialization
@@ -63,10 +57,8 @@ public class FPSPlayerController : MonoBehaviour
         m_Camera = Camera.main;
         m_OriginalCameraPosition = m_Camera.transform.localPosition;
         m_FovKick.Setup(m_Camera);
-        m_HeadBob.Setup(m_Camera, m_StepInterval);
-        m_StepCycle = 0f;
-        m_NextStep = m_StepCycle / 2f;
-        m_Jumping = false;
+        m_HeadBob.Setup(m_Camera);
+        m_stepTravel = 0f;
         m_MouseLook.Init(transform, m_Camera.transform);
     }
 
@@ -81,59 +73,59 @@ public class FPSPlayerController : MonoBehaviour
         {
             TryJump();
         }
-
-        if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
-        {
-            StartCoroutine(m_JumpBob.DoBobCycle());
-            if (m_FootAudio) m_FootAudio.OnLand();
-            m_Jumping = false;
-        }
-
-        m_PreviouslyGrounded = m_CharacterController.isGrounded;
     }
 
 
     private void FixedUpdate()
     {
+        PlayerMoveState prevMoveState = m_moveState;
         bool runStarted = Input.GetKeyDown(KeyCode.LeftShift);
         bool runEnded = Input.GetKeyUp(KeyCode.LeftShift);
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
+        bool wasGrounded = m_CharacterController.isGrounded;
 
         m_maxSpeed = isRunning ? m_RunSpeed : m_WalkSpeed;
 
-        Vector3 desiredVelocity = CalculateDesiredVelocity();
+        Vector3 inputVelocity = CalculateInputVelocity();
         
-        if (m_CharacterController.isGrounded && m_moveState != PlayerMoveState.Jumping)
+        if (wasGrounded && m_moveState != PlayerMoveState.Jumping)
         {
-            m_moveState = PlayerMoveState.Grounded;
+            if(m_moveState == PlayerMoveState.Falling)
+            {
+                StartCoroutine(m_JumpBob.DoBobCycle());
+                if (m_FootAudio) m_FootAudio.OnLand();
+            }
 
-            //m_velocity = Vector3.SmoothDamp(m_velocity, desiredVelocity, ref m_acceleration, 0.1f);
-            m_velocity = desiredVelocity;
+            m_desiredVelocity = inputVelocity;
 
-            m_velocity.y = -m_StickToGroundForce;
+            m_desiredVelocity.y = -m_StickToGroundForce;
         }
         else
         {
             Vector3 gravitionalVelocity = Physics.gravity * m_GravityMultiplier * Time.fixedDeltaTime;
-            desiredVelocity += gravitionalVelocity;
-            m_velocity += gravitionalVelocity;
+            inputVelocity += gravitionalVelocity;
+            m_desiredVelocity += gravitionalVelocity;
 
-            //m_velocity.x = Mathf.SmoothDamp(m_velocity.x, desiredVelocity.x, ref m_acceleration.x, 0.1f);
-            //m_velocity.y = Mathf.SmoothDamp(m_velocity.y, desiredVelocity.y, ref m_acceleration.y, 0.1f);
-            m_velocity.x = desiredVelocity.x;
-            m_velocity.z = desiredVelocity.z;
-            m_acceleration.z = 0;
-
-            if (m_moveState == PlayerMoveState.Jumping && m_velocity.y <= 0)
-            {
-                m_moveState = PlayerMoveState.Falling;
-            }
+            m_desiredVelocity.x = inputVelocity.x;
+            m_desiredVelocity.z = inputVelocity.z;
         }
-        m_CollisionFlags = m_CharacterController.Move(m_velocity * Time.fixedDeltaTime);
 
-        float speed = m_velocity.magnitude;
-        ProgressStepCycle(isRunning, speed);
-        UpdateCameraPosition(isRunning, speed);
+        m_CollisionFlags = m_CharacterController.Move(m_desiredVelocity * Time.fixedDeltaTime);
+
+        float speed = m_CharacterController.velocity.magnitude;
+
+        if(m_CharacterController.isGrounded && wasGrounded)
+        {
+            m_moveState = speed > 0.0f ? PlayerMoveState.GroundedMove : PlayerMoveState.Idle;
+        }
+        else if (m_CharacterController.velocity.y < 0)
+        {
+            m_moveState = PlayerMoveState.Falling;
+        }
+
+        float stepDistance = speed * Time.fixedDeltaTime * (isRunning ? m_RunStepScale : 1.0f);
+        ProgressStepCycle(isRunning, stepDistance, prevMoveState);
+        UpdateCameraPosition(speed, stepDistance);
 
         m_MouseLook.UpdateCursorLock();
 
@@ -148,58 +140,72 @@ public class FPSPlayerController : MonoBehaviour
 
     private void TryJump()
     {
-        if(m_moveState == PlayerMoveState.Grounded)
+        if(m_CharacterController.isGrounded)
         {
             m_moveState = PlayerMoveState.Jumping;
-            m_velocity.y = m_JumpSpeed;
+            m_desiredVelocity.y = m_JumpSpeed;
             if (m_FootAudio) m_FootAudio.OnJump();
         }
     }
 
-    private void ProgressStepCycle(bool isRunning, float speed)
+    private void ProgressStepCycle(bool isRunning, float stepDistance, PlayerMoveState prevMoveState)
     {
-        if (m_CharacterController.velocity.sqrMagnitude > 0)
+        if(stepDistance > m_StepCycleDistance)
         {
-            m_StepCycle += (m_CharacterController.velocity.magnitude + (speed * (isRunning ? m_RunstepScale : 1.0f))) *
-                         Time.fixedDeltaTime;
+            m_stepTravel = 0;
+            OnStep();
         }
-
-        if (!(m_StepCycle > m_NextStep))
+        else if (stepDistance > 0.001f)
         {
-            return;
+            m_stepTravel += stepDistance;
+            if (m_stepTravel > m_StepCycleDistance)
+            {
+                m_stepTravel -= m_StepCycleDistance;
+                OnStep();
+            }
+            //do step when moving from idle
+            else if (prevMoveState == PlayerMoveState.Idle)
+            {
+                OnStep();
+            }
         }
-
-        m_NextStep = m_StepCycle + m_StepInterval;
-
-        if(m_FootAudio && m_CharacterController.isGrounded)
+        else
         {
-            //m_FootstepAudio.m_groundType = 
+            m_stepTravel = 0;
+        }
+    }
+
+    void OnStep()
+    {
+        if (m_FootAudio && m_CharacterController.isGrounded)
+        {
             m_FootAudio.OnStep();
         }
     }
 
 
-    private void UpdateCameraPosition(bool isRunning, float speed)
+    private void UpdateCameraPosition(float speed, float stepDistance)
     {
         if (!m_UseHeadBob)
         {
             return;
         }
 
-        Vector3 BobPosition = m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude + (speed * (isRunning ? m_RunstepScale : 1.0f)));
+        Vector3 BobPosition = m_HeadBob.UpdateBob(stepDistance / m_StepCycleDistance);
         Vector3 NoBobPosition = m_Camera.transform.localPosition;
         NoBobPosition.y = m_OriginalCameraPosition.y;
 
-        bool IsHeadBobbing = m_CharacterController.velocity.magnitude > 0 && m_CharacterController.isGrounded;
+        bool IsHeadBobbing = m_moveState == PlayerMoveState.GroundedMove;
         m_bobBlend = Mathf.Clamp01(m_bobBlend + (Time.deltaTime / m_headBobBlendRate) * (IsHeadBobbing ? 1 : -1));
 
-        Vector3 newCameraPosition = Vector3.Lerp(NoBobPosition, BobPosition, m_bobBlend);
+        float easedBlend = Easing.Ease01(m_bobBlend, Easing.Method.QuadInOut);
+        Vector3 newCameraPosition = Vector3.Lerp(NoBobPosition, BobPosition, easedBlend);
         newCameraPosition.y -= m_JumpBob.Offset();
         m_Camera.transform.localPosition = newCameraPosition;
     }
 
 
-    private Vector3 CalculateDesiredVelocity()
+    private Vector3 CalculateInputVelocity()
     {
         if(m_gunController && m_gunController.GetIsReloading())
         {

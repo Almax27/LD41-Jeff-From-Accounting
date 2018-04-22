@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,10 +14,12 @@ public class ProjectileController : MonoBehaviour {
     public char letter = ' ';
     public LayerMask layerMask = new LayerMask();
     public GameObject instigator = null;
+    public Action<bool> hitCallback = null;
 
     public TextMesh textMesh = null;
 
     float m_distanceTraveled = 0.0f;
+    
 
     // Use this for initialization
     void Start () {

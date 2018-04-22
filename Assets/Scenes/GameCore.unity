@@ -410,16 +410,6 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 114461039772335854, guid: 3ddab1046ddaf3548853296de5ec65c9,
-        type: 2}
-      propertyPath: m_RunstepLenghten
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 114461039772335854, guid: 3ddab1046ddaf3548853296de5ec65c9,
-        type: 2}
-      propertyPath: m_headBobBlendRate
-      value: 0.25
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ddab1046ddaf3548853296de5ec65c9, type: 2}
   m_IsPrefabParent: 0

@@ -25,6 +25,7 @@ public class GunController : MonoBehaviour {
     public Transform muzzleTranform = null;
     public Animator gunRootAnimator = null;
     public Animator gunAnimator = null;
+    public GunAudioController gunAudioController = null;
 
     [Header("Keys")]
     public List<GunKeyBinding> gunKeys = new List<GunKeyBinding>();
@@ -48,13 +49,21 @@ public class GunController : MonoBehaviour {
     {
         if(CanFire())
         {
-            OnFire();
+            if (Ammo.Count > 0)
+            {
+                OnFire();
+            }
+            else
+            {
+                OnDryFire();
+            }
         }
+
     }
 
     bool CanFire()
     {
-        return Ammo.Count > 0 && !m_isReloading;
+        return !m_isReloading;
     }
 
     void OnFire()
@@ -77,6 +86,19 @@ public class GunController : MonoBehaviour {
                     gunAnimator.SetTrigger("OnFire");
                 }
             }
+
+            if (gunAudioController)
+            {
+                gunAudioController.OnFire();
+            }
+        }
+    }
+
+    void OnDryFire()
+    {
+        if (gunAudioController)
+        {
+            gunAudioController.OnDryFire();
         }
     }
 
@@ -150,14 +172,29 @@ public class GunController : MonoBehaviour {
 
     void SetReloadState(bool isReloading)
     {
-        m_isReloading = isReloading;
-        if (gunAnimator)
+        if (isReloading != m_isReloading)
         {
-            gunAnimator.SetBool("IsReloading", isReloading);
-        }
-        if (gunRootAnimator)
-        {
-            gunRootAnimator.SetBool("IsReloading", isReloading);
+            m_isReloading = isReloading;
+            if (gunAnimator)
+            {
+                gunAnimator.SetBool("IsReloading", isReloading);
+            }
+            if (gunRootAnimator)
+            {
+                gunRootAnimator.SetBool("IsReloading", isReloading);
+            }
+
+            if (gunAudioController)
+            {
+                if (isReloading)
+                {
+                    gunAudioController.OnReloadStart();
+                }
+                else
+                {
+                    gunAudioController.OnReloadEnd();
+                }
+            }
         }
     }
 
@@ -234,6 +271,11 @@ public class GunController : MonoBehaviour {
             char upperChar = keyCode.ToString().ToUpper()[0];
             Ammo.Add(upperChar);
             UpdateAmmoDisplay();
+
+            if(gunAudioController)
+            {
+                gunAudioController.OnReloadKeyPress();
+            }
         }
     }
 
@@ -243,6 +285,10 @@ public class GunController : MonoBehaviour {
         {
             Ammo.RemoveAt(Ammo.Count - 1);
             UpdateAmmoDisplay();
+            if (gunAudioController)
+            {
+                gunAudioController.OnReloadKeyPress();
+            }
         }
     }
 
