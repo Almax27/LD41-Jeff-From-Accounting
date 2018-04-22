@@ -5,9 +5,19 @@ public class CameraFacingBillboard : MonoBehaviour
 {
     public Camera m_Camera;
 
+    private void Start()
+    {
+        AlignToCamera();
+    }
+
     void Update()
     {
-        if(m_Camera == null)
+        AlignToCamera();
+    }
+
+    void AlignToCamera()
+    {
+        if (m_Camera == null)
         {
             m_Camera = Camera.main;
         }

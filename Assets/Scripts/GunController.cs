@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Linq.Expressions;
 using System;
@@ -26,6 +27,7 @@ public class GunController : MonoBehaviour {
     public Animator gunRootAnimator = null;
     public Animator gunAnimator = null;
     public GunAudioController gunAudioController = null;
+    public RectTransform reticuleUI = null;
 
     [Header("Keys")]
     public List<GunKeyBinding> gunKeys = new List<GunKeyBinding>();
@@ -58,7 +60,6 @@ public class GunController : MonoBehaviour {
                 OnDryFire();
             }
         }
-
     }
 
     bool CanFire()
@@ -112,6 +113,18 @@ public class GunController : MonoBehaviour {
             projectile = gobj.GetComponent<ProjectileController>();
             projectile.letter = letter;
             projectile.direction = muzzleTranform.forward;
+
+            if (reticuleUI)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(reticuleUI.position);
+                RaycastHit hitInfo;
+                if (Physics.Raycast(ray, out hitInfo, projectile.maxDistance))
+                {
+                    Debug.DrawLine(muzzleTranform.position, hitInfo.point, Color.white, 1.0f);
+                    projectile.direction = (hitInfo.point - muzzleTranform.position).normalized;
+                }
+            }
+
             return projectile;
         }
         return projectile;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public struct DamagePacket
 {
@@ -25,7 +26,7 @@ public class Health : MonoBehaviour {
     public float destroyOnDeathDelay = -1;
 
     [Header("Text")]
-    public Text m_healthText = null;
+    public TextMeshPro m_healthText = null;
     public Color m_defaultColor = Color.white;
     public Color m_damagedColor = Color.grey;
 
@@ -86,7 +87,7 @@ public class Health : MonoBehaviour {
                     text += string.Format("<color=#{0}>{1}</color>", defaultColorHex, m_healthLetters[i]);
                 }
             }
-            m_healthText.text = text;
+            m_healthText.SetText(text);
         }
     }
 
