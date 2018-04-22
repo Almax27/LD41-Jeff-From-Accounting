@@ -32,7 +32,7 @@ public class Health : MonoBehaviour {
     public Color m_removedColor = Color.grey;
     public Color m_damagedColor = Color.red;
     
-    public void TakeDamage(DamagePacket packet)
+    public bool TakeDamage(DamagePacket packet)
     {
         if (m_healthValue > 0)
         {
@@ -57,8 +57,10 @@ public class Health : MonoBehaviour {
                 {
                     OnDeath(packet);
                 }
+                return true;
             }
         }
+        return false;
     }
 
     public IEnumerator WaitForRecentDamage()

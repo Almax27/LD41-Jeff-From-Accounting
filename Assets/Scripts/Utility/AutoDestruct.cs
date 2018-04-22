@@ -13,9 +13,18 @@ public class AutoDestruct : MonoBehaviour {
     public float delay;
     public bool waitForParticles = true;
     private float tick;
-	
-	// Update is called once per frame
-	void Update () 
+
+    private void OnEnable()
+    {
+        foreach (var ps in GetComponentsInChildren<ParticleSystem>())
+        {
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+            ps.Play(true);
+        }
+    }
+
+    // Update is called once per frame
+    void Update () 
     {
         if (tick > delay)
         {
@@ -26,6 +35,7 @@ public class AutoDestruct : MonoBehaviour {
                 {
                     if (ps.IsAlive())
                     {
+                        ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
                         destruct = false;
                         break;
                     }

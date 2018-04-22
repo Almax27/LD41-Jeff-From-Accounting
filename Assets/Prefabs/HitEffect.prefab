@@ -55,7 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mode: 1
   delay: 0.2
-  waitForParticles: 0
+  waitForParticles: 1
 --- !u!198 &198534855951232114
 ParticleSystem:
   m_ObjectHideFlags: 1

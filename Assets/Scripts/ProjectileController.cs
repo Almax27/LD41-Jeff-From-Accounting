@@ -113,8 +113,14 @@ public class ProjectileController : MonoBehaviour {
         DamagePacket packet = new DamagePacket();
         packet.instigator = instigator;
         packet.letter = letter;
-        health.TakeDamage(packet);
-        onDamagedSpawner.ProcessSpawns(transform, hit.point, Quaternion.LookRotation(hit.normal), Vector3.one);
+        if (health.TakeDamage(packet))
+        {
+            onDamagedSpawner.ProcessSpawns(transform, hit.point, Quaternion.LookRotation(hit.normal), Vector3.one);
+        }
+        else
+        {
+            OnHitNoDamage(hit);
+        }
     }
 
     void OnHitNoDamage(RaycastHit hit)
