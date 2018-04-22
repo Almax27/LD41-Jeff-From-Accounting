@@ -5,29 +5,32 @@ using UnityStandardAssets.Utility;
 using UnityStandardAssets.Characters.FirstPerson;
 using Random = UnityEngine.Random;
 
+public enum GroundType
+{
+    Default
+}
+
 [RequireComponent(typeof(CharacterController))]
-[RequireComponent(typeof(AudioSource))]
 public class FPSPlayerController : MonoBehaviour
 {
     public GunController m_gunController = null;
 
-    [SerializeField] private bool m_IsWalking;
-    [SerializeField] private float m_WalkSpeed;
-    [SerializeField] private float m_RunSpeed;
-    [SerializeField] [Range(0f, 1f)] private float m_RunstepLenghten;
-    [SerializeField] private float m_JumpSpeed;
-    [SerializeField] private float m_StickToGroundForce;
-    [SerializeField] private float m_GravityMultiplier;
-    [SerializeField] private MouseLook m_MouseLook;
-    [SerializeField] private bool m_UseFovKick;
-    [SerializeField] private FOVKick m_FovKick = new FOVKick();
-    [SerializeField] private bool m_UseHeadBob;
-    [SerializeField] private CurveControlledBob m_HeadBob = new CurveControlledBob();
-    [SerializeField] private LerpControlledBob m_JumpBob = new LerpControlledBob();
-    [SerializeField] private float m_StepInterval;
-    [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
-    [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
-    [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+    public bool m_IsWalking;
+    public float m_WalkSpeed;
+    public float m_RunSpeed;
+    [Range(0f, 1f)] public float m_RunstepScale = 0.7f;
+    public float m_JumpSpeed;
+    public float m_StickToGroundForce;
+    public float m_GravityMultiplier;
+    public MouseLook m_MouseLook;
+    public bool m_UseFovKick;
+    public FOVKick m_FovKick = new FOVKick();
+    public bool m_UseHeadBob;
+    public float m_headBobBlendRate = 0.1f;
+    public CurveControlledBob m_HeadBob = new CurveControlledBob();
+    public LerpControlledBob m_JumpBob = new LerpControlledBob();
+    public float m_StepInterval;
+    public FootAudioController m_FootAudio;
 
     private Camera m_Camera;
     private bool m_Jump;
@@ -41,7 +44,7 @@ public class FPSPlayerController : MonoBehaviour
     private float m_StepCycle;
     private float m_NextStep;
     private bool m_Jumping;
-    private AudioSource m_AudioSource;
+    private float m_bobBlend = 0.0f;
 
     // Use this for initialization
     private void Start()
@@ -54,7 +57,6 @@ public class FPSPlayerController : MonoBehaviour
         m_StepCycle = 0f;
         m_NextStep = m_StepCycle / 2f;
         m_Jumping = false;
-        m_AudioSource = GetComponent<AudioSource>();
         m_MouseLook.Init(transform, m_Camera.transform);
     }
 
@@ -72,7 +74,7 @@ public class FPSPlayerController : MonoBehaviour
         if (!m_PreviouslyGrounded && m_CharacterController.isGrounded)
         {
             StartCoroutine(m_JumpBob.DoBobCycle());
-            PlayLandingSound();
+            if (m_FootAudio) m_FootAudio.OnLand();
             m_MoveDir.y = 0f;
             m_Jumping = false;
         }
@@ -82,14 +84,6 @@ public class FPSPlayerController : MonoBehaviour
         }
 
         m_PreviouslyGrounded = m_CharacterController.isGrounded;
-    }
-
-
-    private void PlayLandingSound()
-    {
-        m_AudioSource.clip = m_LandSound;
-        m_AudioSource.Play();
-        m_NextStep = m_StepCycle + .5f;
     }
 
 
@@ -117,7 +111,7 @@ public class FPSPlayerController : MonoBehaviour
             if (m_Jump)
             {
                 m_MoveDir.y = m_JumpSpeed;
-                PlayJumpSound();
+                if (m_FootAudio) m_FootAudio.OnJump();
                 m_Jump = false;
                 m_Jumping = true;
             }
@@ -134,19 +128,11 @@ public class FPSPlayerController : MonoBehaviour
         m_MouseLook.UpdateCursorLock();
     }
 
-
-    private void PlayJumpSound()
-    {
-        m_AudioSource.clip = m_JumpSound;
-        m_AudioSource.Play();
-    }
-
-
     private void ProgressStepCycle(float speed)
     {
         if (m_CharacterController.velocity.sqrMagnitude > 0 && (m_Input.x != 0 || m_Input.y != 0))
         {
-            m_StepCycle += (m_CharacterController.velocity.magnitude + (speed * (m_IsWalking ? 1f : m_RunstepLenghten))) *
+            m_StepCycle += (m_CharacterController.velocity.magnitude + (speed * (m_IsWalking ? 1f : m_RunstepScale))) *
                          Time.fixedDeltaTime;
         }
 
@@ -157,47 +143,30 @@ public class FPSPlayerController : MonoBehaviour
 
         m_NextStep = m_StepCycle + m_StepInterval;
 
-        PlayFootStepAudio();
-    }
-
-
-    private void PlayFootStepAudio()
-    {
-        if (!m_CharacterController.isGrounded)
+        if(m_FootAudio && m_CharacterController.isGrounded)
         {
-            return;
+            //m_FootstepAudio.m_groundType = 
+            m_FootAudio.OnStep();
         }
-        // pick & play a random footstep sound from the array,
-        // excluding sound at index 0
-        int n = Random.Range(1, m_FootstepSounds.Length);
-        m_AudioSource.clip = m_FootstepSounds[n];
-        m_AudioSource.PlayOneShot(m_AudioSource.clip);
-        // move picked sound to index 0 so it's not picked next time
-        m_FootstepSounds[n] = m_FootstepSounds[0];
-        m_FootstepSounds[0] = m_AudioSource.clip;
     }
 
 
     private void UpdateCameraPosition(float speed)
     {
-        Vector3 newCameraPosition;
         if (!m_UseHeadBob)
         {
             return;
         }
-        if (m_CharacterController.velocity.magnitude > 0 && m_CharacterController.isGrounded)
-        {
-            m_Camera.transform.localPosition =
-                m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude +
-                                  (speed * (m_IsWalking ? 1f : m_RunstepLenghten)));
-            newCameraPosition = m_Camera.transform.localPosition;
-            newCameraPosition.y = m_Camera.transform.localPosition.y - m_JumpBob.Offset();
-        }
-        else
-        {
-            newCameraPosition = m_Camera.transform.localPosition;
-            newCameraPosition.y = m_OriginalCameraPosition.y - m_JumpBob.Offset();
-        }
+
+        Vector3 BobPosition = m_HeadBob.DoHeadBob(m_CharacterController.velocity.magnitude + (speed * (m_IsWalking ? 1f : m_RunstepScale)));
+        Vector3 NoBobPosition = m_Camera.transform.localPosition;
+        NoBobPosition.y = m_OriginalCameraPosition.y;
+
+        bool IsHeadBobbing = m_CharacterController.velocity.magnitude > 0 && m_CharacterController.isGrounded;
+        m_bobBlend = Mathf.Clamp01(m_bobBlend + (Time.deltaTime / m_headBobBlendRate) * (IsHeadBobbing ? 1 : -1));
+
+        Vector3 newCameraPosition = Vector3.Lerp(NoBobPosition, BobPosition, m_bobBlend);
+        newCameraPosition.y -= m_JumpBob.Offset();
         m_Camera.transform.localPosition = newCameraPosition;
     }
 
