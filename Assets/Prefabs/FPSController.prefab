@@ -4026,7 +4026,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.049
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -4671,8 +4671,14 @@ MonoBehaviour:
   m_setup:
   - m_groundType: 0
     m_footsteps:
-    - {fileID: 8300000, guid: 42e65e088b3f4374e851b8dbd38f3df9, type: 3}
-    - {fileID: 8300000, guid: 8bc94ec6ed537e743b481638bdcd503d, type: 3}
+    - {fileID: 8300000, guid: c2a1f2c89b66b4a46b6c1f8ad85bdec4, type: 3}
+    - {fileID: 8300000, guid: aae10e7260e796b4483c3f42e7771727, type: 3}
+    - {fileID: 8300000, guid: c6412207e2aa8084190a5df6b8fd07ce, type: 3}
+    - {fileID: 8300000, guid: 1b87540d324f3284b96b007e7a23d4b1, type: 3}
+    - {fileID: 8300000, guid: 0625ea01fe153b446abed58018a25522, type: 3}
+    - {fileID: 8300000, guid: 3c4a5c6b82863f54dbc1a05cbd1af6b5, type: 3}
+    - {fileID: 8300000, guid: af3e23f8094be4840866a88e78775cb6, type: 3}
+    - {fileID: 8300000, guid: aeeaeb23970d3cf4d9bf77d19f330b63, type: 3}
     m_jump: {fileID: 8300000, guid: 5897aeed9b676024fbb8c694b421a861, type: 3}
     m_land: {fileID: 8300000, guid: 3b09d59f4499d45428baa7a21e954296, type: 3}
     m_pitchVariance: 0.1
@@ -4899,27 +4905,48 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ReloadStart:
-    clips: []
-    pitchVariance: 0
+    m_clips:
+    - {fileID: 8300000, guid: 0561a18c25b8c0045a96b0fc74e3c8d9, type: 3}
+    m_pitch: 1
+    m_pitchVariance: 0
+    m_volume: 0.3
+    m_volumeVariance: 0
   ReloadKeyPress:
-    clips: []
-    pitchVariance: 0
+    m_clips:
+    - {fileID: 8300000, guid: 228f3f21775ad0c439b1a5af15060fba, type: 3}
+    - {fileID: 8300000, guid: 334f58ff727136647acfc812751bff86, type: 3}
+    - {fileID: 8300000, guid: b19f4ab3afd033143b99694a52580610, type: 3}
+    - {fileID: 8300000, guid: 8a25a117661c3a4489ea3dca676b04b0, type: 3}
+    - {fileID: 8300000, guid: 3c9fc7461ef7bf8458e619e7952c08c2, type: 3}
+    - {fileID: 8300000, guid: 07e29eb3c3d70354595deee3cc920e47, type: 3}
+    m_pitch: 1
+    m_pitchVariance: 0.05
+    m_volume: 0.8
+    m_volumeVariance: 0
   ReloadEnd:
-    clips: []
-    pitchVariance: 0
+    m_clips:
+    - {fileID: 8300000, guid: d5d379e83d90ed949907f53e25942cd6, type: 3}
+    m_pitch: 1
+    m_pitchVariance: 0.05
+    m_volume: 0.8
+    m_volumeVariance: 0
   Fire:
-    clips:
-    - {fileID: 8300000, guid: 5a9383dda6cabc047b7a297602e93eb4, type: 3}
-    pitchVariance: 0
+    m_clips:
+    - {fileID: 8300000, guid: 4edf3cfcd28393045b5381fd4c6d6064, type: 3}
+    m_pitch: 1
+    m_pitchVariance: 0.05
+    m_volume: 1
+    m_volumeVariance: 0.05
   DryFire:
-    clips: []
-    pitchVariance: 0
-  Hit:
-    clips: []
-    pitchVariance: 0
-  HitDamaging:
-    clips: []
-    pitchVariance: 0
+    m_clips:
+    - {fileID: 8300000, guid: 99f2bacad9a97074b8e0ee3567244291, type: 3}
+    - {fileID: 8300000, guid: 4fdc2b24f7224f84ea5fa869908aa732, type: 3}
+    - {fileID: 8300000, guid: 8403844679a8ddc4f8e07a13cb87b0a7, type: 3}
+    - {fileID: 8300000, guid: 05535fbc600507a4b8b2620214eade03, type: 3}
+    m_pitch: 1
+    m_pitchVariance: 0.05
+    m_volume: 0.3
+    m_volumeVariance: 0.05
 --- !u!114 &114764777044815038
 MonoBehaviour:
   m_ObjectHideFlags: 1
