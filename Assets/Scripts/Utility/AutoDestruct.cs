@@ -1,8 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum AutoDestructMode
+{
+    Destroy,
+    Deactivate
+}
+
 public class AutoDestruct : MonoBehaviour {
 
+    public AutoDestructMode mode = AutoDestructMode.Destroy;
     public float delay;
     public bool waitForParticles = true;
     private float tick;
@@ -12,21 +19,29 @@ public class AutoDestruct : MonoBehaviour {
     {
         if (tick > delay)
         {
-            bool destroy = true;
+            bool destruct = true;
             if (waitForParticles)
             {
                 foreach (var ps in GetComponentsInChildren<ParticleSystem>())
                 {
                     if (ps.IsAlive())
                     {
-                        destroy = false;
+                        destruct = false;
                         break;
                     }
                 }
             }
-            if (destroy)
+            if (destruct)
             {
-                Destroy(gameObject);
+                switch (mode)
+                {
+                    case AutoDestructMode.Destroy:
+                        Destroy(gameObject);
+                        break;
+                    case AutoDestructMode.Deactivate:
+                        gameObject.SetActive(false);
+                        break;
+                }
             }
         }
         else

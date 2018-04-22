@@ -20,6 +20,8 @@ public class ProjectileController : MonoBehaviour {
     public TextMeshPro text = null;
 
     public List<FollowEffect> effectPrefabs = new List<FollowEffect>();
+    public Spawner onHitSpawner = new Spawner();
+    public Spawner onDamagedSpawner = new Spawner();
 
     float m_distanceTraveled = 0.0f;
     List<FollowEffect> m_activeEffects = new List<FollowEffect>();
@@ -80,43 +82,44 @@ public class ProjectileController : MonoBehaviour {
         m_distanceTraveled += distanceMovedThisFrame;
 
         //do movement cast
-        bool hitFound = false;
         RaycastHit hitInfo;
-        if (Physics.SphereCast(preMovePosition, damageRadius, direction, out hitInfo, distanceMovedThisFrame, damageMask))
+        if (!Physics.Raycast(preMovePosition, direction, out hitInfo, distanceMovedThisFrame, hitMask))
+        {
+            Physics.SphereCast(preMovePosition, damageRadius, direction, out hitInfo, distanceMovedThisFrame, damageMask);
+        }
+        if(hitInfo.collider)
         {
             Health health = hitInfo.collider.GetComponent<Health>();
             if (health)
             {
-                DealDamage(health);
-                hitFound = true;
+                OnHitDamage(health, hitInfo);
             }
-        }
-        if(!hitFound)
-        {
-            if(Physics.Raycast(preMovePosition, direction, out hitInfo, distanceMovedThisFrame, hitMask))
+            else
             {
-                hitFound = true;
+                OnHitNoDamage(hitInfo);
             }
-        }
-        if(hitFound)
-        {
             transform.position = hitInfo.point;
             Destroy(gameObject);
             DebugExtension.DebugWireSphere(hitInfo.point, damageRadius, 1.0f);
         }
-
         if(m_distanceTraveled > maxDistance)
         {
             OnExpired();
         }
     }
 
-    void DealDamage(Health health)
+    void OnHitDamage(Health health, RaycastHit hit)
     {
         DamagePacket packet = new DamagePacket();
         packet.instigator = instigator;
         packet.letter = letter;
         health.TakeDamage(packet);
+        onDamagedSpawner.ProcessSpawns(transform, hit.point, Quaternion.LookRotation(hit.normal), Vector3.one);
+    }
+
+    void OnHitNoDamage(RaycastHit hit)
+    {
+        onHitSpawner.ProcessSpawns(transform, hit.point, Quaternion.LookRotation(hit.normal), Vector3.one);
     }
 
     void OnExpired()

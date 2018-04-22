@@ -238,10 +238,26 @@ MonoBehaviour:
     m_Bits: 1
   damageMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 512
   instigator: {fileID: 0}
   text: {fileID: 114092812766486560}
   effectPrefabs: []
+  onHitSpawner:
+    objectsToSpawn:
+    - gameobject: {fileID: 1802533186835588, guid: 942932058b5a8d8459a051a0cae453b9,
+        type: 2}
+      addAsChild: 0
+      copyPosition: 1
+      copyRotation: 1
+      copyLocalScale: 0
+  onDamagedSpawner:
+    objectsToSpawn:
+    - gameobject: {fileID: 1328686262800154, guid: c1b5a32f59809b84c88f5576bb905e6e,
+        type: 2}
+      addAsChild: 0
+      copyPosition: 1
+      copyRotation: 1
+      copyLocalScale: 0
 --- !u!114 &114483998123331440
 MonoBehaviour:
   m_ObjectHideFlags: 1

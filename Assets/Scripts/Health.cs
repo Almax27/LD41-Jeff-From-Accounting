@@ -19,6 +19,7 @@ public class Health : MonoBehaviour {
     public bool m_forceCaps = true;
     public bool m_ignoreLetters = false;
     int m_healthValue = 0;
+    int m_recentlyDamagedCount = 0;
 
     [Header("Death")]
 
@@ -28,12 +29,14 @@ public class Health : MonoBehaviour {
     [Header("Text")]
     public TextMeshPro m_healthText = null;
     public Color m_defaultColor = Color.white;
-    public Color m_damagedColor = Color.grey;
-
+    public Color m_removedColor = Color.grey;
+    public Color m_damagedColor = Color.red;
+    
     public void TakeDamage(DamagePacket packet)
     {
         if (m_healthValue > 0)
         {
+            int letterIndex = m_healthLetters.Length - m_healthValue;
             char nextLetter = m_healthLetters[m_healthLetters.Length - m_healthValue];
             if (m_forceCaps)
             {
@@ -47,6 +50,8 @@ public class Health : MonoBehaviour {
             if (packet.letter == nextLetter)
             {
                 m_healthValue--;
+                m_recentlyDamagedCount++;
+                StartCoroutine(WaitForRecentDamage());
                 OnDamage(packet);
                 if (m_healthValue == 0)
                 {
@@ -54,6 +59,13 @@ public class Health : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public IEnumerator WaitForRecentDamage()
+    {
+        yield return new WaitForSeconds(0.5f);
+        m_recentlyDamagedCount--;
+        OnHealthChanged();
     }
 
     public void SetHealth(string healthLetters)
@@ -64,6 +76,7 @@ public class Health : MonoBehaviour {
 
     private void Reset()
     {
+        StopAllCoroutines();
         if (m_forceCaps) m_healthLetters = m_healthLetters.ToUpper();
         m_healthValue = m_healthLetters.Length;
         OnHealthChanged();
@@ -74,12 +87,18 @@ public class Health : MonoBehaviour {
         if(m_healthText)
         {
             string defaultColorHex = ColorUtility.ToHtmlStringRGBA(m_defaultColor);
+            string removedColorHex = ColorUtility.ToHtmlStringRGBA(m_removedColor);
             string damagedColorHex = ColorUtility.ToHtmlStringRGBA(m_damagedColor);
             string text = "";
-            for(int i = 0; i < m_healthLetters.Length; i++)
+            int nextLetterIndex = m_healthLetters.Length - m_healthValue;
+            for (int i = 0; i < m_healthLetters.Length; i++)
             {
-                if(i < m_healthLetters.Length - m_healthValue)
-                {//damaged
+                if(i < nextLetterIndex - m_recentlyDamagedCount)
+                {
+                    text += string.Format("<color=#{0}>{1}</color>", removedColorHex, m_healthLetters[i]);
+                }
+                else if(i < nextLetterIndex)
+                {
                     text += string.Format("<color=#{0}>{1}</color>", damagedColorHex, m_healthLetters[i]);
                 }
                 else
@@ -108,5 +127,10 @@ public class Health : MonoBehaviour {
     private void Start()
     {
         Reset();
+    }
+
+    private void Update()
+    {
+        
     }
 }

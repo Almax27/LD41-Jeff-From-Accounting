@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23133860248360530}
   - component: {fileID: 222478928283032868}
   - component: {fileID: 114168568416360802}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TextMeshPro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 136585321151356198}
   - component: {fileID: 23403407142912596}
   - component: {fileID: 114957585485031238}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: TestEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1819914431137664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.31, y: 1, z: 7.83}
+  m_LocalPosition: {x: -1.67, y: 1, z: 6.01}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224577110723076036}
@@ -275,7 +275,8 @@ MonoBehaviour:
   destroyOnDeathDelay: 0
   m_healthText: {fileID: 114168568416360802}
   m_defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  m_damagedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_removedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_damagedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!136 &136585321151356198
 CapsuleCollider:
   m_ObjectHideFlags: 1

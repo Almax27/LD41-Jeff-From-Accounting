@@ -12,56 +12,52 @@ public class GunAudio
     public float m_volumeVariance = 0.0f;
 }
 
-[RequireComponent(typeof(AudioSource))]
 public class GunAudioController : MonoBehaviour {
 
+    [Header("Setup")]
     public GunAudio ReloadStart;
     public GunAudio ReloadKeyPress;
     public GunAudio ReloadEnd;
     public GunAudio Fire;
     public GunAudio DryFire;
 
-    AudioSource m_audioSource = null;
+    [Header("Sources")]
+    public AudioSource m_muzzleSource = null;
+    public AudioSource m_reloadSource = null;
 
-    private void Awake()
+    void PlayGunAudio(AudioSource source, GunAudio gunAudio)
     {
-        m_audioSource = GetComponent<AudioSource>();
-        Debug.Assert(m_audioSource);
-    }
-
-    void PlayGunAudio(GunAudio gunAudio)
-    {
-        if(m_audioSource && gunAudio != null && gunAudio.m_clips.Count > 0)
+        if(source && gunAudio != null && gunAudio.m_clips.Count > 0)
         {
-            m_audioSource.clip = gunAudio.m_clips[Random.Range(0, gunAudio.m_clips.Count)];
-            m_audioSource.pitch = gunAudio.m_pitch + Random.Range(-gunAudio.m_pitchVariance, gunAudio.m_pitchVariance);
-            m_audioSource.volume = gunAudio.m_volume + Random.Range(-gunAudio.m_volumeVariance, gunAudio.m_volumeVariance);
-            m_audioSource.Play();
+            source.clip = gunAudio.m_clips[Random.Range(0, gunAudio.m_clips.Count)];
+            source.pitch = gunAudio.m_pitch + Random.Range(-gunAudio.m_pitchVariance, gunAudio.m_pitchVariance);
+            source.volume = gunAudio.m_volume + Random.Range(-gunAudio.m_volumeVariance, gunAudio.m_volumeVariance);
+            source.Play();
         }
     }
 
     public void OnReloadStart()
     {
-        PlayGunAudio(ReloadStart);
+        PlayGunAudio(m_reloadSource, ReloadStart);
     }
 
     public void OnReloadKeyPress()
     {
-        PlayGunAudio(ReloadKeyPress);
+        PlayGunAudio(m_reloadSource, ReloadKeyPress);
     }
 
     public void OnReloadEnd()
     {
-        PlayGunAudio(ReloadEnd);
+        PlayGunAudio(m_reloadSource, ReloadEnd);
     }
 
     public void OnFire()
     {
-        PlayGunAudio(Fire);
+        PlayGunAudio(m_muzzleSource, Fire);
     }
 
     public void OnDryFire()
     {
-        PlayGunAudio(DryFire);
+        PlayGunAudio(m_muzzleSource, DryFire);
     }
 }

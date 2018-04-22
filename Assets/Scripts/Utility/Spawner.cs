@@ -35,7 +35,7 @@ public class Spawner
         {
             if (def.gameobject)
             {
-                var gobj = Object.Instantiate<GameObject>(def.gameobject);
+                var gobj = GameObjectPoolManager.Instance.GetOrCreate(def.gameobject);
                 if (def.addAsChild)
                 {
                     gobj.transform.parent = parent;
