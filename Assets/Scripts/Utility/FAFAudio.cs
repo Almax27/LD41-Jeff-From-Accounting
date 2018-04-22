@@ -1,13 +1,63 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using System.Collections;
+using System.Collections.Generic;
 
 public class FAFAudio : SingletonBehaviour<FAFAudio>
 {
     AudioSource musicSource = null;
     AudioSource nextMusicSource = null;
+    List<AudioSource> pool = new List<AudioSource>();
+    Stack<AudioSource> freeStack = new Stack<AudioSource>();
     float fadeIn = 1;
     float fadeOut = 1;
     bool crossfade = false;
+
+    public AudioSource Play(AudioClip _clip, Vector3 _pos, float _volume = 1, float _pitch = 1, AudioMixerGroup _mixerGroup = null)
+    {
+        AudioSource source = null;
+        if (freeStack.Count > 0)
+        {
+            source = freeStack.Pop();
+        }
+        else
+        {
+            GameObject gobj = new GameObject(_clip.name, typeof(AudioSource));
+            if(gobj)
+            {
+                source = gobj.GetComponent<AudioSource>();
+                pool.Add(source);
+            }
+        }
+        if(source)
+        {
+            source.transform.parent = this.transform;
+            source.gameObject.SetActive(true);
+            source.clip = _clip;
+            source.transform.position = _pos;
+            source.volume = _volume;
+            source.pitch = _pitch;
+            source.outputAudioMixerGroup = _mixerGroup;
+            source.loop = false;
+            source.Play();
+            StartCoroutine(FreeAudioSource(source));
+        }
+        return source;
+    }
+
+    IEnumerator FreeAudioSource(AudioSource source)
+    {
+        yield return new WaitForSeconds(source.clip.length);
+        while(source && source.isPlaying)
+        {
+            source.loop = false;
+            yield return null;
+        }
+        if(source)
+        {
+            freeStack.Push(source);
+        }
+    }
 
     public void PlayOnce2D(AudioClip _clip, Vector3 _pos, float _volume = 1, float _pitchVariation = 0)
     {
