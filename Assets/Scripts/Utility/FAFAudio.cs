@@ -3,15 +3,63 @@ using UnityEngine.Audio;
 using System.Collections;
 using System.Collections.Generic;
 
+public enum MusicTransitionMode
+{
+    Fade,
+    CrossFade,
+    Wait
+}
+
+[System.Serializable]
+public class MusicSetup
+{
+    public AudioClip clip = null;
+    public float volume = 1.0f;
+    public bool loop = true;
+    public float fadeIn = 1.0f;
+    public float fadeOut = 1.0f;
+    public MusicTransitionMode transitionMode = MusicTransitionMode.CrossFade;
+}
+
 public class FAFAudio : SingletonBehaviour<FAFAudio>
 {
-    AudioSource musicSource = null;
-    AudioSource nextMusicSource = null;
+    public AudioMixerGroup musicMixerGroup = null;
+
+    MusicSetup currentMusicSetup = null;
+    public AudioSource currentMusicSource = null;
+    public AudioSource nextMusicSource = null;
+
+    MusicSetup transitioningMusicSetup = null;
+    Queue<MusicSetup> musicQueue = new Queue<MusicSetup>();
+
     List<AudioSource> pool = new List<AudioSource>();
     Stack<AudioSource> freeStack = new Stack<AudioSource>();
-    float fadeIn = 1;
-    float fadeOut = 1;
-    bool crossfade = false;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if(currentMusicSource == null)
+        {
+            currentMusicSource = CreateMusicSource("CurrentMusic");
+        }
+        if (nextMusicSource == null)
+        {
+            nextMusicSource = CreateMusicSource("NextMusic");
+        }
+    }
+
+    AudioSource CreateMusicSource(string _name)
+    {
+        GameObject gobj = new GameObject(_name, typeof(AudioSource));
+        if(gobj)
+        {
+            gobj.transform.parent = this.transform;
+            AudioSource source = gobj.GetComponent<AudioSource>();
+            source.outputAudioMixerGroup = musicMixerGroup;
+            return source;
+        }
+        return null;
+    }
 
     public AudioSource Play(AudioClip _clip, Vector3 _pos, float _volume = 1, float _pitch = 1, AudioMixerGroup _mixerGroup = null)
     {
@@ -78,58 +126,141 @@ public class FAFAudio : SingletonBehaviour<FAFAudio>
         }
     }
 
-    public void TryPlayMusic(AudioClip _clip, float _fadeOut = 1, float _fadeIn = 1, bool _crossFade = false)
+    public bool TryPlayMusic(MusicSetup musicSetup, bool queue = true)
     {
-        if ((musicSource && musicSource.clip == _clip) || //check current
-            (nextMusicSource && nextMusicSource.clip == _clip))//check next (transition)
+        if(musicSetup == null || musicSetup == currentMusicSetup || musicQueue.Contains(musicSetup))
         {
-            return;
+            return false;
         }
-        PlayMusic(_clip, _fadeOut, _fadeIn, _crossFade);
-    }
 
-    public void PlayMusic(AudioClip _clip, float _fadeOut = 1, float _fadeIn = 1, bool _crossFade = false)
-    {
+        if (transitioningMusicSetup != null && queue)
+        {
+            musicQueue.Enqueue(musicSetup);
+            return true;
+        }
+
         if (nextMusicSource)
-            Destroy(nextMusicSource);
-
-        GameObject gobj = new GameObject("NextMusic");
-        DontDestroyOnLoad(gobj);
-        nextMusicSource = gobj.AddComponent<AudioSource>();
-        nextMusicSource.clip = _clip;
-        nextMusicSource.loop = true;
-        nextMusicSource.Play();
-        nextMusicSource.volume = 0;
-
-        fadeIn = _fadeIn;
-        fadeOut = _fadeOut;
-        crossfade = _crossFade;
-    }
-	
-	// Update is called once per frame
-	void Update () 
-    {
-	    if (nextMusicSource != null)
         {
-            const float targetVolume = 0.5f;
-            if(musicSource && musicSource.volume > 0 && fadeOut > 0)
-            {
-                musicSource.volume -= Time.deltaTime / fadeOut;
-            }
-            else if(nextMusicSource.volume < targetVolume && fadeIn > 0)
-            {
-                nextMusicSource.volume += Time.deltaTime / fadeIn;
-            }
-            else
-            {
-                if(musicSource)
-                    Destroy(musicSource.gameObject);
+            transitioningMusicSetup = null;
 
-                musicSource = nextMusicSource;
-                musicSource.name = "CurrentMusic";
-                musicSource.volume = targetVolume;
-                nextMusicSource = null;
-            }
+            StopAllCoroutines();
+            StartCoroutine(TransitionMusic(musicSetup));
+
+            return true;
         }
-	}
+
+        return false;
+    }
+
+    void Fade(AudioSource source, float duration, float volume)
+    {
+        if (source)
+        {
+            if (Mathf.Abs(duration) > 0)
+                source.volume = Mathf.Clamp(source.volume + Time.deltaTime / duration, 0, volume);
+            else
+                source.volume = 0;
+        }
+    }
+
+    IEnumerator TransitionMusic(MusicSetup nextMusicSetup)
+    {
+        if (nextMusicSetup == null) yield break;
+
+        transitioningMusicSetup = nextMusicSetup;
+        nextMusicSource.Stop();
+        nextMusicSource.clip = nextMusicSetup.clip;
+        nextMusicSource.loop = nextMusicSetup.loop;
+
+        switch (nextMusicSetup.transitionMode)
+        {
+            case MusicTransitionMode.Fade:
+                nextMusicSource.volume = 0;
+                nextMusicSource.PlayDelayed(nextMusicSetup.fadeOut);
+                break;
+            case MusicTransitionMode.CrossFade:
+                nextMusicSource.volume = 0;
+                nextMusicSource.Play();
+                break;
+            case MusicTransitionMode.Wait:
+                if (currentMusicSource)
+                {
+                    currentMusicSource.loop = false;
+                }
+                nextMusicSource.volume = nextMusicSetup.volume;
+                break;
+            default:
+                break;
+        }
+
+        bool finishedTransition = false;
+        while (!finishedTransition)
+        {
+            switch (nextMusicSetup.transitionMode)
+            {
+                case MusicTransitionMode.Fade:
+                    if (currentMusicSource && currentMusicSource.volume > 0)
+                    {
+                        Fade(currentMusicSource, -Mathf.Abs(currentMusicSetup.fadeOut), currentMusicSetup.volume);
+                    }
+                    else if(nextMusicSource && nextMusicSource.volume < nextMusicSetup.volume)
+                    {
+                        Fade(nextMusicSource, Mathf.Abs(nextMusicSetup.fadeIn), nextMusicSource.volume);
+                    }
+                    else
+                    {
+                        finishedTransition = true;
+                    }
+                    break;
+                case MusicTransitionMode.CrossFade:
+                    if (currentMusicSetup != null)
+                    {
+                        Fade(currentMusicSource, -Mathf.Abs(currentMusicSetup.fadeOut), currentMusicSetup.volume);
+                    }
+                    Fade(nextMusicSource, Mathf.Abs(nextMusicSetup.fadeIn), nextMusicSetup.volume);
+                    if ((currentMusicSetup == null || !currentMusicSource || currentMusicSource.volume <= 0) && (!nextMusicSource || nextMusicSource.volume >= nextMusicSetup.volume))
+                    {
+                        finishedTransition = true;
+                    }
+                    break;
+                case MusicTransitionMode.Wait:
+                    if(!currentMusicSource || !currentMusicSource.isPlaying)
+                    {
+                        if (nextMusicSource)
+                        {
+                            nextMusicSource.Play();
+                        }
+                        finishedTransition = true;
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            yield return null; //wait a frame
+        }
+
+        //finished transition so swap the sources
+        var tempSource = currentMusicSource;
+        currentMusicSource = nextMusicSource;
+        nextMusicSource = tempSource;
+
+        //swap the setups
+        currentMusicSetup = nextMusicSetup;
+        nextMusicSetup = null;
+
+        //rename sources
+        if (currentMusicSource) currentMusicSource.gameObject.name = "CurrentMusic";
+        if (nextMusicSource) nextMusicSource.gameObject.name = "NextMusic";
+
+        //stop the old music
+        if (nextMusicSource) nextMusicSource.Stop();
+
+        transitioningMusicSetup = null;
+
+        if (musicQueue.Count > 0)
+        {
+            StartCoroutine(TransitionMusic(musicQueue.Dequeue()));
+        }
+    }
 }

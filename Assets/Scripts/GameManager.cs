@@ -6,6 +6,13 @@ using UnityEditor;
 using UnityEngine;
 #endif
 
+public enum GameState
+{
+    Idle,
+    Combat
+}
+
+
 public class GameManager : MonoBehaviour {
 
     [Header("Editor")]
@@ -14,8 +21,15 @@ public class GameManager : MonoBehaviour {
     [Header("Player")]
     public FPSPlayerController playerPrefab = null;
 
-	// Use this for initialization
-	void Start () {
+    [Header("Music")]
+    public MusicSetup idleMusic = null;
+    public MusicSetup combatBuildupMusic = null;
+    public MusicSetup combatMusic = null;
+
+    private GameState m_state = GameState.Idle;
+
+    // Use this for initialization
+    void Start () {
         if(playerPrefab)
         {
             GameObject gobj = Instantiate<GameObject>(playerPrefab.gameObject);
@@ -32,11 +46,36 @@ public class GameManager : MonoBehaviour {
             }
 #endif
         }
+        SetGameState(GameState.Idle, true);
+        StartCoroutine(Hack());
+    }
 
+    IEnumerator Hack()
+    {
+        yield return new WaitForSeconds(10.0f);
+        SetGameState(GameState.Combat);
     }
 	
 	// Update is called once per frame
 	void Update () {
 		
 	}
+
+    void SetGameState(GameState newState, bool force = false)
+    {
+        if (!force && newState == m_state) return;
+        m_state = newState;
+        switch (m_state)
+        {
+            case GameState.Idle:
+                FAFAudio.Instance.TryPlayMusic(idleMusic);
+                break;
+            case GameState.Combat:
+                FAFAudio.Instance.TryPlayMusic(combatBuildupMusic);
+                FAFAudio.Instance.TryPlayMusic(combatMusic, true);
+                break;
+            default:
+                break;
+        }
+    }
 }
