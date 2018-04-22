@@ -6,7 +6,10 @@ using UnityEngine;
 public class GunAudio
 {
     public List<AudioClip> clips = new List<AudioClip>();
+    public float pitch = 1.0f;
     public float pitchVariance = 0.0f;
+    public float volume = 1.0f;
+    public float volumeVariance = 1.0f;
 }
 
 [RequireComponent(typeof(AudioSource))]
@@ -17,8 +20,6 @@ public class GunAudioController : MonoBehaviour {
     public GunAudio ReloadEnd;
     public GunAudio Fire;
     public GunAudio DryFire;
-    public GunAudio Hit;
-    public GunAudio HitDamaging;
 
     AudioSource m_audioSource = null;
 
@@ -33,7 +34,8 @@ public class GunAudioController : MonoBehaviour {
         if(m_audioSource && gunAudio != null && gunAudio.clips.Count > 0)
         {
             m_audioSource.clip = gunAudio.clips[Random.Range(0, gunAudio.clips.Count)];
-            m_audioSource.pitch = 1.0f + Random.Range(-gunAudio.pitchVariance, gunAudio.pitchVariance);
+            m_audioSource.pitch = gunAudio.pitch + Random.Range(-gunAudio.pitchVariance, gunAudio.pitchVariance);
+            m_audioSource.volume = gunAudio.volume + Random.Range(-gunAudio.volumeVariance, gunAudio.volumeVariance);
             m_audioSource.Play();
         }
     }
@@ -61,15 +63,5 @@ public class GunAudioController : MonoBehaviour {
     public void OnDryFire()
     {
         PlayGunAudio(DryFire);
-    }
-
-    public void OnHit()
-    {
-        PlayGunAudio(Hit);
-    }
-
-    public void OnHitDamaging()
-    {
-        PlayGunAudio(HitDamaging);
     }
 }
