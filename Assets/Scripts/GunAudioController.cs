@@ -5,11 +5,11 @@ using UnityEngine;
 [System.Serializable]
 public class GunAudio
 {
-    public List<AudioClip> clips = new List<AudioClip>();
-    public float pitch = 1.0f;
-    public float pitchVariance = 0.0f;
-    public float volume = 1.0f;
-    public float volumeVariance = 1.0f;
+    public List<AudioClip> m_clips = new List<AudioClip>();
+    public float m_pitch = 1.0f;
+    public float m_pitchVariance = 0.0f;
+    public float m_volume = 1.0f;
+    public float m_volumeVariance = 0.0f;
 }
 
 [RequireComponent(typeof(AudioSource))]
@@ -31,11 +31,11 @@ public class GunAudioController : MonoBehaviour {
 
     void PlayGunAudio(GunAudio gunAudio)
     {
-        if(m_audioSource && gunAudio != null && gunAudio.clips.Count > 0)
+        if(m_audioSource && gunAudio != null && gunAudio.m_clips.Count > 0)
         {
-            m_audioSource.clip = gunAudio.clips[Random.Range(0, gunAudio.clips.Count)];
-            m_audioSource.pitch = gunAudio.pitch + Random.Range(-gunAudio.pitchVariance, gunAudio.pitchVariance);
-            m_audioSource.volume = gunAudio.volume + Random.Range(-gunAudio.volumeVariance, gunAudio.volumeVariance);
+            m_audioSource.clip = gunAudio.m_clips[Random.Range(0, gunAudio.m_clips.Count)];
+            m_audioSource.pitch = gunAudio.m_pitch + Random.Range(-gunAudio.m_pitchVariance, gunAudio.m_pitchVariance);
+            m_audioSource.volume = gunAudio.m_volume + Random.Range(-gunAudio.m_volumeVariance, gunAudio.m_volumeVariance);
             m_audioSource.Play();
         }
     }
