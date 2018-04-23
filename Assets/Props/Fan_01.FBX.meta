@@ -72,6 +72,11 @@ ModelImporter:
     4300020: Object009
     4300022: Object010
     4300024: Object011
+    6400000: Box004
+    6400002: Object008
+    6400004: Object009
+    6400006: Object010
+    6400008: Object011
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -102,7 +107,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -142,7 +147,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

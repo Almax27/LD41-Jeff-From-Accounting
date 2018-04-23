@@ -6,11 +6,22 @@ ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Object005
+    100004: Plane005
     400000: //RootNode
+    400002: Object005
+    400004: Plane005
     2300000: //RootNode
+    2300002: Object005
+    2300004: Plane005
     3300000: //RootNode
+    3300002: Object005
+    3300004: Plane005
     4300000: Plane005
+    4300002: Object005
     6400000: //RootNode
+    6400002: Object005
+    6400004: Plane005
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -62,7 +73,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -81,7 +92,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
