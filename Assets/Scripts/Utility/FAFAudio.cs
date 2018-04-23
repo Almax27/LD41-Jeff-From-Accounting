@@ -128,15 +128,18 @@ public class FAFAudio : SingletonBehaviour<FAFAudio>
 
     public bool TryPlayMusic(MusicSetup musicSetup, bool queue = true)
     {
-        if(musicSetup == null || musicSetup == currentMusicSetup || musicQueue.Contains(musicSetup))
+        if(musicSetup == null || musicSetup == transitioningMusicSetup)
         {
             return false;
         }
 
-        if (transitioningMusicSetup != null && queue)
+        if (transitioningMusicSetup != null)
         {
-            musicQueue.Enqueue(musicSetup);
-            return true;
+            if (queue)
+            {
+                musicQueue.Enqueue(musicSetup);
+                return true;
+            }
         }
 
         if (nextMusicSource)

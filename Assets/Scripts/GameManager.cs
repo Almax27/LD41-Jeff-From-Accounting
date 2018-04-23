@@ -99,12 +99,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
     private void Start()
     {
         SetGameState(GameState.Idle, true);
-        StartCoroutine(Hack());
     }
 
-    IEnumerator Hack()
+    public void OnDoorKilled()
     {
-        yield return new WaitForSeconds(10.0f);
         SetGameState(GameState.Combat);
     }
 
