@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 195913029765066982}
   - component: {fileID: 114871999416130944}
   - component: {fileID: 114459025937333436}
-  - component: {fileID: 135279238621552212}
   m_Layer: 9
   m_Name: ChairEnemy_03
   m_TagString: Untagged
@@ -61,6 +60,7 @@ GameObject:
   - component: {fileID: 33911513947562822}
   - component: {fileID: 23009911817913236}
   - component: {fileID: 95771379031816364}
+  - component: {fileID: 64545073211496220}
   m_Layer: 9
   m_Name: Chair_03
   m_TagString: Untagged
@@ -93,7 +93,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1720869170405762}
   m_LocalRotation: {x: -0.44508564, y: -0.3838107, z: -0.6127157, w: 0.5283631}
-  m_LocalPosition: {x: 0.0040500066, y: -0.5, z: 0.030726204}
+  m_LocalPosition: {x: 0.0040500066, y: 0.2, z: 0.030726204}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4354393362946220}
@@ -250,6 +250,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1720869170405762}
+  m_Mesh: {fileID: 4300000, guid: 56fc0a1a467157c4ab6896fd9f5e88a3, type: 3}
+--- !u!64 &64545073211496220
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1720869170405762}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 56fc0a1a467157c4ab6896fd9f5e88a3, type: 3}
 --- !u!95 &95132072489918528
 Animator:
@@ -440,18 +454,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f86c1c02fa608438acd3c8c4a7733d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135279238621552212
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1161692809630060}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.6
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &195913029765066982
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -465,7 +467,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 240
-  m_StoppingDistance: 2
+  m_StoppingDistance: 3
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1
