@@ -75,7 +75,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 21354747041288968, guid: f3c4686c64e5e494c8657d4866d604a9, type: 2}
+  - {fileID: 21354747041288968, guid: acba7bc0444abf9438cae2de1e3c4771, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,8 +125,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f3c4686c64e5e494c8657d4866d604a9, type: 2}
-  m_sharedMaterial: {fileID: 21354747041288968, guid: f3c4686c64e5e494c8657d4866d604a9,
+  m_fontAsset: {fileID: 11400000, guid: acba7bc0444abf9438cae2de1e3c4771, type: 2}
+  m_sharedMaterial: {fileID: 21354747041288968, guid: acba7bc0444abf9438cae2de1e3c4771,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}

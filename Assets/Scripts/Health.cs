@@ -97,9 +97,9 @@ public class Health : MonoBehaviour {
                     StopCoroutine(m_fadeTextCorountine);
                     m_fadeTextCorountine = null;
                 }
-                if (isVisible)
+                if (isVisible || force)
                 {
-                    m_healthText.enabled = true;
+                    m_healthText.enabled = isVisible;
                     Color color = m_healthText.color;
                     color.a = 1.0f;
                     m_healthText.color = color;

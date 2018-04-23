@@ -26,7 +26,7 @@ public class MouseLook
     }
 
 
-    public void LookRotation(Transform character, Transform camera)
+    public void ApplyLookRotation(Transform character, Transform camera)
     {
         float yRot = CrossPlatformInputManager.GetAxis("Mouse X") * XSensitivity;
         float xRot = CrossPlatformInputManager.GetAxis("Mouse Y") * YSensitivity;
@@ -49,8 +49,6 @@ public class MouseLook
             character.localRotation = m_CharacterTargetRot;
             camera.localRotation = m_CameraTargetRot;
         }
-
-        UpdateCursorLock();
     }
 
     public void SetCursorLock(bool value)
@@ -61,6 +59,11 @@ public class MouseLook
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+    }
+
+    public bool GetIsCursorLocked()
+    {
+        return m_cursorIsLocked;
     }
 
     public void UpdateCursorLock()

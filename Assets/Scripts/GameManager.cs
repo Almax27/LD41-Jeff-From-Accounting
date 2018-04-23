@@ -4,6 +4,8 @@ using UnityEditor;
 
 #if UNITY_EDITOR
 using UnityEngine;
+using UnityEngine.Playables;
+
 [InitializeOnLoadAttribute]
 public static class GameManagerPlayModeStateChanged
 {
@@ -44,7 +46,7 @@ public static class GameManagerPlayModeStateChanged
             GameManager[] gms = GameObject.FindObjectsOfType<GameManager>();
             foreach(GameManager gm in gms)
             {
-                if(gm.Player)
+                if(gm.Player && gm.spawnAtSceneViewCamera)
                 {
                     gm.Player.transform.position = Vector3FromString(EditorPrefs.GetString("SpawnPos"));
                     Vector3 euler = Vector3FromString(EditorPrefs.GetString("SpawnRot"));
@@ -81,8 +83,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
     private FPSPlayerController m_player = null;
 
     // Use this for initialization
-    void Start () {
-        if(playerPrefab)
+    protected override void Awake () {
+
+        m_player = FindObjectOfType<FPSPlayerController>();
+        if(!m_player && playerPrefab)
         {
             GameObject gobj = Instantiate<GameObject>(playerPrefab.gameObject);
             if(gobj)
@@ -90,6 +94,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
                 m_player = gobj.GetComponent<FPSPlayerController>();
             }
         }
+    }
+
+    private void Start()
+    {
         SetGameState(GameState.Idle, true);
         StartCoroutine(Hack());
     }
@@ -99,11 +107,6 @@ public class GameManager : SingletonBehaviour<GameManager> {
         yield return new WaitForSeconds(10.0f);
         SetGameState(GameState.Combat);
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void SetGameState(GameState newState, bool force = false)
     {

@@ -21,7 +21,9 @@ public enum PlayerMoveState
 public class FPSPlayerController : MonoBehaviour
 {
     public GunController m_gunController = null;
+    public FPSHUD m_fpsHUD = null;
 
+    public bool m_isInputEnabled = true;
     public float m_WalkSpeed;
     public float m_RunSpeed;
     [Range(0f, 1f)] public float m_RunStepScale = 0.7f;
@@ -42,8 +44,8 @@ public class FPSPlayerController : MonoBehaviour
     private float m_maxSpeed = 0.0f;
     private Vector3 m_desiredVelocity = Vector3.zero;
 
+    private Animator m_animator = null;
     private Camera m_Camera;
-    private float m_YRotation;
     private CharacterController m_CharacterController;
     private CollisionFlags m_CollisionFlags;
     private Vector3 m_OriginalCameraPosition;
@@ -53,6 +55,7 @@ public class FPSPlayerController : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
+        m_animator = GetComponent<Animator>();
         m_CharacterController = GetComponent<CharacterController>();
         m_Camera = Camera.main;
         m_OriginalCameraPosition = m_Camera.transform.localPosition;
@@ -66,7 +69,7 @@ public class FPSPlayerController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        RotateView();
+        UpdateLook();
 
         // the jump state needs to read here to make sure it is not missed
         if(CrossPlatformInputManager.GetButtonDown("Jump"))
@@ -137,8 +140,6 @@ public class FPSPlayerController : MonoBehaviour
         ProgressStepCycle(isRunning, stepDistance, prevMoveState);
         UpdateCameraPosition(speed, stepDistance);
 
-        m_MouseLook.UpdateCursorLock();
-
         // handle speed change to give an fov kick
         // only if the player is going to a run, is running and the fovkick is to be used
         if ((runStarted || runEnded) && m_UseFovKick && m_CharacterController.velocity.sqrMagnitude > 0)
@@ -148,13 +149,18 @@ public class FPSPlayerController : MonoBehaviour
         }
     }
 
+    private bool IsLookAllowed()
+    {
+        return m_isInputEnabled && m_MouseLook.GetIsCursorLocked();
+    }
+
     private bool IsMoveAllowed()
     {
         if(m_gunController && m_gunController.GetIsReloading())
         {
             return false;
         }
-        return true;
+        return m_isInputEnabled;
     }
 
     private void TryJump()
@@ -205,7 +211,7 @@ public class FPSPlayerController : MonoBehaviour
 
     private void UpdateCameraPosition(float speed, float stepDistance)
     {
-        if (!m_UseHeadBob)
+        if (!m_UseHeadBob || !IsLookAllowed())
         {
             return;
         }
@@ -250,9 +256,13 @@ public class FPSPlayerController : MonoBehaviour
     }
 
 
-    private void RotateView()
+    private void UpdateLook()
     {
-        m_MouseLook.LookRotation(transform, m_Camera.transform);
+        m_MouseLook.UpdateCursorLock();
+        if (IsLookAllowed())
+        {
+            m_MouseLook.ApplyLookRotation(transform, m_Camera.transform);
+        }
     }
 
 
