@@ -3113,7 +3113,7 @@ AudioReverbZone:
   m_MinDistance: 32.4
   m_MaxDistance: 36
   m_ReverbPreset: 27
-  m_Room: -1464
+  m_Room: -1290
   m_RoomHF: -3200
   m_DecayTime: 1.5
   m_DecayHFRatio: 0.59
