@@ -3,43 +3,93 @@ guid: 41818898da6478743a527b33bc5c893b
 timeCreated: 1524404853
 licenseType: Free
 ModelImporter:
-  serializedVersion: 21
+  serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     100002: Line002
     100004: Object002
     100006: Object003
     100008: Object004
+    100010: Object007
+    100012: Object008
+    100014: Object014
     400000: //RootNode
     400002: Line002
     400004: Object002
     400006: Object003
     400008: Object004
+    400010: Object007
+    400012: Object008
+    400014: Object014
     2300000: //RootNode
     2300002: Line002
     2300004: Object002
     2300006: Object003
     2300008: Object004
+    2300010: Object007
+    2300012: Object008
+    2300014: Object014
     3300000: //RootNode
     3300002: Line002
     3300004: Object002
     3300006: Object003
     3300008: Object004
+    3300010: Object007
+    3300012: Object008
+    3300014: Object014
     4300000: Line002
     4300002: Object002
     4300004: Object003
     4300006: Object004
+    4300008: Object007
+    4300010: Object008
+    4300012: Object014
     6400000: //RootNode
     6400002: Line002
     6400004: Object002
     6400006: Object003
     6400008: Object004
+    6400010: Object007
+    6400012: Object008
+    6400014: Object014
     9500000: //RootNode
     11100000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 04 - Default
+    second: {fileID: 2100000, guid: 854f8ae5656a49c41b1c94f4abaa936a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 15 - Default
+    second: {fileID: 2100000, guid: cdd91668fe109d24db482db91fb8216f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 16 - Default
+    second: {fileID: 2100000, guid: eda21c41effbdda4daf0df9e8700babc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grey_Dark
+    second: {fileID: 2100000, guid: d3668816c4cf43241ae511976a38b25f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grey_Light
+    second: {fileID: 2100000, guid: 39720566efc0ca841a2ef9834b3a0fd7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grey_Medium
+    second: {fileID: 2100000, guid: ecd0257492491db4d9dc5815f45b9def, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -52,6 +102,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -76,6 +127,8 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 1
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
