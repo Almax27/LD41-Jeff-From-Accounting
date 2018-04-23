@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 143814219640159972}
   - component: {fileID: 114461039772335854}
   - component: {fileID: 54179011118014818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FPSController
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 81083085062449914}
   - component: {fileID: 124861978535002198}
   - component: {fileID: 114253186319454246}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FPSCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 4211228962080966}
   - component: {fileID: 82216313081222740}
   - component: {fileID: 114284894098012814}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FootAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -492,7 +492,7 @@ GameObject:
   - component: {fileID: 223406344398467444}
   - component: {fileID: 114116804717519932}
   - component: {fileID: 114172679183238236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 224208673853522168}
   - component: {fileID: 222285031882136670}
   - component: {fileID: 114338297491808508}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -787,7 +787,7 @@ GameObject:
   - component: {fileID: 4141685134505584}
   - component: {fileID: 20036955539303788}
   - component: {fileID: 114325840942945952}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FPSBodyCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
