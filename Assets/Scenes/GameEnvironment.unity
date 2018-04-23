@@ -2446,10 +2446,10 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 66.1
-  MaxDistance: 129.22
+  MinDistance: 96.77
+  MaxDistance: 125.7
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -2514,7 +2514,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 468830030}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.756, y: 15.547, z: 118.97838}
+  m_LocalPosition: {x: 1.756, y: 15.547, z: 171.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1193109316}
@@ -3110,12 +3110,12 @@ AudioReverbZone:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 569289221}
   m_Enabled: 1
-  m_MinDistance: 11.25
-  m_MaxDistance: 15.46
+  m_MinDistance: 32.4
+  m_MaxDistance: 36
   m_ReverbPreset: 27
   m_Room: -1464
   m_RoomHF: -3200
-  m_DecayTime: 1.2
+  m_DecayTime: 1.5
   m_DecayHFRatio: 0.59
   m_Reflections: -1219
   m_ReflectionsDelay: 0.007
@@ -3133,7 +3133,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 569289221}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.40399998, y: -1.357827, z: 13.968377}
+  m_LocalPosition: {x: 4.52, y: -0.2, z: 35.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1193109316}
@@ -7562,7 +7562,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1910351443}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.37600002, y: 2.0170002, z: 122.00479}
+  m_LocalPosition: {x: -2.8, y: 2.0170002, z: 163.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1193109316}
