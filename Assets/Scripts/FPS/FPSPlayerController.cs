@@ -108,6 +108,17 @@ public class FPSPlayerController : MonoBehaviour
 
             m_desiredVelocity.x = inputVelocity.x;
             m_desiredVelocity.z = inputVelocity.z;
+
+            if(m_desiredVelocity.y > 0)
+            {
+                RaycastHit hitInfo;
+                if(Physics.SphereCast(  transform.position, m_CharacterController.radius, Vector3.up, out hitInfo,
+                                        m_CharacterController.height / 2f, Physics.AllLayers, QueryTriggerInteraction.Ignore))
+                {
+                    m_moveState = PlayerMoveState.Falling;
+                    m_desiredVelocity.y = 0;
+                }
+            }
         }
 
         m_CollisionFlags = m_CharacterController.Move(m_desiredVelocity * Time.fixedDeltaTime);
@@ -138,9 +149,18 @@ public class FPSPlayerController : MonoBehaviour
         }
     }
 
+    private bool IsMoveAllowed()
+    {
+        if(m_gunController && m_gunController.GetIsReloading())
+        {
+            return false;
+        }
+        return true;
+    }
+
     private void TryJump()
     {
-        if(m_CharacterController.isGrounded)
+        if(m_CharacterController.isGrounded && IsMoveAllowed())
         {
             m_moveState = PlayerMoveState.Jumping;
             m_desiredVelocity.y = m_JumpSpeed;
@@ -207,7 +227,7 @@ public class FPSPlayerController : MonoBehaviour
 
     private Vector3 CalculateInputVelocity()
     {
-        if(m_gunController && m_gunController.GetIsReloading())
+        if(!IsMoveAllowed())
         {
             return Vector3.zero;
         }
