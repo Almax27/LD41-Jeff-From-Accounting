@@ -38,12 +38,12 @@ public class GameObjectPool
         lastTrimTime = Time.time + Random.Range(0, trimInterval);
         for (int i = 0; i < minObjects; i++)
         {
-            GameObject gobj = GetOrCreate();
+            GameObject gobj = GetOrCreate(Vector3.zero, Quaternion.identity);
             gobj.SetActive(false);
         }
     }
 
-    public GameObject GetOrCreate()
+    public GameObject GetOrCreate(Vector3 position, Quaternion rotation)
     {
         GameObject instance = null;
         //First try and return an inactive object in the pool
@@ -70,8 +70,9 @@ public class GameObjectPool
         //if we obtained an instance then initialise it
         if(instance)
         {
-            instance.SetActive(true);
             instance.transform.parent = rootObject.transform;
+            instance.transform.SetPositionAndRotation(position, rotation);
+            instance.SetActive(true);
         }
 
         return instance;
@@ -143,6 +144,11 @@ public class GameObjectPoolManager : SingletonBehaviour<GameObjectPoolManager>
 
     public GameObject GetOrCreate(GameObject templateObject)
     {
+        return GetOrCreate(templateObject, Vector3.zero, Quaternion.identity);
+    }
+
+    public GameObject GetOrCreate(GameObject templateObject, Vector3 position, Quaternion rotation)
+    {
         if (templateObject == null) return null;
 
         //find the pool with the given gameobject
@@ -159,6 +165,6 @@ public class GameObjectPoolManager : SingletonBehaviour<GameObjectPoolManager>
             poolsByInstanceID[instanceID] = pool;
         }
 
-        return pool.GetOrCreate();
+        return pool.GetOrCreate(position, rotation);
     }
 }

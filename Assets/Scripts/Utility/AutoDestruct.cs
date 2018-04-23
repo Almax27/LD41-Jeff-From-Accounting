@@ -12,6 +12,7 @@ public class AutoDestruct : MonoBehaviour {
     public AutoDestructMode mode = AutoDestructMode.Destroy;
     public float delay;
     public bool waitForParticles = true;
+    public bool waitForAudio = true;
     private float tick;
 
     private void OnEnable()
@@ -20,6 +21,11 @@ public class AutoDestruct : MonoBehaviour {
         {
             ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
             ps.Play(true);
+        }
+        foreach (var audio in GetComponentsInChildren<AudioSource>())
+        {
+            audio.Stop();
+            audio.Play();
         }
     }
 
@@ -36,6 +42,18 @@ public class AutoDestruct : MonoBehaviour {
                     if (ps.IsAlive())
                     {
                         ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+                        destruct = false;
+                        break;
+                    }
+                }
+            }
+            if(destruct && waitForAudio)
+            {
+                foreach (var audio in GetComponentsInChildren<AudioSource>())
+                {
+                    audio.loop = false;
+                    if(audio.isPlaying)
+                    {
                         destruct = false;
                         break;
                     }

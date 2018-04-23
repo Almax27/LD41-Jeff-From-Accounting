@@ -56,21 +56,21 @@ MonoBehaviour:
     type: 2}
   idleMusic:
     clip: {fileID: 8300000, guid: 245d4f4fed1a9944f9baf6f090387f83, type: 3}
-    volume: 0.5
+    volume: 1
     loop: 1
     fadeIn: 1
     fadeOut: 1
     transitionMode: 1
   combatBuildupMusic:
     clip: {fileID: 8300000, guid: 59b3ee4935fd59a45b3ee2c8eb04c2a4, type: 3}
-    volume: 0.5
+    volume: 1
     loop: 0
     fadeIn: 1
     fadeOut: 1
     transitionMode: 1
   combatMusic:
     clip: {fileID: 8300000, guid: 80a867a82e2d34249aaadc0b008473c1, type: 3}
-    volume: 0.5
+    volume: 1
     loop: 1
     fadeIn: 1
     fadeOut: 1

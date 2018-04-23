@@ -89,7 +89,7 @@ public class ProjectileController : MonoBehaviour {
         }
         if(hitInfo.collider)
         {
-            Health health = hitInfo.collider.GetComponent<Health>();
+            Health health = hitInfo.collider.GetComponentInParent<Health>();
             if (health)
             {
                 OnHitDamage(health, hitInfo);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public struct DamagePacket
 {
@@ -31,13 +32,18 @@ public class Health : MonoBehaviour {
     public Color m_defaultColor = Color.white;
     public Color m_removedColor = Color.grey;
     public Color m_damagedColor = Color.red;
-    
+
     public bool TakeDamage(DamagePacket packet)
     {
         if (m_healthValue > 0)
         {
             int letterIndex = m_healthLetters.Length - m_healthValue;
             char nextLetter = m_healthLetters[m_healthLetters.Length - m_healthValue];
+            while(!char.IsLetter(nextLetter) && m_healthValue > 0)
+            {
+                m_healthValue--;
+                nextLetter = m_healthLetters[m_healthLetters.Length - m_healthValue];
+            }
             if (m_forceCaps)
             {
                 packet.letter = packet.letter.ToString().ToUpper()[0];
@@ -73,6 +79,8 @@ public class Health : MonoBehaviour {
     public void SetHealth(string healthLetters)
     {
         m_healthLetters = healthLetters;
+
+        m_healthLetters = new string(healthLetters.Where(c => char.IsLetter(c) || char.IsWhiteSpace(c)).ToArray());
         Reset();
     }
 
@@ -129,10 +137,5 @@ public class Health : MonoBehaviour {
     private void Start()
     {
         Reset();
-    }
-
-    private void Update()
-    {
-        
     }
 }

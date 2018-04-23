@@ -151,7 +151,7 @@ public class GunController : MonoBehaviour {
 
         if (m_isReloading)
         {
-            if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Escape))
             {
                 SetReloadState(false);
             }
@@ -176,7 +176,7 @@ public class GunController : MonoBehaviour {
         }
         else //not reloading
         {
-            if(Input.GetKeyDown(KeyCode.R))
+            if(Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.Return))
             {
                 SetReloadState(true);
             };

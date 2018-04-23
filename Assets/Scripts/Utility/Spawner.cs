@@ -35,18 +35,12 @@ public class Spawner
         {
             if (def.gameobject)
             {
-                var gobj = GameObjectPoolManager.Instance.GetOrCreate(def.gameobject);
+                position = def.copyPosition ? position : Vector3.zero;
+                rotation = def.copyRotation ? rotation : Quaternion.identity;
+                var gobj = GameObjectPoolManager.Instance.GetOrCreate(def.gameobject, position, rotation);
                 if (def.addAsChild)
                 {
                     gobj.transform.parent = parent;
-                }
-                if (def.copyPosition)
-                {
-                    gobj.transform.position = position;
-                }
-                if (def.copyRotation)
-                {
-                    gobj.transform.rotation = rotation;
                 }
                 if (def.copyLocalScale)
                 {
