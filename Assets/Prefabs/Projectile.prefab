@@ -235,7 +235,7 @@ MonoBehaviour:
   letter: 32
   hitMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 1025
   damageMask:
     serializedVersion: 2
     m_Bits: 512

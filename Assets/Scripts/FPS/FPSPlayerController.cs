@@ -75,7 +75,6 @@ public class FPSPlayerController : MonoBehaviour
         }
     }
 
-
     private void FixedUpdate()
     {
         PlayerMoveState prevMoveState = m_moveState;

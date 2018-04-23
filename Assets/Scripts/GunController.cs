@@ -43,6 +43,7 @@ public class GunController : MonoBehaviour {
 
     bool m_isReloading;
     float m_timeToNextDelete = 0;
+    Health m_targetUnderReticule = null;
 
     public bool GetIsReloading() { return m_isReloading; }
     public int GetMaxAmmoCount() { return ammoDisplayPanels.Count; }
@@ -194,6 +195,34 @@ public class GunController : MonoBehaviour {
             {
                 SetReloadState(true);
             };
+        }
+
+        if (Camera.main && ProjectileControllerPrefab)
+        {
+            if (reticuleUI)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(reticuleUI.position);
+                RaycastHit damageHitInfo;
+                Health health = null;
+                if (Physics.SphereCast(ray, ProjectileControllerPrefab.damageRadius, out damageHitInfo, ProjectileControllerPrefab.maxDistance, ProjectileControllerPrefab.damageMask))
+                {
+                    //make sure no geometry is in the way
+                    float distanceToTarget = Vector3.Distance(ray.origin, damageHitInfo.transform.position);
+                    if(!Physics.Raycast(ray, distanceToTarget, ProjectileControllerPrefab.hitMask))
+                    {
+                        health = damageHitInfo.collider.GetComponentInParent<Health>();
+                    }
+                }
+                if(health != m_targetUnderReticule)
+                {
+                    if (m_targetUnderReticule) m_targetUnderReticule.SetIsTextVisible(false);
+                    m_targetUnderReticule = health;
+                }
+                if(m_targetUnderReticule)
+                {
+                    m_targetUnderReticule.SetIsTextVisible(true);
+                }
+            }
         }
     }
 

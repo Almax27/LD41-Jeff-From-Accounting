@@ -63,7 +63,7 @@ public enum GameState
 }
 
 
-public class GameManager : MonoBehaviour {
+public class GameManager : SingletonBehaviour<GameManager> {
 
     [Header("Editor")]
     public bool spawnAtSceneViewCamera = true;
