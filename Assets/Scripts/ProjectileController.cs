@@ -89,18 +89,7 @@ public class ProjectileController : MonoBehaviour {
         }
         if(hitInfo.collider)
         {
-            Health health = hitInfo.collider.GetComponentInParent<Health>();
-            if (health)
-            {
-                OnHitDamage(health, hitInfo);
-            }
-            else
-            {
-                OnHitNoDamage(hitInfo);
-            }
-            transform.position = hitInfo.point;
-            Destroy(gameObject);
-            DebugExtension.DebugWireSphere(hitInfo.point, damageRadius, 1.0f);
+            OnHit(hitInfo);
         }
         if(m_distanceTraveled > maxDistance)
         {
@@ -108,24 +97,29 @@ public class ProjectileController : MonoBehaviour {
         }
     }
 
-    void OnHitDamage(Health health, RaycastHit hit)
+    public void OnHit(RaycastHit hitInfo)
     {
-        DamagePacket packet = new DamagePacket();
-        packet.instigator = instigator;
-        packet.letter = letter;
-        if (health.TakeDamage(packet))
+        Debug.Assert(hitInfo.collider);
+        bool dealtDamage = false;
+        Health health = hitInfo.collider.GetComponentInParent<Health>();
+        if (health)
         {
-            onDamagedSpawner.ProcessSpawns(transform, hit.point, Quaternion.LookRotation(hit.normal), Vector3.one);
+            DamagePacket packet = new DamagePacket();
+            packet.instigator = instigator;
+            packet.letter = letter;
+            if (health.TakeDamage(packet))
+            {
+                onDamagedSpawner.ProcessSpawns(transform, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), Vector3.one);
+                dealtDamage = true;
+            }
         }
-        else
+        if (!dealtDamage)
         {
-            OnHitNoDamage(hit);
+            onHitSpawner.ProcessSpawns(transform, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), Vector3.one);
         }
-    }
-
-    void OnHitNoDamage(RaycastHit hit)
-    {
-        onHitSpawner.ProcessSpawns(transform, hit.point, Quaternion.LookRotation(hit.normal), Vector3.one);
+        transform.position = hitInfo.point;
+        Destroy(gameObject);
+        DebugExtension.DebugWireSphere(hitInfo.point, damageRadius, 1.0f);
     }
 
     void OnExpired()

@@ -114,18 +114,32 @@ public class GunController : MonoBehaviour {
             projectile.letter = letter;
             projectile.direction = muzzleTranform.forward;
 
+            bool usedRayCast = false;
             if (reticuleUI)
             {
                 Ray ray = Camera.main.ScreenPointToRay(reticuleUI.position);
                 RaycastHit hitInfo;
                 if (Physics.Raycast(ray, out hitInfo, projectile.maxDistance))
                 {
-                    Debug.DrawLine(muzzleTranform.position, hitInfo.point, Color.white, 1.0f);
-                    projectile.direction = (hitInfo.point - muzzleTranform.position).normalized;
+                    Vector3 fireDir = (hitInfo.point - muzzleTranform.position).normalized;
+                    if (Vector3.Angle(fireDir, ray.direction) < 90.0f)
+                    {
+                        projectile.direction = fireDir;
+                        Debug.DrawLine(muzzleTranform.position, hitInfo.point, Color.green, 1.0f);
+                    }
+                    else
+                    {
+                        //force projectile hit immediately with camera cast as it's behind the muzzle
+                        projectile.OnHit(hitInfo);
+                        Debug.DrawLine(muzzleTranform.position, hitInfo.point, Color.red, 1.0f);
+                    }
+                    usedRayCast = true;
                 }
             }
-
-            return projectile;
+            if (!usedRayCast)
+            {
+                Debug.DrawLine(muzzleTranform.position, muzzleTranform.position + projectile.direction * projectile.maxDistance, Color.grey, 1.0f);
+            }
         }
         return projectile;
     }
