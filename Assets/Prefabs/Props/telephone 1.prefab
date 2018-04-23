@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4444444650638950}
   - component: {fileID: 33775414137221280}
   - component: {fileID: 23789134005532050}
-  - component: {fileID: 64722293972323660}
   m_Layer: 0
   m_Name: telephone 1
   m_TagString: Untagged
@@ -51,6 +50,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -66,6 +66,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -80,18 +81,4 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1452477476439406}
-  m_Mesh: {fileID: 4300000, guid: a70acd0ec3d570744bde797c0085fa5f, type: 3}
---- !u!64 &64722293972323660
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1452477476439406}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: a70acd0ec3d570744bde797c0085fa5f, type: 3}

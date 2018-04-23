@@ -177,7 +177,7 @@ public class GunController : MonoBehaviour {
                 if (Physics.Raycast(ray, out hitInfo, projectile.maxDistance))
                 {
                     Vector3 fireDir = (hitInfo.point - muzzleTranform.position).normalized;
-                    if (Vector3.Angle(fireDir, ray.direction) < 90.0f)
+                    if (Vector3.Angle(fireDir, ray.direction) < 45.0f)
                     {
                         projectile.direction = fireDir;
                         Debug.DrawLine(muzzleTranform.position, hitInfo.point, Color.green, 1.0f);

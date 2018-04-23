@@ -100,15 +100,15 @@ NavMeshSettings:
   m_BuildSettings:
     serializedVersion: 2
     agentTypeID: 0
-    agentRadius: 0.5
-    agentHeight: 2
+    agentRadius: 0.6
+    agentHeight: 1
     agentSlope: 45
-    agentClimb: 0.4
+    agentClimb: 0.7
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
     minRegionArea: 2
     manualCellSize: 0
-    cellSize: 0.16666667
+    cellSize: 0.2
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -216,6 +216,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 33251641709697826, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 114232662743244948, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -226,23 +231,19 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 33251641709697826, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1161692809630060, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
       propertyPath: m_Name
-      value: ChairEnemy_03 (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 114459025937333436, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
-        type: 2}
-      propertyPath: m_healthLetters
       value: MR CHAIR
       objectReference: {fileID: 0}
-    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+    - target: {fileID: 114232662743244948, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_inputSource
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 195913029765066982, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_Radius
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
@@ -286,11 +287,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 33850260561903166, guid: 29b0b47ee70ed3d4a9a2fd40ffeeb552,
-        type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 114628461418406628, guid: 29b0b47ee70ed3d4a9a2fd40ffeeb552,
         type: 2}
       propertyPath: m_havePropertiesChanged
@@ -301,6 +297,15 @@ Prefab:
       propertyPath: m_isInputParsingRequired
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 33850260561903166, guid: 29b0b47ee70ed3d4a9a2fd40ffeeb552,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1244919838076512, guid: 29b0b47ee70ed3d4a9a2fd40ffeeb552, type: 2}
+      propertyPath: m_Name
+      value: DOOR
+      objectReference: {fileID: 0}
     - target: {fileID: 114628461418406628, guid: 29b0b47ee70ed3d4a9a2fd40ffeeb552,
         type: 2}
       propertyPath: m_inputSource
@@ -308,4 +313,181 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29b0b47ee70ed3d4a9a2fd40ffeeb552, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1688807888
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 9.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 4.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 43.79
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0.5287665
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.8487674
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 33251641709697826, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232662743244948, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232662743244948, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161692809630060, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_Name
+      value: CHAIR JR
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232662743244948, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_inputSource
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114871999416130944, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_aggroRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 423.844
+      objectReference: {fileID: 0}
+    - target: {fileID: 114459025937333436, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_healthLetters
+      value: CHAIR JR
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232662743244948, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_text
+      value: <color=#808080FF>C</color><color=#808080FF>H</color><color=#808080FF>A</color><color=#808080FF>I</color><color=#808080FF>R</color><color=#808080FF>
+        </color><color=#808080FF>J</color><color=#808080FF>R</color>
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232662743244948, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 9
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &2030957706
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 16.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.319
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 30.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0.4479545
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.8940564
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 33251641709697826, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232662743244948, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232662743244948, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1161692809630060, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_Name
+      value: MRS CHAIR
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232662743244948, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_inputSource
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114871999416130944, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_aggroRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762103297278656, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 306.775
+      objectReference: {fileID: 0}
+    - target: {fileID: 114459025937333436, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_healthLetters
+      value: MRS CHAIR
+      objectReference: {fileID: 0}
+    - target: {fileID: 114232662743244948, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e,
+        type: 2}
+      propertyPath: m_text
+      value: <color=#808080FF>M</color><color=#808080FF>R</color><color=#808080FF>S</color><color=#808080FF>
+        </color><color=#808080FF>C</color><color=#808080FF>H</color><color=#808080FF>A</color><color=#808080FF>I</color><color=#808080FF>R</color>
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: bdaf84cc6f9bc694eb4b61fc0c54ff2e, type: 2}
   m_IsPrefabParent: 0
