@@ -37,6 +37,7 @@ GameObject:
   - component: {fileID: 4963477764120980}
   - component: {fileID: 33440253414527688}
   - component: {fileID: 23880436277274394}
+  - component: {fileID: 64178778210570976}
   m_Layer: 0
   m_Name: Lamp_01 1
   m_TagString: Untagged
@@ -63,14 +64,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1619002694712878}
-  m_LocalRotation: {x: -0.062805064, y: -0.7043122, z: -0.704312, w: 0.062805064}
-  m_LocalPosition: {x: -0.8317003, y: 1.0172378, z: 2.3879385}
-  m_LocalScale: {x: 1.3812242, y: 1.3812244, z: 1.3812244}
+  m_LocalRotation: {x: 0.018240795, y: -0.7068716, z: 0.70687133, w: 0.01824105}
+  m_LocalPosition: {x: -11.24, y: -1.0719959, z: 187.51}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
   - {fileID: 4780724055801290}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -169.809}
+  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: -362.956}
 --- !u!23 &23880436277274394
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -80,6 +81,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -95,6 +97,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 1
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -110,6 +113,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1619002694712878}
   m_Mesh: {fileID: 4300000, guid: 42ef28aad4572ed45b91f85b85dbff16, type: 3}
+--- !u!64 &64178778210570976
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1619002694712878}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 42ef28aad4572ed45b91f85b85dbff16, type: 3}
 --- !u!108 &108402368051141398
 Light:
   m_ObjectHideFlags: 1
@@ -121,8 +138,8 @@ Light:
   m_Type: 0
   m_Color: {r: 1, g: 0.90906143, b: 0.7867647, a: 1}
   m_Intensity: 2
-  m_Range: 1
-  m_SpotAngle: 138
+  m_Range: 20
+  m_SpotAngle: 50
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2

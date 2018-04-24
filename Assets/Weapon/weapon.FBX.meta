@@ -57,6 +57,7 @@ ModelImporter:
     100098: Display_08
     100100: Display_09
     100102: Display_10
+    100104: Cylinder021
     400000: Cylinder003
     400002: Cylinder004
     400004: Cylinder005
@@ -109,6 +110,7 @@ ModelImporter:
     400098: Display_08
     400100: Display_09
     400102: Display_10
+    400104: Cylinder021
     2300000: Cylinder003
     2300002: Cylinder004
     2300004: Cylinder005
@@ -160,6 +162,7 @@ ModelImporter:
     2300096: Display_08
     2300098: Display_09
     2300100: Display_10
+    2300102: Cylinder021
     3300000: Cylinder003
     3300002: Cylinder004
     3300004: Cylinder005
@@ -211,6 +214,7 @@ ModelImporter:
     3300096: Display_08
     3300098: Display_09
     3300100: Display_10
+    3300102: Cylinder021
     4300000: Weapon_Body
     4300002: Cylinder003
     4300004: Cylinder004
@@ -262,6 +266,7 @@ ModelImporter:
     4300096: Display_08
     4300098: Display_09
     4300100: Display_10
+    4300102: Cylinder021
     7400000: Idle
     7400002: Fire
     7400004: FireLastRound
