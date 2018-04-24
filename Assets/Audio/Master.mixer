@@ -50,6 +50,7 @@ AudioMixerGroupController:
   - {fileID: 244427352684848418}
   - {fileID: 244333339714323220}
   - {fileID: 244559791106393606}
+  - {fileID: 244516750353802838}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
@@ -82,6 +83,7 @@ AudioMixerSnapshotController:
     269e5580340364e40ac965507b2134a8: -1.7
     afbf9a8096c850940b96bb19b21050a6: 6.2251854
     d0e6eba03b0eb9148bfafc380474e5f8: 0.93
+    a66faaa2a910b7540bab08d27b7d8c55: 1.14
     22b2e113e122a3b4db8ae44843407716: 0
     4f590a534c5738542a409a70affc5f71: 45
     d8f62e633ca98934383152f260cf384e: 8202
@@ -97,6 +99,8 @@ AudioMixerSnapshotController:
     044d43274d7da3a4e9849250a75b0b44: 0
     ab4913889bb56ce41a7f88bcae3ef612: 24.3
     c5ee25c81011900479060b6aa564f191: 7802
+    25da89d8863077642a90126bcc65d741: 9259
+    5aedea2913af05d4e93fb8ab488e1501: 5
     37b8c8a92248e294993380713040f023: 350
     ee782b3a74e4fe24586730d4b41ef877: 0
     0ad4217a25bd06a4a9862c7eb53b3aad: 10
@@ -105,7 +109,7 @@ AudioMixerSnapshotController:
     6ceed03c8ccaa1b4f97dcf70aa0f8887: 59
     00b7093c627357942b20e1f0b6a955c2: 4.02
     89de805c8ecc547439f0bb410e49acf5: 83
-    01e11cac6e9302f4da28db7f7d6b1721: -11.944499
+    01e11cac6e9302f4da28db7f7d6b1721: -11.400908
     c56ae9ece49508e40b3e849af9b1583f: 1.35
     9d42e50d500fb1a408d64295301e5e6c: 0
     311c118db98552e4997e2286889dc768: 0
@@ -484,6 +488,25 @@ AudioMixerEffectController:
   m_EffectName: Attenuation
   m_MixLevel: c21abaaa650ca1348b91bcb91c50403d
   m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &244516750353802838
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_EffectID: 5dc228ad9b0240f4ebbcf344b6a7a364
+  m_EffectName: ParamEQ
+  m_MixLevel: e8ac8c3b50b62d94c86ce9ad0b508c09
+  m_Parameters:
+  - m_ParameterName: Center freq
+    m_GUID: 25da89d8863077642a90126bcc65d741
+  - m_ParameterName: Octave range
+    m_GUID: 5aedea2913af05d4e93fb8ab488e1501
+  - m_ParameterName: Frequency gain
+    m_GUID: a66faaa2a910b7540bab08d27b7d8c55
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
