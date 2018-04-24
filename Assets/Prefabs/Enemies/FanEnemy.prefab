@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4942092779485748}
   - component: {fileID: 33581541715090284}
   - component: {fileID: 23963120250783914}
-  - component: {fileID: 64771992677796552}
+  - component: {fileID: 135675186854816124}
   m_Layer: 9
   m_Name: Fan_02
   m_TagString: Untagged
@@ -93,7 +93,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1517649204418812}
   m_LocalRotation: {x: -0, y: 0.9429158, z: -0, w: -0.33303127}
-  m_LocalPosition: {x: 6.56, y: -7.11, z: 110.44}
+  m_LocalPosition: {x: 6.56, y: -2.8, z: 110.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224486880486713932}
@@ -251,20 +251,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1121933040679370}
   m_Mesh: {fileID: 4300000, guid: a54f2f53b4a1ed242832364b3683e83a, type: 3}
---- !u!64 &64771992677796552
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1121933040679370}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: a54f2f53b4a1ed242832364b3683e83a, type: 3}
 --- !u!95 &95993315893962212
 Animator:
   serializedVersion: 3
@@ -414,7 +400,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 1
-  m_inputSource: 0
+  m_inputSource: 2
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23477038655155754}
   m_subTextObjects:
@@ -518,6 +504,18 @@ MonoBehaviour:
   transformToShake: {fileID: 4942092779485748}
   shakeMag: 0.05
   m_eyes: {fileID: 1788381750868538}
+--- !u!135 &135675186854816124
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1121933040679370}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.32078397
+  m_Center: {x: 0.26607814, y: 0.0000038310945, z: -0.024051076}
 --- !u!195 &195468294049599340
 NavMeshAgent:
   m_ObjectHideFlags: 1

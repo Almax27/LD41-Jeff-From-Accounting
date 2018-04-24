@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 4826108441985442}
   - component: {fileID: 33521287413852660}
   - component: {fileID: 23397072894619576}
-  - component: {fileID: 64007466618242748}
+  - component: {fileID: 65851127460027188}
   m_Layer: 9
   m_Name: PaintingEnemy
   m_TagString: Untagged
@@ -92,15 +92,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1849643079910938}
-  m_LocalRotation: {x: -0, y: 0.95767605, z: -0, w: 0.28784823}
-  m_LocalPosition: {x: -6.421, y: -6.27, z: -38.576}
+  m_LocalRotation: {x: 0, y: 0.93939376, z: 0, w: 0.34284016}
+  m_LocalPosition: {x: -32.62, y: -6.27, z: 54.15}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 224219811856049972}
   - {fileID: 4826108441985442}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 146.542, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 139.9, z: 0}
 --- !u!4 &4826108441985442
 Transform:
   m_ObjectHideFlags: 1
@@ -252,8 +252,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1632975426040836}
   m_Mesh: {fileID: 4300000, guid: 2dff91a227cd86747a1acd667b6256d3, type: 3}
---- !u!64 &64007466618242748
-MeshCollider:
+--- !u!65 &65851127460027188
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -261,11 +261,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 3110ad0f53b89cf459da6aa565216541, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 2.1451256, y: 1.1451254, z: 0.06891739}
+  m_Center: {x: 0.000007749616, y: 0.000000118196866, z: 0.03397169}
 --- !u!95 &95561038643383742
 Animator:
   serializedVersion: 3
