@@ -68,7 +68,7 @@ public class ProjectileController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update ()
+    void LateUpdate ()
     {
         direction.Normalize();
 
@@ -83,9 +83,9 @@ public class ProjectileController : MonoBehaviour {
 
         //do movement cast
         RaycastHit hitInfo;
-        if (!Physics.Raycast(preMovePosition, direction, out hitInfo, distanceMovedThisFrame, hitMask))
+        if(!Physics.SphereCast(preMovePosition, damageRadius, direction, out hitInfo, distanceMovedThisFrame, damageMask))
         {
-            Physics.SphereCast(preMovePosition, damageRadius, direction, out hitInfo, distanceMovedThisFrame, damageMask);
+            Physics.Raycast(preMovePosition, direction, out hitInfo, distanceMovedThisFrame, hitMask);
         }
         if(hitInfo.collider)
         {

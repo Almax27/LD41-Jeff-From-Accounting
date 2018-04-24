@@ -21,6 +21,7 @@ public class Health : MonoBehaviour {
     public bool m_forceCaps = true;
     public bool m_ignoreLetters = false;
     public bool m_alwaysVisible = false;
+    public bool m_ignoreRaycat = false;
     int m_healthValue = 0;
     int m_recentlyDamagedCount = 0;
     bool m_isTargeted = false;

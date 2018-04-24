@@ -403,6 +403,7 @@ MonoBehaviour:
   m_forceCaps: 1
   m_ignoreLetters: 0
   m_alwaysVisible: 0
+  m_ignoreRaycat: 0
   m_soundsOnHurt: []
   m_mixerGroup: {fileID: 0}
   destroyOnDeathDelay: 0.1

@@ -302,6 +302,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   transformToShake: {fileID: 0}
   shakeMag: 0.05
+  m_eyes: {fileID: 0}
 --- !u!114 &114168568416360802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -430,6 +431,7 @@ MonoBehaviour:
   m_forceCaps: 1
   m_ignoreLetters: 0
   m_alwaysVisible: 0
+  m_ignoreRaycat: 0
   m_soundsOnHurt: []
   m_mixerGroup: {fileID: 0}
   destroyOnDeathDelay: 0.1

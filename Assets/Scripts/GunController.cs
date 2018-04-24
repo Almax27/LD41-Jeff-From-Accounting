@@ -307,7 +307,7 @@ public class GunController : MonoBehaviour {
                     if (m_targetUnderReticule) m_targetUnderReticule.SetIsTextVisible(false);
                     m_targetUnderReticule = health;
                 }
-                if(m_targetUnderReticule)
+                if(m_targetUnderReticule && !m_targetUnderReticule.m_ignoreRaycat)
                 {
                     m_targetUnderReticule.SetIsTextVisible(true);
                 }
