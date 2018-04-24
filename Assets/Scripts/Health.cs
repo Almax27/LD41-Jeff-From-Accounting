@@ -146,6 +146,7 @@ public class Health : MonoBehaviour {
     private void OnValidate()
     {
         OnHealthChanged();
+        gameObject.name = m_healthLetters;
     }
 
     void OnHealthChanged()

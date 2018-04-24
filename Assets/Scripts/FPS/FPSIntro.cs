@@ -19,6 +19,10 @@ public class FPSIntro : MonoBehaviour {
             m_introAnimation.Play();
             OnIntroStart();
         }
+        else
+        {
+            OnIntroFinished();
+        }
     }
 
     public void OnIntroStart()
