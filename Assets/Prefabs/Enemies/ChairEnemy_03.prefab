@@ -142,7 +142,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: fecc1842245b9d34fa16cd1a04544e35, type: 2}
+  - {fileID: 2100000, guid: cb2295e4c99e9a247921ae9a7f8d78df, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -400,7 +400,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 1
-  m_inputSource: 0
+  m_inputSource: 2
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23480030124931322}
   m_subTextObjects:
