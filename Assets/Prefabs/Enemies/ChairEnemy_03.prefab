@@ -459,7 +459,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_aggroRange: 15
   m_attackRange: 3
-  m_attackRate: 2
+  m_attackRate: 1
+  m_shakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.25
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.75
+      value: -1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  transformToShake: {fileID: 4041971288095512}
+  shakeMag: 0.05
 --- !u!195 &195913029765066982
 NavMeshAgent:
   m_ObjectHideFlags: 1

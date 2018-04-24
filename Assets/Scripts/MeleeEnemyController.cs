@@ -10,14 +10,32 @@ public class MeleeEnemyController : MonoBehaviour {
     public float m_attackRange = 3.0f;
     public float m_attackRate = 1.0f;
 
+    public AnimationCurve m_shakeCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(0.25f, 1f),
+                                                            new Keyframe(0.5f, 0f), new Keyframe(0.75f, -1f),
+                                                            new Keyframe(1f, 0f)); // sin curve for head bob
+    public Transform transformToShake = null;
+    public float shakeMag = 0.05f;
+    Vector3 originalShakePos = Vector3.zero;
+
     Transform m_target = null;
     NavMeshAgent m_agent = null;
 
     float attackTick = 0;
 
+    public void SetTarget(Transform target)
+    {
+        m_target = target;
+    }
+
     // Use this for initialization
     void Awake () {
         m_agent = GetComponent<NavMeshAgent>();
+        if (transformToShake)
+        {
+            originalShakePos = transformToShake.localPosition;
+        }
+        attackTick = m_attackRate;
+        m_shakeCurve.postWrapMode = WrapMode.Loop;
     }
 	
 	// Update is called once per frame
@@ -48,6 +66,11 @@ public class MeleeEnemyController : MonoBehaviour {
                     health.TakeDamage(dmg);
                     attackTick = 0;
                 }
+            }
+            if (transformToShake && attackTick * 3.0f < m_attackRate)
+            {
+                float shake = m_shakeCurve.Evaluate((attackTick / m_attackRate) * 10.0f);
+                transformToShake.localPosition = originalShakePos + new Vector3(0.7f, 1.2f, 0.5f) * shake * shakeMag;
             }
         }
 	}

@@ -375,7 +375,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 1
-  m_inputSource: 2
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23990819285243584}
   m_subTextObjects:
@@ -402,6 +402,9 @@ MonoBehaviour:
   m_healthLetters: DOOR
   m_forceCaps: 1
   m_ignoreLetters: 0
+  m_alwaysVisible: 0
+  m_soundsOnHurt: []
+  m_mixerGroup: {fileID: 0}
   destroyOnDeathDelay: 0.1
   m_healthText: {fileID: 114628461418406628}
   m_defaultColor: {r: 1, g: 1, b: 1, a: 1}

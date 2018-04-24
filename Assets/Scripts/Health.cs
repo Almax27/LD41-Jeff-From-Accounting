@@ -193,7 +193,15 @@ public class Health : MonoBehaviour {
         if (m_soundsOnHurt.Count > 0)
         {
             FAFAudio.Instance.Play(m_soundsOnHurt[Random.Range(0, m_soundsOnHurt.Count-1)], transform.position, 1.0f, 1.0f, m_mixerGroup);
-                }
+        }
+        if (tag != "Player")
+        {
+            MeleeEnemyController melee = GetComponent<MeleeEnemyController>();
+            if(melee)
+            {
+                melee.SetTarget(GameManager.Instance.Player.transform);
+            }
+        }
     }
 
     void OnDeath(DamagePacket packet)

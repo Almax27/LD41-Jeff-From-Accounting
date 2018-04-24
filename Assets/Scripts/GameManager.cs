@@ -111,7 +111,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         for (int i = 1; i < 5; i++)
         {
-            if (i == 0)
+            if (i == 1)
             {
                 SceneManager.LoadScene(i, LoadSceneMode.Single);
             }
