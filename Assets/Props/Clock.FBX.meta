@@ -153,6 +153,33 @@ ModelImporter:
     4300052: Box077
     4300054: Box078
     4300056: Box079
+    6400000: Box025
+    6400002: Box053
+    6400004: Box054
+    6400006: Box056
+    6400008: Box057
+    6400010: Box058
+    6400012: Box059
+    6400014: Box060
+    6400016: Box061
+    6400018: Box062
+    6400020: Box063
+    6400022: Box064
+    6400024: Box065
+    6400026: Box066
+    6400028: Box068
+    6400030: Box069
+    6400032: Box070
+    6400034: Box071
+    6400036: Box072
+    6400038: Box073
+    6400040: Box074
+    6400042: Box075
+    6400044: Box076
+    6400046: Box077
+    6400048: Box078
+    6400050: Box079
+    6400052: Cylinder020
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -185,13 +212,13 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     optimizeMeshForGPU: 1
     keepQuads: 0

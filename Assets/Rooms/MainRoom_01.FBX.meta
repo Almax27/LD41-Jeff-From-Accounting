@@ -13,6 +13,7 @@ ModelImporter:
     100010: Object007
     100012: Object008
     100014: Object014
+    100016: Object021
     400000: //RootNode
     400002: Line002
     400004: Object002
@@ -21,6 +22,7 @@ ModelImporter:
     400010: Object007
     400012: Object008
     400014: Object014
+    400016: Object021
     2300000: //RootNode
     2300002: Line002
     2300004: Object002
@@ -29,6 +31,7 @@ ModelImporter:
     2300010: Object007
     2300012: Object008
     2300014: Object014
+    2300016: Object021
     3300000: //RootNode
     3300002: Line002
     3300004: Object002
@@ -37,6 +40,7 @@ ModelImporter:
     3300010: Object007
     3300012: Object008
     3300014: Object014
+    3300016: Object021
     4300000: Line002
     4300002: Object002
     4300004: Object003
@@ -44,6 +48,7 @@ ModelImporter:
     4300008: Object007
     4300010: Object008
     4300012: Object014
+    4300014: Object021
     6400000: //RootNode
     6400002: Line002
     6400004: Object002
@@ -52,6 +57,7 @@ ModelImporter:
     6400010: Object007
     6400012: Object008
     6400014: Object014
+    6400016: Object021
     9500000: //RootNode
     11100000: //RootNode
   externalObjects:
@@ -85,6 +91,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Grey_Medium
     second: {fileID: 2100000, guid: ecd0257492491db4d9dc5815f45b9def, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #12'
+    second: {fileID: 2100000, guid: 116023dbad0bea54197aa09a2384f71d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #13'
+    second: {fileID: 2100000, guid: c9c339e5fda75864cbaa525b03d09691, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
