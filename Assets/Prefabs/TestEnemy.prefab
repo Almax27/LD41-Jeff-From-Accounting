@@ -261,6 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f86c1c02fa608438acd3c8c4a7733d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_aggroRange: 10
 --- !u!114 &114168568416360802
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,7 +281,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: <color=#FFFFFFFF>G</color><color=#FFFFFFFF>R</color><color=#FFFFFFFF>E</color><color=#FFFFFFFF>G</color>
+  m_text: <color=#808080FF>G</color><color=#808080FF>R</color><color=#808080FF>E</color><color=#808080FF>G</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f3c4686c64e5e494c8657d4866d604a9, type: 2}
   m_sharedMaterial: {fileID: 21354747041288968, guid: f3c4686c64e5e494c8657d4866d604a9,

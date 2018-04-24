@@ -141,7 +141,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 990b4275e770f7c4cb141de590c5d3af, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.241
+  m_Volume: 0.322
   m_Pitch: 0.25
   Loop: 1
   Mute: 0
@@ -496,7 +496,7 @@ AudioReverbZone:
   m_MinDistance: 94.86
   m_MaxDistance: 98.4
   m_ReverbPreset: 27
-  m_Room: -1986
+  m_Room: -1638
   m_RoomHF: -476
   m_DecayTime: 4.32
   m_DecayHFRatio: 0.59
