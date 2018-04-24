@@ -221,12 +221,12 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114215411834322380, guid: 3ddab1046ddaf3548853296de5ec65c9,
+    - target: {fileID: 114785486352858888, guid: 3ddab1046ddaf3548853296de5ec65c9,
         type: 2}
       propertyPath: m_havePropertiesChanged
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114215411834322380, guid: 3ddab1046ddaf3548853296de5ec65c9,
+    - target: {fileID: 114785486352858888, guid: 3ddab1046ddaf3548853296de5ec65c9,
         type: 2}
       propertyPath: m_isInputParsingRequired
       value: 1
@@ -381,14 +381,29 @@ Prefab:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1259599335886318, guid: 3ddab1046ddaf3548853296de5ec65c9, type: 2}
+      propertyPath: m_Name
+      value: FPSPlayer
+      objectReference: {fileID: 0}
+    - target: {fileID: 114215411834322380, guid: 3ddab1046ddaf3548853296de5ec65c9,
+        type: 2}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114215411834322380, guid: 3ddab1046ddaf3548853296de5ec65c9,
+        type: 2}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114785486352858888, guid: 3ddab1046ddaf3548853296de5ec65c9,
+        type: 2}
+      propertyPath: m_inputSource
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 224803270961731982, guid: 3ddab1046ddaf3548853296de5ec65c9,
         type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4430789635042328, guid: 3ddab1046ddaf3548853296de5ec65c9, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -0.48200002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3ddab1046ddaf3548853296de5ec65c9, type: 2}

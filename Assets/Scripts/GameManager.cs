@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
-
-#if UNITY_EDITOR
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
+
+#if UNITY_EDITOR
+using UnityEditor;
 
 [InitializeOnLoadAttribute]
 public static class GameManagerPlayModeStateChanged
@@ -104,6 +105,21 @@ public class GameManager : SingletonBehaviour<GameManager> {
     public void OnDoorKilled()
     {
         SetGameState(GameState.Combat);
+    }
+
+    public void ReloadLevel()
+    {
+        for (int i = 1; i < 5; i++)
+        {
+            if (i == 0)
+            {
+                SceneManager.LoadScene(i, LoadSceneMode.Single);
+            }
+            else
+            {
+                SceneManager.LoadScene(i, LoadSceneMode.Additive);
+            }
+        }
     }
 
     void SetGameState(GameState newState, bool force = false)

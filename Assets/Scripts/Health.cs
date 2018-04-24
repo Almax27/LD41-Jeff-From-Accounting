@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using UnityEngine.Audio;
 
 public struct DamagePacket
 {
@@ -19,16 +20,21 @@ public class Health : MonoBehaviour {
     public string m_healthLetters = "HEALTH";
     public bool m_forceCaps = true;
     public bool m_ignoreLetters = false;
+    public bool m_alwaysVisible = false;
     int m_healthValue = 0;
     int m_recentlyDamagedCount = 0;
     bool m_isTargeted = false;
+
+    [Header("Audio")]
+    public List<AudioClip> m_soundsOnHurt = new List<AudioClip>();
+    public AudioMixerGroup m_mixerGroup = null;
 
     [Header("Death")]
     [Tooltip("Time to wait befor destroying this gameobject after death, if < 0 will not destroy")]
     public float destroyOnDeathDelay = 0.1f;
 
     [Header("Text")]
-    public TextMeshPro m_healthText = null;
+    public TMP_Text m_healthText = null;
     public Color m_defaultColor = Color.white;
     public Color m_removedColor = Color.grey;
     public Color m_damagedColor = Color.red;
@@ -88,7 +94,7 @@ public class Health : MonoBehaviour {
 
     public void SetIsTextVisible(bool isVisible, bool force = false)
     {
-        if(m_healthText)
+        if(m_healthText && !m_alwaysVisible)
         {
             if (force || (m_healthText.isActiveAndEnabled && m_fadeTextCorountine == null) != isVisible)
             {
@@ -140,13 +146,16 @@ public class Health : MonoBehaviour {
         if (m_forceCaps) m_healthLetters = m_healthLetters.ToUpper();
         m_healthValue = m_healthLetters.Length;
         OnHealthChanged();
-        SetIsTextVisible(false, true);
+        SetIsTextVisible(m_alwaysVisible, true);
     }
 
     private void OnValidate()
     {
         OnHealthChanged();
-        gameObject.name = m_healthLetters;
+        if (tag != "Player")
+        {
+            gameObject.name = m_healthLetters;
+        }
     }
 
     void OnHealthChanged()
@@ -181,6 +190,10 @@ public class Health : MonoBehaviour {
     {
         Debug.Log(gameObject.name + " Took damage: " + packet.letter);
         OnHealthChanged();
+        if (m_soundsOnHurt.Count > 0)
+        {
+            FAFAudio.Instance.Play(m_soundsOnHurt[Random.Range(0, m_soundsOnHurt.Count-1)], transform.position, 1.0f, 1.0f, m_mixerGroup);
+                }
     }
 
     void OnDeath(DamagePacket packet)
@@ -188,6 +201,18 @@ public class Health : MonoBehaviour {
         if(destroyOnDeathDelay >= 0)
         {
             Destroy(gameObject, destroyOnDeathDelay);
+        }
+
+        //Mega end game hack
+        if (tag == "Player")
+        {
+            GameManager.Instance.Invoke("ReloadLevel", 5.0f);
+            if(GameManager.Instance.Player && GameManager.Instance.Player.m_fpsHUD)
+            {
+                GameManager.Instance.Player.m_isInputEnabled = false;
+                GameManager.Instance.Player.m_gunController.gameObject.SetActive(false);
+                GameManager.Instance.Player.m_fpsHUD.OnDeath();
+            }
         }
     }
 

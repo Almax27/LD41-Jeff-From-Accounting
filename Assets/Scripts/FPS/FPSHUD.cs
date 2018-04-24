@@ -20,6 +20,7 @@ public class FPSHUD : MonoBehaviour {
     [Header("Prompts")]
     public float promptFadeDuration = 0.3f;
     public PromptSetup m_reloadPrompt;
+    public PromptSetup m_deathPrompt;
 
     [Header("Widgets")]
     public RectTransform m_crosshair = null;
@@ -102,5 +103,10 @@ public class FPSHUD : MonoBehaviour {
     {
         TryShowPrompt(null);
         m_reloadPrompt.triggerCount = 0;
+    }
+
+    public void OnDeath()
+    {
+        TryShowPrompt(m_deathPrompt);
     }
 }
