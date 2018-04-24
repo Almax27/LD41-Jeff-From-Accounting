@@ -28,6 +28,7 @@ public class Health : MonoBehaviour {
 
     [Header("Audio")]
     public List<AudioClip> m_soundsOnHurt = new List<AudioClip>();
+    public List<AudioClip> m_soundsOnDeath = new List<AudioClip>();
     public AudioMixerGroup m_mixerGroup = null;
 
     [Header("Death")]
@@ -40,6 +41,8 @@ public class Health : MonoBehaviour {
     public Color m_removedColor = Color.grey;
     public Color m_damagedColor = Color.red;
     Coroutine m_fadeTextCorountine = null;
+
+    public bool IsAlive() { return isActiveAndEnabled && m_healthValue > 0; }
 
     public bool TakeDamage(DamagePacket packet)
     {
@@ -222,6 +225,14 @@ public class Health : MonoBehaviour {
                 GameManager.Instance.Player.m_gunController.gameObject.SetActive(false);
                 GameManager.Instance.Player.m_fpsHUD.OnDeath();
             }
+        }
+        else
+        {
+            GameManager.Instance.OnEnemyKilled(this);
+        }
+        if (m_soundsOnDeath.Count > 0)
+        {
+            FAFAudio.Instance.Play(m_soundsOnDeath[Random.Range(0, m_soundsOnDeath.Count - 1)], transform.position, 2.0f, 1.0f, m_mixerGroup);
         }
     }
 

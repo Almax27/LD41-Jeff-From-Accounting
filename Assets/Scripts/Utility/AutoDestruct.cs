@@ -17,6 +17,7 @@ public class AutoDestruct : MonoBehaviour {
 
     private void OnEnable()
     {
+        tick = 0;
         foreach (var ps in GetComponentsInChildren<ParticleSystem>())
         {
             ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);

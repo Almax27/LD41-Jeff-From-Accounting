@@ -82,9 +82,10 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     private GameState m_state = GameState.Idle;
     private FPSPlayerController m_player = null;
+    private bool m_isPaused = false;
 
     // Use this for initialization
-    protected override void Awake () {
+    protected void Awake () {
 
         m_player = FindObjectOfType<FPSPlayerController>();
         if(!m_player && playerPrefab)
@@ -97,14 +98,78 @@ public class GameManager : SingletonBehaviour<GameManager> {
         }
     }
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         SetGameState(GameState.Idle, true);
+
+        //START MESSAGE HACK
+        if (Player.m_fpsHUD)
+        {
+            Player.m_fpsHUD.TryShowPrompt(new PromptSetup("Jeff the Accountant\nMade for LudumDare 41\nBy Greg Lee, Dale Smith and Aaron Baumbach", 0, 10.0f));
+        }
+    }
+
+    public void OnEnemyKilled(Health enemy)
+    {
+        bool allEnemiesDead = true;
+        foreach(Health health in FindObjectsOfType<Health>())
+        {
+            if(health.IsAlive() && health.tag != "Player")
+            {
+                allEnemiesDead = false;
+                break;
+            }
+        }
+        if (allEnemiesDead)
+        {
+            StartCoroutine(EndingHack());
+        }
+    }
+
+    IEnumerator EndingHack()
+    {
+        if(Player.m_fpsHUD)
+        {
+            Player.m_fpsHUD.TryShowPrompt(new PromptSetup("You killed all the things. Thanks for playing!", 0, 10.0f));
+        }
+        yield return new WaitForSecondsRealtime(10.0f);
+        for(int i = 5; i > 0; i--)
+        {
+            if (Player.m_fpsHUD)
+            {
+                Player.m_fpsHUD.TryShowPrompt(new PromptSetup("Restarting in " + i + "...", 0, 1.0f));
+            }
+            yield return new WaitForSecondsRealtime(1.0f);
+        }
+        ReloadLevel();
     }
 
     public void OnDoorKilled()
     {
         SetGameState(GameState.Combat);
+    }
+
+    public void SetPaused(bool pause)
+    {
+        if (m_isPaused == pause) return;
+        m_isPaused = pause;
+        if (pause)
+        {
+            Time.timeScale = 0;
+            if (Player && Player.m_fpsHUD)
+            {
+                Player.m_fpsHUD.OnPaused();
+            }
+        }
+        else
+        {
+            Time.timeScale = 1;
+            if (Player && Player.m_fpsHUD)
+            {
+                Player.m_fpsHUD.OnUnpaused();
+            }
+        }
     }
 
     public void ReloadLevel()

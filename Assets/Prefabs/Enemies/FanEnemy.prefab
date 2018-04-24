@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 222796990096139850}
   - component: {fileID: 114491578665004508}
   - component: {fileID: 114619671996523138}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: TextMeshPro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -333,7 +333,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: <color=#808080FF>F</color><color=#808080FF>a</color><color=#808080FF>n</color><color=#808080FF>E</color><color=#808080FF>n</color><color=#808080FF>e</color><color=#808080FF>m</color><color=#808080FF>y</color>
+  m_text: <color=#2B2B2BFF>F</color><color=#2B2B2BFF>a</color><color=#2B2B2BFF>n</color><color=#2B2B2BFF>E</color><color=#2B2B2BFF>n</color><color=#2B2B2BFF>e</color><color=#2B2B2BFF>m</color><color=#2B2B2BFF>y</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f3c4686c64e5e494c8657d4866d604a9, type: 2}
   m_sharedMaterial: {fileID: 21354747041288968, guid: f3c4686c64e5e494c8657d4866d604a9,
@@ -414,7 +414,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 1
-  m_inputSource: 2
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23477038655155754}
   m_subTextObjects:
@@ -444,11 +444,14 @@ MonoBehaviour:
   m_alwaysVisible: 0
   m_ignoreRaycat: 0
   m_soundsOnHurt: []
-  m_mixerGroup: {fileID: 0}
+  m_soundsOnDeath:
+  - {fileID: 8300000, guid: dd8abb2f0fb52034d9025b176fe0b31c, type: 3}
+  m_mixerGroup: {fileID: 243826569297582702, guid: 22ebe517a927c904b825455383b9d44b,
+    type: 2}
   destroyOnDeathDelay: 0.1
   m_healthText: {fileID: 114491578665004508}
   m_defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  m_removedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_removedColor: {r: 0.16911763, g: 0.16911763, b: 0.16911763, a: 1}
   m_damagedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114619671996523138
 MonoBehaviour:
@@ -475,7 +478,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_aggroRange: 15
   m_attackRange: 3
-  m_attackRate: 1
+  m_attackRate: 1.5
   m_shakeCurve:
     serializedVersion: 2
     m_Curve:

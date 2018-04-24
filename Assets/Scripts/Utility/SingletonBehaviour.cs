@@ -4,46 +4,49 @@ using UnityEngine;
 
 public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 {
-	static T instance = null;
+    static T s_instance = null;
 
 	public static T Instance
 	{
 		get
 		{
-			if (instance == null)
+			if (s_instance == null)
 			{
-				instance = (T)FindObjectOfType(typeof(T));
-				if (instance == null)
+				s_instance = (T)FindObjectOfType(typeof(T));
+				if (s_instance == null)
 				{
 					GameObject gobj = new GameObject(typeof(T).ToString());
-					instance = gobj.AddComponent<T>();
-					//DontDestroyOnLoad(gobj);
+					s_instance = gobj.AddComponent<T>();
 				}
 			}
-			return instance;
+			return s_instance;
 		}
 	}
 	public static void DestroyInstance()
 	{
-		Destroy(instance.gameObject);
-		instance = null;
+		Destroy(s_instance.gameObject);
+		s_instance = null;
 	}
 	
-	virtual protected void Awake()
+	virtual protected void Start()
 	{
 		//there can only be one!
-		if (instance)
+		if (s_instance && s_instance != this)
 		{
-			Debug.Break();
+            Debug.LogError("There can only be one " + typeof(T).ToString() + ", deleting...");
 			Destroy(this.gameObject);
 		}
+        else
+        {
+            s_instance = this as T;
+        }
 	}
 
 	virtual protected void OnDestroy()
 	{
-		if(instance == this)
+		if(s_instance == this)
 		{
-			instance = null;
+			s_instance = null;
 		}
 	}
 }

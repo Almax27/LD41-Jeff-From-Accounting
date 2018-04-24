@@ -14,11 +14,22 @@ public enum MusicTransitionMode
 public class MusicSetup
 {
     public AudioClip clip = null;
-    public float volume = 1.0f;
+    [Range(0,1)] public float volume = 1.0f;
     public bool loop = true;
     public float fadeIn = 1.0f;
     public float fadeOut = 1.0f;
     public MusicTransitionMode transitionMode = MusicTransitionMode.CrossFade;
+}
+
+[System.Serializable]
+public class SFXSetup
+{
+    public AudioClip clip = null;
+    public AudioMixerGroup mixerGroup = null;
+    [Range(0,1)] public float volume = 1.0f;
+    [Range(0,1)] public float volumeVariance = 1.0f;
+    [Range(0, 1)] public float pitch = 1.0f;
+    [Range(0, 1)] public float pitchVariance = 1.0f;
 }
 
 public class FAFAudio : SingletonBehaviour<FAFAudio>
@@ -35,9 +46,9 @@ public class FAFAudio : SingletonBehaviour<FAFAudio>
     List<AudioSource> pool = new List<AudioSource>();
     Stack<AudioSource> freeStack = new Stack<AudioSource>();
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
+        DontDestroyOnLoad(this.gameObject);
         if(currentMusicSource == null)
         {
             currentMusicSource = CreateMusicSource("CurrentMusic");
@@ -59,6 +70,13 @@ public class FAFAudio : SingletonBehaviour<FAFAudio>
             return source;
         }
         return null;
+    }
+
+    public AudioSource Play(SFXSetup _sfx, Vector3 _pos)
+    {
+        float volume = _sfx.volume + Random.Range(-_sfx.volumeVariance, _sfx.volumeVariance);
+        float pitch = _sfx.pitch + Random.Range(-_sfx.pitchVariance, _sfx.pitchVariance);
+        return Play(_sfx.clip, _pos, volume, pitch, _sfx.mixerGroup);
     }
 
     public AudioSource Play(AudioClip _clip, Vector3 _pos, float _volume = 1, float _pitch = 1, AudioMixerGroup _mixerGroup = null)
@@ -124,6 +142,22 @@ public class FAFAudio : SingletonBehaviour<FAFAudio>
 
             autoDestruct.delay = _clip.length;
         }
+    }
+
+    public bool TryPlayMusic(List<MusicSetup> musicSetups, bool queue = true)
+    {
+        if (musicSetups == null || musicSetups.Count == 0 || musicSetups[0] == transitioningMusicSetup)
+        {
+            return false;
+        }
+
+        bool success = TryPlayMusic(musicSetups[0], false);
+        for(int i = 1; i < musicSetups.Count; i++)
+        {
+            success |= TryPlayMusic(musicSetups[i], queue);
+        }
+
+        return success;
     }
 
     public bool TryPlayMusic(MusicSetup musicSetup, bool queue = true)

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 222911834173972860}
   - component: {fileID: 114877158871445600}
   - component: {fileID: 114219700758627454}
-  m_Layer: 9
+  m_Layer: 2
   m_Name: TextMeshPro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,15 +92,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1849643079910938}
-  m_LocalRotation: {x: -0, y: 0.9756013, z: -0, w: -0.21954988}
-  m_LocalPosition: {x: 23.9, y: -6.27, z: 36.5}
+  m_LocalRotation: {x: -0, y: 0.95767605, z: -0, w: 0.28784823}
+  m_LocalPosition: {x: -6.421, y: -6.27, z: -38.576}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_Children:
   - {fileID: 224219811856049972}
   - {fileID: 4826108441985442}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 205.36499, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 146.542, z: 0}
 --- !u!4 &4826108441985442
 Transform:
   m_ObjectHideFlags: 1
@@ -294,9 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f86c1c02fa608438acd3c8c4a7733d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_aggroRange: 5
+  m_aggroRange: 10
   m_attackRange: 5
-  m_attackRate: 1
+  m_attackRate: 1.5
   m_shakeCurve:
     serializedVersion: 2
     m_Curve:
@@ -365,11 +365,14 @@ MonoBehaviour:
   m_alwaysVisible: 0
   m_ignoreRaycat: 0
   m_soundsOnHurt: []
-  m_mixerGroup: {fileID: 0}
+  m_soundsOnDeath:
+  - {fileID: 8300000, guid: 3f79f14c976222642b7f02fed4e69d73, type: 3}
+  m_mixerGroup: {fileID: 243826569297582702, guid: 22ebe517a927c904b825455383b9d44b,
+    type: 2}
   destroyOnDeathDelay: 0.1
   m_healthText: {fileID: 114877158871445600}
   m_defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  m_removedColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  m_removedColor: {r: 0.16911763, g: 0.16911763, b: 0.16911763, a: 1}
   m_damagedColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114779497866253212
 MonoBehaviour:
@@ -422,7 +425,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: <color=#808080FF>P</color><color=#808080FF>a</color><color=#808080FF>i</color><color=#808080FF>n</color><color=#808080FF>t</color><color=#808080FF>i</color><color=#808080FF>n</color><color=#808080FF>g</color><color=#808080FF>E</color><color=#808080FF>n</color><color=#808080FF>e</color><color=#808080FF>m</color><color=#808080FF>y</color><color=#808080FF>_</color><color=#808080FF>0</color><color=#808080FF>2</color>
+  m_text: <color=#2B2B2BFF>P</color><color=#2B2B2BFF>a</color><color=#2B2B2BFF>i</color><color=#2B2B2BFF>n</color><color=#2B2B2BFF>t</color><color=#2B2B2BFF>i</color><color=#2B2B2BFF>n</color><color=#2B2B2BFF>g</color><color=#2B2B2BFF>E</color><color=#2B2B2BFF>n</color><color=#2B2B2BFF>e</color><color=#2B2B2BFF>m</color><color=#2B2B2BFF>y</color><color=#2B2B2BFF>_</color><color=#2B2B2BFF>0</color><color=#2B2B2BFF>2</color>
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f3c4686c64e5e494c8657d4866d604a9, type: 2}
   m_sharedMaterial: {fileID: 21354747041288968, guid: f3c4686c64e5e494c8657d4866d604a9,
@@ -525,7 +528,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 3
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 240

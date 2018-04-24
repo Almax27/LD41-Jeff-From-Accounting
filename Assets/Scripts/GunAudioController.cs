@@ -22,6 +22,8 @@ public class GunAudioController : MonoBehaviour {
     public GunAudio ReloadEnd;
     public GunAudio Fire;
     public GunAudio DryFire;
+    public GunAudio GunUp;
+    public GunAudio GunDown;
 
     void PlayGunAudio(GunAudio gunAudio)
     {
@@ -57,5 +59,15 @@ public class GunAudioController : MonoBehaviour {
     public void OnDryFire()
     {
         PlayGunAudio(DryFire);
+    }
+
+    public void OnGunUp()
+    {
+        PlayGunAudio(GunUp);
+    }
+
+    public void OnGunDown()
+    {
+        PlayGunAudio(GunDown);
     }
 }

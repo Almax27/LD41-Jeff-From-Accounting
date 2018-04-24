@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MusicTrigger : MonoBehaviour {
 
-    public MusicSetup musicOnEnter = null;
-    public MusicSetup musicOnExit = null;
+    public List<MusicSetup> musicOnEnter = new List<MusicSetup>();
+    public List<MusicSetup> musicOnExit = new List<MusicSetup>();
 
     private void OnTriggerEnter(Collider other)
     {

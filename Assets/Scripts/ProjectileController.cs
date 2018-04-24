@@ -83,9 +83,14 @@ public class ProjectileController : MonoBehaviour {
 
         //do movement cast
         RaycastHit hitInfo;
-        if(!Physics.SphereCast(preMovePosition, damageRadius, direction, out hitInfo, distanceMovedThisFrame, damageMask))
+        bool validHit = Physics.Raycast(preMovePosition, direction, out hitInfo, distanceMovedThisFrame, hitMask);
+        RaycastHit damageHitInfo;
+        if(Physics.SphereCast(preMovePosition, damageRadius, direction, out damageHitInfo, distanceMovedThisFrame, damageMask))
         {
-            Physics.Raycast(preMovePosition, direction, out hitInfo, distanceMovedThisFrame, hitMask);
+            if(!validHit || damageHitInfo.distance < hitInfo.distance)
+            {
+                hitInfo = damageHitInfo;
+            }
         }
         if(hitInfo.collider)
         {
@@ -100,6 +105,7 @@ public class ProjectileController : MonoBehaviour {
     public void OnHit(RaycastHit hitInfo)
     {
         Debug.Assert(hitInfo.collider);
+        Debug.Log("Hit: " + hitInfo.collider.gameObject);
         bool dealtDamage = false;
         Health health = hitInfo.collider.GetComponentInParent<Health>();
         if (health)

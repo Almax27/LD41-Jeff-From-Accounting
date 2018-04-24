@@ -58,17 +58,40 @@ public class GunController : MonoBehaviour {
     public bool GetIsGunUp() { return m_gunState == GunState.Up; }
     public int GetMaxAmmoCount() { return ammoDisplayPanels.Count; }
 
-    public void SetGunUp(bool gunUp)
+    private void OnEnable()
+    {
+        FPSPlayerController player = GameManager.Instance.Player;
+        if (player && player.m_fpsHUD)
+        {
+            m_crosshair = player.m_fpsHUD.m_crosshair;
+        }
+
+        GenerateGunKeyBindings();
+        FindAmmoText();
+        UpdateAmmoDisplay();
+
+        if (gunControllerAnimator == null)
+        {
+            gunControllerAnimator = GetComponent<Animator>();
+        }
+
+        SetGunUp(true, true);
+        SetReloadState(false, true);
+    }
+
+    public void SetGunUp(bool gunUp, bool force = false) 
     {
         if(gunUp && m_gunState != GunState.Up)
         {
             gunControllerAnimator.SetBool("IsGunUp", true);
             m_gunState = GunState.Raising;
+            if(gunAudioController && !force) gunAudioController.OnGunUp();
         }
         else if(!gunUp && m_gunState != GunState.Down)
         {
             gunControllerAnimator.SetBool("IsGunUp", false);
             m_gunState = GunState.Lowering;
+            if (gunAudioController && !force) gunAudioController.OnGunDown();
         }
     }
 
@@ -177,7 +200,7 @@ public class GunController : MonoBehaviour {
                 if (Physics.Raycast(ray, out hitInfo, projectile.maxDistance))
                 {
                     Vector3 fireDir = (hitInfo.point - muzzleTranform.position).normalized;
-                    if (Vector3.Angle(fireDir, ray.direction) < 45.0f)
+                    if (Vector3.Angle(fireDir, ray.direction) < 90.0f && hitInfo.distance > 1.0f)
                     {
                         projectile.direction = fireDir;
                         Debug.DrawLine(muzzleTranform.position, hitInfo.point, Color.green, 1.0f);
@@ -199,27 +222,6 @@ public class GunController : MonoBehaviour {
         return projectile;
     }
 
-	// Use this for initialization
-	void Start () {
-
-        FPSPlayerController player = GameManager.Instance.Player;
-        if (player && player.m_fpsHUD)
-        {
-            m_crosshair = player.m_fpsHUD.m_crosshair;
-        }
-
-        GenerateGunKeyBindings();
-        FindAmmoText();
-        UpdateAmmoDisplay();
-
-        if(gunControllerAnimator == null)
-        {
-            gunControllerAnimator = GetComponent<Animator>();
-        }
-
-        OnGunDown();
-    }
-
     private void LateUpdate()
     {
         this.transform.rotation = Camera.main.transform.rotation;
@@ -234,18 +236,7 @@ public class GunController : MonoBehaviour {
 
         if (m_isReloading)
         {
-            if(Input.GetKeyDown(KeyCode.Escape))
-            {
-                if(Ammo.Count == 0)
-                {
-                    SetReloadState(false);
-                }
-                else
-                {
-                    RemoveAllAmmo();
-                }
-            }
-            else if(Input.GetKeyDown(KeyCode.Return))
+            if(Input.GetKeyDown(KeyCode.Return))
             {
                 SetReloadState(false);
             }
@@ -315,9 +306,9 @@ public class GunController : MonoBehaviour {
         }
     }
 
-    void SetReloadState(bool isReloading)
+    void SetReloadState(bool isReloading, bool force = false)
     {
-        if (isReloading != m_isReloading)
+        if (force || isReloading != m_isReloading)
         {
             m_isReloading = isReloading;
             if (gunAnimator)
@@ -328,7 +319,7 @@ public class GunController : MonoBehaviour {
             {
                 gunControllerAnimator.SetBool("IsReloading", isReloading);
             }
-            if (gunAudioController)
+            if (gunAudioController && !force)
             {
                 if (isReloading)
                 {
@@ -340,7 +331,7 @@ public class GunController : MonoBehaviour {
                 }
             }
             FPSPlayerController player = GameManager.Instance.Player;
-            if(player && player.m_fpsHUD)
+            if(player && player.m_fpsHUD && !force)
             {
                 if (isReloading)
                 {
@@ -352,6 +343,8 @@ public class GunController : MonoBehaviour {
 
     void GenerateGunKeyBindings()
     {
+        gunKeys.Clear();
+
         List<Transform> children = new List<Transform>(gameObject.GetComponentsInChildren<Transform>());
         children.RemoveAll(t => !t.name.StartsWith("Key_"));
 
@@ -380,6 +373,9 @@ public class GunController : MonoBehaviour {
         }
         foreach(GunKeyBinding binding in gunKeys)
         {
+            if (Ammo.Count >= GetMaxAmmoCount())
+                break;
+
             if(m_isReloading && Input.GetKeyDown(binding.keyCode))
             {
                 AddAmmo(binding.keyCode);
@@ -416,14 +412,16 @@ public class GunController : MonoBehaviour {
         }
     }
 
-    void AddAmmo(KeyCode keyCode)
+    bool AddAmmo(KeyCode keyCode)
     {
         if (Ammo.Count < GetMaxAmmoCount())
         {
             char upperChar = keyCode.ToString().ToUpper()[0];
             Ammo.Add(upperChar);
             OnAmmoChanged();
+            return true;
         }
+        return false;
     }
 
     void RemoveAmmo()
@@ -467,7 +465,8 @@ public class GunController : MonoBehaviour {
         }
         AmmoTextTransforms.Sort((t1, t2) => int.Parse(t1.name.Remove(0, prefix.Length)) < int.Parse(t2.name.Remove(0, prefix.Length)) ? -1 : 1);
 
-        foreach(Transform t in AmmoTextTransforms)
+        ammoDisplayPanels.Clear();
+        foreach (Transform t in AmmoTextTransforms)
         {
             TextMeshPro textMeshPro = t.GetComponent<TextMeshPro>();
             Debug.Assert(textMeshPro != null);

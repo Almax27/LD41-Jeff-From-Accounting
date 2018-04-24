@@ -78,10 +78,12 @@ public class MouseLook
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             m_cursorIsLocked = false;
+            GameManager.Instance.SetPaused(true);
         }
         else if (Input.GetMouseButtonUp(0))
         {
             m_cursorIsLocked = true;
+            GameManager.Instance.SetPaused(false);
         }
 
         if (m_cursorIsLocked)
