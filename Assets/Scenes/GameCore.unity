@@ -154,6 +154,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114231381109132646, guid: 44877ba9c9eb5694aa3b8ec3984012bb,
+        type: 2}
+      propertyPath: spawnAtSceneViewCamera
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44877ba9c9eb5694aa3b8ec3984012bb, type: 2}
   m_IsPrefabParent: 0

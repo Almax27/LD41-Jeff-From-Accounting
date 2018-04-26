@@ -86,19 +86,19 @@ public class ProjectileController : MonoBehaviour {
             OnExpired();
         }
 
-        Vector3 preMoveCastPosition = m_castPosition;
-        m_castPosition += m_castDirection * distanceToMove;
+        Vector3 castMoveDelta = m_castDirection * distanceToMove;
+        Vector3 traceOrigin = m_castPosition - castMoveDelta; //we trace from one frame back to avoid missing objects coming towards us
+        m_castPosition += castMoveDelta;
+
+        float castDistance = Vector3.Distance(traceOrigin, m_castPosition);
 
         //do cast
         RaycastHit hitInfo;
-        bool validHit = Physics.Raycast(preMoveCastPosition, m_castDirection, out hitInfo, distanceToMove, hitMask);
+        bool validHit = Physics.Raycast(traceOrigin, m_castDirection, out hitInfo, castDistance, hitMask);
         RaycastHit damageHitInfo;
-        if (Physics.SphereCast(preMoveCastPosition, damageRadius, m_castDirection, out damageHitInfo, distanceToMove, damageMask))
+        if (Physics.SphereCast(traceOrigin, damageRadius, m_castDirection, out damageHitInfo, castDistance, damageMask))
         {
-            if (!validHit || damageHitInfo.distance < hitInfo.distance + damageRadius)
-            {
-                hitInfo = damageHitInfo;
-            }
+            hitInfo = damageHitInfo;
         }
         if (hitInfo.collider)
         {
@@ -112,12 +112,12 @@ public class ProjectileController : MonoBehaviour {
         m_direction = (targetPosition - muzzlePosition).normalized;
         m_castPosition = castPosition;
         m_castDirection = (targetPosition - castPosition).normalized;
+        Debug.Log(string.Format("[{0}] ProjectileSpawn", letter));
     }
 
     public void OnHit(RaycastHit hitInfo)
     {
         Debug.Assert(hitInfo.collider);
-        Debug.Log("Hit: " + hitInfo.collider.gameObject);
 
         transform.position = hitInfo.point;
 
@@ -132,16 +132,18 @@ public class ProjectileController : MonoBehaviour {
             {
                 onDamagedSpawner.ProcessSpawns(transform, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), Vector3.one);
                 dealtDamage = true;
-                DebugExtension.DebugWireSphere(hitInfo.point, Color.red, damageRadius, 1.0f);
+                DebugExtension.DebugWireSphere(hitInfo.point, Color.red, damageRadius, 10.0f);
             }
         }
         if (!dealtDamage)
         {
             onHitSpawner.ProcessSpawns(transform, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), Vector3.one);
-            DebugExtension.DebugWireSphere(hitInfo.point, Color.grey, damageRadius, 1.0f);
+            DebugExtension.DebugWireSphere(hitInfo.point, Color.grey, damageRadius, 10.0f);
         }
+
+        Debug.Log(string.Format("[{0}] Hit{1}: {2}", letter, dealtDamage ? "+Damage" : "", health ? health.gameObject.name : hitInfo.collider.gameObject.name));
+
         Destroy(gameObject);
-        
     }
 
     void OnExpired()
