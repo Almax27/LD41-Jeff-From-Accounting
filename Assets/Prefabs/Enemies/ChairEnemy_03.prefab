@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114871999416130944}
   - component: {fileID: 114459025937333436}
   m_Layer: 9
-  m_Name: ChairEnemy_03
+  m_Name: MR CHAIR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 33911513947562822}
   - component: {fileID: 23009911817913236}
   - component: {fileID: 95771379031816364}
-  - component: {fileID: 135428555658336074}
+  - component: {fileID: 64066583608602064}
   m_Layer: 9
   m_Name: Chair_03
   m_TagString: Untagged
@@ -250,6 +250,20 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1720869170405762}
+  m_Mesh: {fileID: 4300000, guid: 56fc0a1a467157c4ab6896fd9f5e88a3, type: 3}
+--- !u!64 &64066583608602064
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1720869170405762}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 56fc0a1a467157c4ab6896fd9f5e88a3, type: 3}
 --- !u!95 &95132072489918528
 Animator:
@@ -489,18 +503,6 @@ MonoBehaviour:
   transformToShake: {fileID: 4041971288095512}
   shakeMag: 0.05
   m_eyes: {fileID: 1976518264942012}
---- !u!135 &135428555658336074
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1720869170405762}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.6
-  m_Center: {x: 0, y: 0, z: 0.6}
 --- !u!195 &195913029765066982
 NavMeshAgent:
   m_ObjectHideFlags: 1

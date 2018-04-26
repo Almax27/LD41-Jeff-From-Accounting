@@ -48,7 +48,6 @@ public class Health : MonoBehaviour {
     {
         if (m_healthValue > 0)
         {
-            int letterIndex = m_healthLetters.Length - m_healthValue;
             char nextLetter = m_healthLetters[m_healthLetters.Length - m_healthValue];
             while(!char.IsLetter(nextLetter) && m_healthValue > 0)
             {

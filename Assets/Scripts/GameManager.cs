@@ -106,7 +106,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
         //START MESSAGE HACK
         if (Player.m_fpsHUD)
         {
-            Player.m_fpsHUD.TryShowPrompt(new PromptSetup("Jeff the Accountant\nMade for LudumDare 41\nBy Greg Lee, Dale Smith and Aaron Baumbach", 0, 10.0f));
+            Player.m_fpsHUD.TryShowPrompt(new PromptSetup("Jeff from Accounting\nMade for LudumDare 41\nBy Greg Lee, Dale Smith and Aaron Baumbach", 0, 10.0f));
         }
     }
 

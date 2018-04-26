@@ -230,8 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100
   maxDistance: 100
-  direction: {x: 0, y: 0, z: 0}
-  damageRadius: 0.8
+  damageRadius: 0.4
   letter: 32
   hitMask:
     serializedVersion: 2

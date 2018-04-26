@@ -60,12 +60,6 @@ public class GunController : MonoBehaviour {
 
     private void OnEnable()
     {
-        FPSPlayerController player = GameManager.Instance.Player;
-        if (player && player.m_fpsHUD)
-        {
-            m_crosshair = player.m_fpsHUD.m_crosshair;
-        }
-
         GenerateGunKeyBindings();
         FindAmmoText();
         UpdateAmmoDisplay();
@@ -187,37 +181,36 @@ public class GunController : MonoBehaviour {
         if (ProjectileControllerPrefab && muzzleTranform)
         {
             GameObject gobj = Instantiate<GameObject>(ProjectileControllerPrefab.gameObject);
-            gobj.transform.position = muzzleTranform.position;
             projectile = gobj.GetComponent<ProjectileController>();
             projectile.letter = letter;
-            projectile.direction = muzzleTranform.forward;
 
-            bool usedRayCast = false;
-            if (m_crosshair)
+            Vector3 traceOrigin = muzzleTranform.position;
+            Vector3 targetPosition = muzzleTranform.forward * projectile.maxDistance;
+
+            FPSPlayerController player = GameManager.Instance.Player;
+            if (player && player.m_fpsHUD.m_crosshair)
             {
-                Ray ray = Camera.main.ScreenPointToRay(m_crosshair.position);
+                Ray ray = Camera.main.ScreenPointToRay(player.m_fpsHUD.m_crosshair.position);
+                traceOrigin = ray.origin;
                 RaycastHit hitInfo;
-                if (Physics.Raycast(ray, out hitInfo, projectile.maxDistance))
+                if (Physics.Raycast(ray, out hitInfo, projectile.maxDistance, projectile.hitMask | projectile.damageMask))
                 {
-                    Vector3 fireDir = (hitInfo.point - muzzleTranform.position).normalized;
-                    if (Vector3.Angle(fireDir, ray.direction) < 90.0f && hitInfo.distance > 1.0f)
+                    targetPosition = hitInfo.point;
+                    //hit is closer than the muzzle then count as an immediate hit
+                    if (hitInfo.distance < Vector3.Distance(muzzleTranform.position, traceOrigin) + 0.5f)
                     {
-                        projectile.direction = fireDir;
-                        Debug.DrawLine(muzzleTranform.position, hitInfo.point, Color.green, 1.0f);
-                    }
-                    else
-                    {
-                        //force projectile hit immediately with camera cast as it's behind the muzzle
                         projectile.OnHit(hitInfo);
                         Debug.DrawLine(muzzleTranform.position, hitInfo.point, Color.red, 1.0f);
                     }
-                    usedRayCast = true;
+                    else
+                    {
+                        Debug.DrawLine(muzzleTranform.position, targetPosition, Color.green, 2.0f);
+                    }
                 }
             }
-            if (!usedRayCast)
-            {
-                Debug.DrawLine(muzzleTranform.position, muzzleTranform.position + projectile.direction * projectile.maxDistance, Color.grey, 1.0f);
-            }
+
+            Debug.DrawLine(traceOrigin, targetPosition, Color.grey, 2.0f);
+            projectile.OnSpawn(muzzleTranform.position, Camera.main.transform.position, targetPosition);
         }
         return projectile;
     }
@@ -279,9 +272,10 @@ public class GunController : MonoBehaviour {
 
         if (Camera.main && ProjectileControllerPrefab)
         {
-            if (m_crosshair)
+            FPSPlayerController player = GameManager.Instance.Player;
+            if (player && player.m_fpsHUD.m_crosshair)
             {
-                Ray ray = Camera.main.ScreenPointToRay(m_crosshair.position);
+                Ray ray = Camera.main.ScreenPointToRay(player.m_fpsHUD.m_crosshair.position);
                 RaycastHit damageHitInfo;
                 Health health = null;
                 if (Physics.SphereCast(ray, ProjectileControllerPrefab.damageRadius, out damageHitInfo, ProjectileControllerPrefab.maxDistance, ProjectileControllerPrefab.damageMask))

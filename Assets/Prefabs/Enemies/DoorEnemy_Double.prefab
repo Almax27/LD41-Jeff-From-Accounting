@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4664501150787876}
   - component: {fileID: 114824075504256136}
   m_Layer: 9
-  m_Name: DoorEnemy_Double
+  m_Name: DOOR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

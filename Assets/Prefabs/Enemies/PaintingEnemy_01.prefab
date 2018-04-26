@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 114593513251072542}
   - component: {fileID: 114779497866253212}
   m_Layer: 9
-  m_Name: PaintingEnemy_01
+  m_Name: PaintingEnemy_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 4826108441985442}
   - component: {fileID: 33521287413852660}
   - component: {fileID: 23397072894619576}
-  - component: {fileID: 65851127460027188}
+  - component: {fileID: 64687336860958068}
   m_Layer: 9
   m_Name: PaintingEnemy
   m_TagString: Untagged
@@ -252,8 +252,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1632975426040836}
   m_Mesh: {fileID: 4300000, guid: 2dff91a227cd86747a1acd667b6256d3, type: 3}
---- !u!65 &65851127460027188
-BoxCollider:
+--- !u!64 &64687336860958068
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -261,9 +261,11 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.1451256, y: 1.1451254, z: 0.06891739}
-  m_Center: {x: 0.000007749616, y: 0.000000118196866, z: 0.03397169}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 3110ad0f53b89cf459da6aa565216541, type: 3}
 --- !u!95 &95561038643383742
 Animator:
   serializedVersion: 3

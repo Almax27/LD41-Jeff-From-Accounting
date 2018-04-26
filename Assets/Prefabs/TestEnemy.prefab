@@ -433,6 +433,7 @@ MonoBehaviour:
   m_alwaysVisible: 0
   m_ignoreRaycat: 0
   m_soundsOnHurt: []
+  m_soundsOnDeath: []
   m_mixerGroup: {fileID: 0}
   destroyOnDeathDelay: 0.1
   m_healthText: {fileID: 114168568416360802}

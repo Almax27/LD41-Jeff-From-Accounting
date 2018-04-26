@@ -9,7 +9,6 @@ public class ProjectileController : MonoBehaviour {
 
     public float speed = 100.0f;
     public float maxDistance = 100.0f;
-    public Vector3 direction = Vector3.zero;
     public float damageRadius = 1.0f;
     public char letter = ' ';
     public LayerMask hitMask = new LayerMask();
@@ -25,6 +24,9 @@ public class ProjectileController : MonoBehaviour {
 
     float m_distanceTraveled = 0.0f;
     List<FollowEffect> m_activeEffects = new List<FollowEffect>();
+    Vector3 m_direction = Vector3.zero;
+    Vector3 m_castPosition = Vector3.zero;
+    Vector3 m_castDirection = Vector3.zero;
 
     private void Start()
     {
@@ -68,44 +70,57 @@ public class ProjectileController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void LateUpdate ()
+    void Update ()
     {
-        direction.Normalize();
+        float distanceToMove = speed * Time.deltaTime;
+        transform.position += m_direction * distanceToMove;        
+    }
 
-        //move projectile
-        Vector3 preMovePosition = transform.position;
-        Vector3 newPosition = preMovePosition + direction * speed * Time.deltaTime;
-        transform.position = newPosition;
+    private void FixedUpdate()
+    {
+        float distanceToMove = speed * Time.fixedDeltaTime;
+        m_distanceTraveled += distanceToMove;
 
-        Vector3 moveDelta = newPosition - preMovePosition;
-        float distanceMovedThisFrame = moveDelta.magnitude;
-        m_distanceTraveled += distanceMovedThisFrame;
-
-        //do movement cast
-        RaycastHit hitInfo;
-        bool validHit = Physics.Raycast(preMovePosition, direction, out hitInfo, distanceMovedThisFrame, hitMask);
-        RaycastHit damageHitInfo;
-        if(Physics.SphereCast(preMovePosition, damageRadius, direction, out damageHitInfo, distanceMovedThisFrame, damageMask))
+        if (m_distanceTraveled > maxDistance)
         {
-            if(!validHit || damageHitInfo.distance < hitInfo.distance)
+            OnExpired();
+        }
+
+        Vector3 preMoveCastPosition = m_castPosition;
+        m_castPosition += m_castDirection * distanceToMove;
+
+        //do cast
+        RaycastHit hitInfo;
+        bool validHit = Physics.Raycast(preMoveCastPosition, m_castDirection, out hitInfo, distanceToMove, hitMask);
+        RaycastHit damageHitInfo;
+        if (Physics.SphereCast(preMoveCastPosition, damageRadius, m_castDirection, out damageHitInfo, distanceToMove, damageMask))
+        {
+            if (!validHit || damageHitInfo.distance < hitInfo.distance + damageRadius)
             {
                 hitInfo = damageHitInfo;
             }
         }
-        if(hitInfo.collider)
+        if (hitInfo.collider)
         {
             OnHit(hitInfo);
         }
-        if(m_distanceTraveled > maxDistance)
-        {
-            OnExpired();
-        }
+    }
+
+    public void OnSpawn(Vector3 muzzlePosition, Vector3 castPosition, Vector3 targetPosition)
+    {
+        transform.position = muzzlePosition;
+        m_direction = (targetPosition - muzzlePosition).normalized;
+        m_castPosition = castPosition;
+        m_castDirection = (targetPosition - castPosition).normalized;
     }
 
     public void OnHit(RaycastHit hitInfo)
     {
         Debug.Assert(hitInfo.collider);
         Debug.Log("Hit: " + hitInfo.collider.gameObject);
+
+        transform.position = hitInfo.point;
+
         bool dealtDamage = false;
         Health health = hitInfo.collider.GetComponentInParent<Health>();
         if (health)
@@ -117,15 +132,16 @@ public class ProjectileController : MonoBehaviour {
             {
                 onDamagedSpawner.ProcessSpawns(transform, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), Vector3.one);
                 dealtDamage = true;
+                DebugExtension.DebugWireSphere(hitInfo.point, Color.red, damageRadius, 1.0f);
             }
         }
         if (!dealtDamage)
         {
             onHitSpawner.ProcessSpawns(transform, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), Vector3.one);
+            DebugExtension.DebugWireSphere(hitInfo.point, Color.grey, damageRadius, 1.0f);
         }
-        transform.position = hitInfo.point;
         Destroy(gameObject);
-        DebugExtension.DebugWireSphere(hitInfo.point, damageRadius, 1.0f);
+        
     }
 
     void OnExpired()

@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10237fe0bd5baac42bafb8f0e8f90ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAtSceneViewCamera: 1
+  spawnAtSceneViewCamera: 0
   playerPrefab: {fileID: 114461039772335854, guid: 3ddab1046ddaf3548853296de5ec65c9,
     type: 2}
   idleMusic:
@@ -75,8 +75,3 @@ MonoBehaviour:
     fadeIn: 1
     fadeOut: 1
     transitionMode: 2
-  scenesToReload:
-  - {fileID: 102900000, guid: 8480509ac7ccce041898b6622f9b22ab, type: 3}
-  - {fileID: 102900000, guid: e0e9d72bb55fdea479ef9289c153ab06, type: 3}
-  - {fileID: 102900000, guid: b17329e98eb84fb4ca0d68a44cba73cf, type: 3}
-  - {fileID: 102900000, guid: 7f2a6c4bb1ff83b4287ceca2749c03bb, type: 3}

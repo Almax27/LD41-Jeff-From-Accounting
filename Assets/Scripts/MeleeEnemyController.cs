@@ -70,16 +70,19 @@ public class MeleeEnemyController : MonoBehaviour {
         }
         if(m_target)
         {
-            attackTick += Time.deltaTime;
-            if (attackTick > m_attackRate && Vector3.Distance(transform.position, m_target.position) < m_attackRange)
+            if (Vector3.Distance(transform.position, m_target.position) < m_attackRange)
             {
-                Health health = m_target.GetComponent<Health>();
-                if(health)
+                attackTick += Time.deltaTime;
+                if (attackTick > m_attackRate)
                 {
-                    DamagePacket dmg = new DamagePacket();
-                    dmg.forceLetterMatch = true;
-                    health.TakeDamage(dmg);
-                    attackTick = 0;
+                    Health health = m_target.GetComponent<Health>();
+                    if (health)
+                    {
+                        DamagePacket dmg = new DamagePacket();
+                        dmg.forceLetterMatch = true;
+                        health.TakeDamage(dmg);
+                        attackTick = 0;
+                    }
                 }
             }
             if (transformToShake && attackTick * 3.0f < m_attackRate)
@@ -100,6 +103,9 @@ public class MeleeEnemyController : MonoBehaviour {
 
     private void OnDrawGizmosSelected()
     {
+        Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(this.transform.position, m_aggroRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(this.transform.position, m_attackRange);
     }
 }
