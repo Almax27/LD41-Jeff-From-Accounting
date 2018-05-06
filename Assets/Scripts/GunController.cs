@@ -75,13 +75,13 @@ public class GunController : MonoBehaviour {
 
     public void SetGunUp(bool gunUp, bool force = false) 
     {
-        if(gunUp && m_gunState != GunState.Up)
+        if(gunUp && (force || m_gunState != GunState.Up))
         {
             gunControllerAnimator.SetBool("IsGunUp", true);
             m_gunState = GunState.Raising;
             if(gunAudioController && !force) gunAudioController.OnGunUp();
         }
-        else if(!gunUp && m_gunState != GunState.Down)
+        else if(!gunUp && (force || m_gunState != GunState.Down))
         {
             gunControllerAnimator.SetBool("IsGunUp", false);
             m_gunState = GunState.Lowering;
@@ -184,8 +184,8 @@ public class GunController : MonoBehaviour {
             projectile = gobj.GetComponent<ProjectileController>();
             projectile.letter = letter;
 
-            Vector3 traceOrigin = muzzleTranform.position;
-            Vector3 targetPosition = muzzleTranform.forward * projectile.maxDistance;
+            Vector3 traceOrigin = Camera.main.transform.position;
+            Vector3 targetPosition = traceOrigin + Camera.main.transform.forward * projectile.maxDistance;
 
             FPSPlayerController player = GameManager.Instance.Player;
             if (player && player.m_fpsHUD.m_crosshair)
@@ -207,10 +207,14 @@ public class GunController : MonoBehaviour {
                         Debug.DrawLine(muzzleTranform.position, targetPosition, Color.green, 2.0f);
                     }
                 }
+                else
+                {
+                    targetPosition = traceOrigin + ray.direction * projectile.maxDistance;
+                }
             }
 
             Debug.DrawLine(traceOrigin, targetPosition, Color.grey, 2.0f);
-            projectile.OnSpawn(muzzleTranform.position, Camera.main.transform.position, targetPosition);
+            projectile.OnSpawn(muzzleTranform.position, traceOrigin, targetPosition);
         }
         return projectile;
     }

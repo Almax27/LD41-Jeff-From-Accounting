@@ -69,9 +69,11 @@ public class ProjectileController : MonoBehaviour {
         m_activeEffects.Clear();
     }
 
-    // Update is called once per frame
     void Update ()
     {
+        //move the renderable forwards
+        //There will be desynchronisation with the cast due to different starting position
+        //However this should be relatively minimal and will converge on the target
         float distanceToMove = speed * Time.deltaTime;
         transform.position += m_direction * distanceToMove;        
     }
@@ -87,12 +89,19 @@ public class ProjectileController : MonoBehaviour {
         }
 
         Vector3 castMoveDelta = m_castDirection * distanceToMove;
-        Vector3 traceOrigin = m_castPosition - castMoveDelta; //we trace from one frame back to avoid missing objects coming towards us
+        Vector3 traceOrigin = m_castPosition; 
+        
+        //trace from one frame back to avoid missing objects coming towards us
+        if(distanceToMove < m_distanceTraveled)
+        {
+            traceOrigin -= castMoveDelta;
+        }
+
+        //update move the cast position forwards
         m_castPosition += castMoveDelta;
 
-        float castDistance = Vector3.Distance(traceOrigin, m_castPosition);
-
         //do cast
+        float castDistance = Vector3.Distance(traceOrigin, m_castPosition);
         RaycastHit hitInfo;
         bool validHit = Physics.Raycast(traceOrigin, m_castDirection, out hitInfo, castDistance, hitMask);
         RaycastHit damageHitInfo;
