@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114952005231783620}
   - component: {fileID: 114989924500034514}
   m_Layer: 9
-  m_Name: MR CHAIR
+  m_Name: ChairEnemyRandom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 1
-  m_inputSource: 2
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23779502009526470}
   m_subTextObjects:
@@ -494,11 +494,9 @@ MonoBehaviour:
   m_ignoreLetters: 0
   m_alwaysVisible: 0
   m_ignoreRaycat: 0
-  m_soundsOnHurt: []
-  m_soundsOnDeath:
-  - {fileID: 8300000, guid: dd8abb2f0fb52034d9025b176fe0b31c, type: 3}
-  m_mixerGroup: {fileID: 243826569297582702, guid: 22ebe517a927c904b825455383b9d44b,
-    type: 2}
+  m_SFXOnHitNoDamage: {fileID: 11400000, guid: 7e84147a567e9fa4e89e9f5ea3b3369e, type: 2}
+  m_SFXOnDamaged: {fileID: 11400000, guid: 6e041f611f3ef584cbfcbf7c51557b7f, type: 2}
+  m_SFXOnDeath: {fileID: 11400000, guid: f53b2b105e0c5e64e966b18f3e378afb, type: 2}
   destroyOnDeathDelay: 0.1
   m_healthText: {fileID: 114353657112647080}
   m_defaultColor: {r: 1, g: 1, b: 1, a: 1}

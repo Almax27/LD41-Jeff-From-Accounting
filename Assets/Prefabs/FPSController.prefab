@@ -4259,18 +4259,9 @@ MonoBehaviour:
   m_ignoreLetters: 0
   m_alwaysVisible: 1
   m_ignoreRaycat: 0
-  m_soundsOnHurt:
-  - {fileID: 8300000, guid: a4f03c77df1a4504d976458018a5ecb4, type: 3}
-  - {fileID: 8300000, guid: dbb4f7945850de143806a014ffc14a2e, type: 3}
-  - {fileID: 8300000, guid: 181907c1033b68d4b817ac153fb43096, type: 3}
-  - {fileID: 8300000, guid: 00b44a4fdeef65949be6e66c5cb430f9, type: 3}
-  - {fileID: 8300000, guid: 1992b3d8f2288cd4da59ea21768e6c85, type: 3}
-  - {fileID: 8300000, guid: 67c2d63882f2ed1419fa239fbbdf01bf, type: 3}
-  - {fileID: 8300000, guid: 730999e641568444b921e98eab319a94, type: 3}
-  m_soundsOnDeath:
-  - {fileID: 8300000, guid: 9c015ab3ae1d9324f97ff48b3333115a, type: 3}
-  m_mixerGroup: {fileID: 243826569297582702, guid: 22ebe517a927c904b825455383b9d44b,
-    type: 2}
+  m_SFXOnHitNoDamage: {fileID: 0}
+  m_SFXOnDamaged: {fileID: 11400000, guid: 20be166c31155554aadf9321a66292f8, type: 2}
+  m_SFXOnDeath: {fileID: 11400000, guid: 0594074617508d447b6f02f6ed3d167c, type: 2}
   destroyOnDeathDelay: 0.1
   m_healthText: {fileID: 114785486352858888}
   m_defaultColor: {r: 0.66176474, g: 0, b: 0, a: 1}
@@ -5504,7 +5495,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 1
-  m_inputSource: 0
+  m_inputSource: 2
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}

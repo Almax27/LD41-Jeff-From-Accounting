@@ -27,9 +27,9 @@ public class Health : MonoBehaviour {
     bool m_isTargeted = false;
 
     [Header("Audio")]
-    public List<AudioClip> m_soundsOnHurt = new List<AudioClip>();
-    public List<AudioClip> m_soundsOnDeath = new List<AudioClip>();
-    public AudioMixerGroup m_mixerGroup = null;
+    public FAFAudioSFXSetup m_SFXOnHitNoDamage = null;
+    public FAFAudioSFXSetup m_SFXOnDamaged = null;
+    public FAFAudioSFXSetup m_SFXOnDeath = null;
 
     [Header("Death")]
     [Tooltip("Time to wait befor destroying this gameobject after death, if < 0 will not destroy")]
@@ -74,6 +74,10 @@ public class Health : MonoBehaviour {
                     OnDeath(packet);
                 }
                 return true;
+            }
+            else
+            {
+                OnHitNoDamage(packet);
             }
         }
         return false;
@@ -189,13 +193,23 @@ public class Health : MonoBehaviour {
         }
     }
 
+    void OnHitNoDamage(DamagePacket packet)
+    {
+        if(m_SFXOnHitNoDamage)
+        {
+            m_SFXOnHitNoDamage.Play(transform.position);
+        }
+    }
+
     void OnDamage(DamagePacket packet)
     {
         Debug.Log(gameObject.name + " Took damage: " + packet.letter);
         OnHealthChanged();
-        if (m_soundsOnHurt.Count > 0)
+        if (m_SFXOnDamaged)
         {
-            FAFAudio.Instance.Play(m_soundsOnHurt[Random.Range(0, m_soundsOnHurt.Count-1)], transform.position, 1.0f, 1.0f, m_mixerGroup);
+            float SFXPitchOffset = 1.0f - m_SFXOnDamaged.Pitch;
+            SFXPitchOffset *= m_healthLetters.Length > 0 ? 1.0f - ((float)m_healthValue / m_healthLetters.Length) : 1.0f;
+            m_SFXOnDamaged.Play(transform.position, 1.0f, 1.0f, SFXPitchOffset);
         }
         if (tag != "Player")
         {
@@ -229,9 +243,9 @@ public class Health : MonoBehaviour {
         {
             GameManager.Instance.OnEnemyKilled(this);
         }
-        if (m_soundsOnDeath.Count > 0)
+        if(m_SFXOnDeath)
         {
-            FAFAudio.Instance.Play(m_soundsOnDeath[Random.Range(0, m_soundsOnDeath.Count - 1)], transform.position, 2.0f, 1.0f, m_mixerGroup);
+            m_SFXOnDeath.Play(transform.position);
         }
     }
 

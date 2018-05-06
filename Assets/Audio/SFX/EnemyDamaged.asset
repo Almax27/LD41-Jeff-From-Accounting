@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f02bd36187c6143851253f4ed41dd0, type: 3}
+  m_Name: EnemyDamaged
+  m_EditorClassIdentifier: 
+  Clips:
+  - {fileID: 8300000, guid: aa797ac53ba942f46b37661b12561a5b, type: 3}
+  MixerGroup: {fileID: 243826569297582702, guid: 22ebe517a927c904b825455383b9d44b,
+    type: 2}
+  Volume: 0.2
+  VolumeVariance: 0
+  Pitch: 0.7
+  PitchVariance: 0

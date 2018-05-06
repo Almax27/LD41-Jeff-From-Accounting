@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4f02bd36187c6143851253f4ed41dd0, type: 3}
+  m_Name: PlayerDamaged
+  m_EditorClassIdentifier: 
+  Clips:
+  - {fileID: 8300000, guid: a4f03c77df1a4504d976458018a5ecb4, type: 3}
+  - {fileID: 8300000, guid: dbb4f7945850de143806a014ffc14a2e, type: 3}
+  - {fileID: 8300000, guid: c519430c51cc6c74b9d6e2b7e43ea5b0, type: 3}
+  - {fileID: 8300000, guid: 181907c1033b68d4b817ac153fb43096, type: 3}
+  - {fileID: 8300000, guid: 00b44a4fdeef65949be6e66c5cb430f9, type: 3}
+  - {fileID: 8300000, guid: 1992b3d8f2288cd4da59ea21768e6c85, type: 3}
+  - {fileID: 8300000, guid: 67c2d63882f2ed1419fa239fbbdf01bf, type: 3}
+  - {fileID: 8300000, guid: 730999e641568444b921e98eab319a94, type: 3}
+  MixerGroup: {fileID: 243826569297582702, guid: 22ebe517a927c904b825455383b9d44b,
+    type: 2}
+  Volume: 1
+  VolumeVariance: 0
+  Pitch: 1
+  PitchVariance: 0
