@@ -73,18 +73,26 @@ public class GunController : MonoBehaviour {
         SetReloadState(false, true);
     }
 
+    public void OnRespawn()
+    {
+        RemoveAllAmmo();
+        gunControllerAnimator.Rebind();
+        SetGunUp(true, true);
+        SetReloadState(false, true);
+    }
+
     public void SetGunUp(bool gunUp, bool force = false) 
     {
         if(gunUp && (force || m_gunState != GunState.Up))
         {
             gunControllerAnimator.SetBool("IsGunUp", true);
-            m_gunState = GunState.Raising;
+            m_gunState = m_gunState != GunState.Up ? GunState.Raising : GunState.Up;
             if(gunAudioController && !force) gunAudioController.OnGunUp();
         }
         else if(!gunUp && (force || m_gunState != GunState.Down))
         {
             gunControllerAnimator.SetBool("IsGunUp", false);
-            m_gunState = GunState.Lowering;
+            m_gunState = m_gunState != GunState.Down ? GunState.Lowering : GunState.Down;
             if (gunAudioController && !force) gunAudioController.OnGunDown();
         }
     }
@@ -357,7 +365,7 @@ public class GunController : MonoBehaviour {
                 newBinding.transform = keyTransform;
                 newBinding.originalZ = keyTransform.localPosition.z;
                 gunKeys.Add(newBinding);
-                Debug.Log("Found key: Key_" + alphaKey);
+                //Debug.Log("Found key: Key_" + alphaKey);
             }
         }
         UpdateGunKeys(true);

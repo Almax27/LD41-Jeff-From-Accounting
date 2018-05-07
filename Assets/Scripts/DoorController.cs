@@ -6,6 +6,6 @@ public class DoorController : MonoBehaviour {
 
     private void OnDestroy()
     {
-        GameManager.Instance.OnDoorKilled();
+        
     }
 }

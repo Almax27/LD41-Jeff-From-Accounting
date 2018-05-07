@@ -51,9 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10237fe0bd5baac42bafb8f0e8f90ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnAtSceneViewCamera: 0
+  spawnAtSceneViewCamera: 1
   playerPrefab: {fileID: 114461039772335854, guid: 3ddab1046ddaf3548853296de5ec65c9,
     type: 2}
+  firstStageIndex: 0
+  gameStages:
+  - {fileID: 0}
   idleMusic:
     clip: {fileID: 8300000, guid: 245d4f4fed1a9944f9baf6f090387f83, type: 3}
     volume: 1

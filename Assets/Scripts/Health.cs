@@ -11,6 +11,13 @@ public struct DamagePacket
     public GameObject instigator;
     public char letter;
     public bool forceLetterMatch;
+
+    public DamagePacket(GameObject _instigator = null, char _letter = (char)0, bool _forceMatch = false)
+    {
+        instigator = _instigator;
+        letter = _letter;
+        forceLetterMatch = _forceMatch;
+    }
 }
 
 
@@ -83,11 +90,18 @@ public class Health : MonoBehaviour {
         return false;
     }
 
+    public void Heal()
+    {
+        m_recentlyDamagedCount = Mathf.Max(m_recentlyDamagedCount - 1, 0);
+        m_healthValue = Mathf.Min(m_healthValue + 1, m_healthLetters.Length);
+        OnHealthChanged();
+    }
+
     public IEnumerator WaitForRecentDamage()
     {
         SetIsTextVisible(true);
         yield return new WaitForSeconds(0.5f);
-        m_recentlyDamagedCount--;
+        m_recentlyDamagedCount = Mathf.Max(m_recentlyDamagedCount - 1, 0);
         OnHealthChanged();
         SetIsTextVisible(false);
     }
@@ -147,11 +161,12 @@ public class Health : MonoBehaviour {
         }
     }
 
-    private void Reset()
+    public void Reset()
     {
         StopAllCoroutines();
         if (m_forceCaps) m_healthLetters = m_healthLetters.ToUpper();
         m_healthValue = m_healthLetters.Length;
+        m_recentlyDamagedCount = 0;
         OnHealthChanged();
         SetIsTextVisible(m_alwaysVisible, true);
     }
@@ -231,13 +246,7 @@ public class Health : MonoBehaviour {
         //Mega end game hack
         if (tag == "Player")
         {
-            GameManager.Instance.Invoke("ReloadLevel", 5.0f);
-            if(GameManager.Instance.Player && GameManager.Instance.Player.m_fpsHUD)
-            {
-                GameManager.Instance.Player.m_isInputEnabled = false;
-                GameManager.Instance.Player.m_gunController.gameObject.SetActive(false);
-                GameManager.Instance.Player.m_fpsHUD.OnDeath();
-            }
+            GameManager.Instance.OnPlayerKilled();
         }
         else
         {

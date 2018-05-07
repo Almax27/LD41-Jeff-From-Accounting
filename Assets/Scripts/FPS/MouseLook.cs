@@ -25,6 +25,11 @@ public class MouseLook
         m_CameraTargetRot = camera.localRotation;
     }
 
+    public void Reset()
+    {
+        m_CharacterTargetRot = Quaternion.identity;
+        m_CameraTargetRot = Quaternion.identity;
+    }
 
     public void ApplyLookRotation(Transform character, Transform camera)
     {

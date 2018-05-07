@@ -30,7 +30,7 @@ public class FPSPlayerController : MonoBehaviour
     public float m_JumpSpeed;
     public float m_StickToGroundForce;
     public float m_GravityMultiplier;
-    public MouseLook m_MouseLook;
+    public MouseLook m_MouseLook = new MouseLook();
     public bool m_UseFovKick;
     public FOVKick m_FovKick = new FOVKick();
     public bool m_UseHeadBob;
@@ -293,5 +293,24 @@ public class FPSPlayerController : MonoBehaviour
             return;
         }
         body.AddForceAtPosition(m_CharacterController.velocity * 0.1f, hit.point, ForceMode.Impulse);
+    }
+
+    public void OnRespawn()
+    {
+        Health health = GetComponent<Health>();
+        if(health)
+        {
+            health.Reset();
+        }
+
+        if(m_gunController)
+        {
+            m_gunController.OnRespawn();
+        }
+
+        if (m_MouseLook != null)
+        {
+            m_MouseLook.Reset();
+        }
     }
 }

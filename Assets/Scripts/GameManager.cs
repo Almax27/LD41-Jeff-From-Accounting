@@ -59,13 +59,6 @@ public static class GameManagerPlayModeStateChanged
 }
 #endif
 
-public enum GameState
-{
-    Idle,
-    Combat
-}
-
-
 public class GameManager : SingletonBehaviour<GameManager> {
 
     [Header("Editor")]
@@ -75,13 +68,13 @@ public class GameManager : SingletonBehaviour<GameManager> {
     public FPSPlayerController playerPrefab = null;
     public FPSPlayerController Player { get { return m_player; } }
 
-    [Header("Music")]
-    public MusicSetup idleMusic = null;
-    public MusicSetup combatBuildupMusic = null;
-    public MusicSetup combatMusic = null;
 
-    private GameState m_state = GameState.Idle;
+    [Header("Stages")]
+    public int firstStageIndex = 0;
+    public List<GameStage> gameStages = new List<GameStage>();
+
     private FPSPlayerController m_player = null;
+    private int m_currentStageIndex = -1;
     private bool m_isPaused = false;
 
     // Use this for initialization
@@ -101,30 +94,53 @@ public class GameManager : SingletonBehaviour<GameManager> {
     protected override void Start()
     {
         base.Start();
-        SetGameState(GameState.Idle, true);
 
-        //START MESSAGE HACK
-        if (Player.m_fpsHUD)
+        //Start first stage
+        AdvanceToStage(firstStageIndex);
+        if (m_currentStageIndex >= 0 && m_currentStageIndex < gameStages.Count)
         {
-            Player.m_fpsHUD.TryShowPrompt(new PromptSetup("Jeff from Accounting\nMade for LudumDare 41\nBy Greg Lee, Dale Smith and Aaron Baumbach", 0, 10.0f));
+            gameStages[m_currentStageIndex].RespawnPlayer(Player);
         }
+    }
+
+    protected void Update()
+    {
+        if (Application.isEditor)
+        {
+            if (Input.GetKeyDown(KeyCode.KeypadMinus))
+            {
+                if (Player) Player.GetComponent<Health>().TakeDamage(new DamagePacket(null, '!', true));
+            }
+            if (Input.GetKeyDown(KeyCode.KeypadPlus))
+            {
+                if (Player) Player.GetComponent<Health>().Heal();
+            }
+        }
+
+        if (m_currentStageIndex >= 0 && m_currentStageIndex < gameStages.Count)
+        {
+            if(gameStages[m_currentStageIndex].IsStageFinished())
+            {
+                if(!AdvanceToStage(m_currentStageIndex + 1))
+                {
+                    StartCoroutine(EndingHack());
+                }
+            }
+        }
+    }
+
+    public void OnPlayerKilled()
+    {
+        if (Player && Player.m_fpsHUD)
+        {
+            Player.m_fpsHUD.OnDeath();
+        }
+        RestartCurrentStage();
     }
 
     public void OnEnemyKilled(Health enemy)
     {
-        bool allEnemiesDead = true;
-        foreach(Health health in FindObjectsOfType<Health>())
-        {
-            if(health.IsAlive() && health.tag != "Player")
-            {
-                allEnemiesDead = false;
-                break;
-            }
-        }
-        if (allEnemiesDead)
-        {
-            StartCoroutine(EndingHack());
-        }
+        
     }
 
     IEnumerator EndingHack()
@@ -133,7 +149,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
         {
             Player.m_fpsHUD.TryShowPrompt(new PromptSetup("You killed all the things. Thanks for playing!", 0, 10.0f));
         }
-        yield return new WaitForSecondsRealtime(10.0f);
+        yield return new WaitForSecondsRealtime(1.0f);
         for(int i = 5; i > 0; i--)
         {
             if (Player.m_fpsHUD)
@@ -142,12 +158,36 @@ public class GameManager : SingletonBehaviour<GameManager> {
             }
             yield return new WaitForSecondsRealtime(1.0f);
         }
-        ReloadLevel();
+        AdvanceToStage(0, true);
     }
 
-    public void OnDoorKilled()
+    public bool AdvanceToStage(int stageIndex, bool forceRespawn = false)
     {
-        SetGameState(GameState.Combat);
+        if (m_currentStageIndex >= 0 && m_currentStageIndex < gameStages.Count)
+        {
+            gameStages[m_currentStageIndex].OnStageEnded();
+        }
+        m_currentStageIndex = stageIndex;
+        if (m_currentStageIndex >= 0 && m_currentStageIndex < gameStages.Count)
+        {
+            gameStages[m_currentStageIndex].OnStageBegan();
+            if(forceRespawn)
+            {
+                gameStages[m_currentStageIndex].RespawnPlayer(Player);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public void RestartCurrentStage()
+    {
+        if (m_currentStageIndex >= 0 && m_currentStageIndex < gameStages.Count)
+        {
+            gameStages[m_currentStageIndex].OnStageEnded();
+            gameStages[m_currentStageIndex].OnStageBegan();
+            gameStages[m_currentStageIndex].RespawnPlayer(Player);
+        }
     }
 
     public void SetPaused(bool pause)
@@ -169,39 +209,6 @@ public class GameManager : SingletonBehaviour<GameManager> {
             {
                 Player.m_fpsHUD.OnUnpaused();
             }
-        }
-    }
-
-    public void ReloadLevel()
-    {
-        for (int i = 1; i < 5; i++)
-        {
-            if (i == 1)
-            {
-                SceneManager.LoadScene(i, LoadSceneMode.Single);
-            }
-            else
-            {
-                SceneManager.LoadScene(i, LoadSceneMode.Additive);
-            }
-        }
-    }
-
-    void SetGameState(GameState newState, bool force = false)
-    {
-        if (!force && newState == m_state) return;
-        m_state = newState;
-        switch (m_state)
-        {
-            case GameState.Idle:
-                FAFAudio.Instance.TryPlayMusic(idleMusic);
-                break;
-            case GameState.Combat:
-                FAFAudio.Instance.TryPlayMusic(combatBuildupMusic);
-                FAFAudio.Instance.TryPlayMusic(combatMusic, true);
-                break;
-            default:
-                break;
         }
     }
 }
