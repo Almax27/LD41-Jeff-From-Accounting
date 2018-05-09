@@ -222,7 +222,7 @@ public class GunController : MonoBehaviour {
             }
 
             Debug.DrawLine(traceOrigin, targetPosition, Color.grey, 2.0f);
-            projectile.OnSpawn(muzzleTranform.position, traceOrigin, targetPosition);
+            projectile.OnSpawn(player.gameObject, muzzleTranform.position, traceOrigin, targetPosition);
         }
         return projectile;
     }

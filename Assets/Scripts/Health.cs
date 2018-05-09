@@ -231,14 +231,6 @@ public class Health : MonoBehaviour {
             SFXPitchOffset *= m_healthLetters.Length > 0 ? 1.0f - ((float)m_healthValue / m_healthLetters.Length) : 1.0f;
             m_SFXOnDamaged.Play(transform.position, 1.0f, 1.0f, SFXPitchOffset);
         }
-        if (tag != "Player")
-        {
-            MeleeEnemyController melee = GetComponent<MeleeEnemyController>();
-            if(melee)
-            {
-                melee.SetTarget(GameManager.Instance.Player.transform);
-            }
-        }
         SendMessage("OnDamage", packet, SendMessageOptions.DontRequireReceiver);
     }
 

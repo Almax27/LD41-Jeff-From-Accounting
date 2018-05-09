@@ -13,7 +13,6 @@ public class ProjectileController : MonoBehaviour {
     public char letter = ' ';
     public LayerMask hitMask = new LayerMask();
     public LayerMask damageMask = new LayerMask();
-    public GameObject instigator = null;
     public Action<bool> hitCallback = null;
 
     public TextMeshPro text = null;
@@ -22,6 +21,7 @@ public class ProjectileController : MonoBehaviour {
     public Spawner onHitSpawner = new Spawner();
     public Spawner onDamagedSpawner = new Spawner();
 
+    GameObject m_instigator = null;
     float m_distanceTraveled = 0.0f;
     List<FollowEffect> m_activeEffects = new List<FollowEffect>();
     Vector3 m_direction = Vector3.zero;
@@ -115,8 +115,9 @@ public class ProjectileController : MonoBehaviour {
         }
     }
 
-    public void OnSpawn(Vector3 muzzlePosition, Vector3 castPosition, Vector3 targetPosition)
+    public void OnSpawn(GameObject instigator, Vector3 muzzlePosition, Vector3 castPosition, Vector3 targetPosition)
     {
+        m_instigator = instigator;
         transform.position = muzzlePosition;
         m_direction = (targetPosition - muzzlePosition).normalized;
         m_castPosition = castPosition;
@@ -134,7 +135,7 @@ public class ProjectileController : MonoBehaviour {
         Health health = hitInfo.collider.GetComponentInParent<Health>();
         if (health)
         {
-            if (health.TakeDamage(new DamagePacket(instigator, -m_direction, false, letter)))
+            if (health.TakeDamage(new DamagePacket(m_instigator, -m_direction, false, letter)))
             {
                 onDamagedSpawner.ProcessSpawns(transform, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), Vector3.one);
                 dealtDamage = true;

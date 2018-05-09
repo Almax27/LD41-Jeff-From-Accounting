@@ -187,6 +187,18 @@ public class MeleeEnemyController : MonoBehaviour {
             m_knockbackTick = 0;
             m_knockbackVelocity = Vector3.zero;
         }
+        if(packet.instigator)
+        {
+            SetTarget(packet.instigator.transform);
+        }
+    }
+
+    void OnHitNoDamage(DamagePacket packet)
+    {
+        if (packet.instigator)
+        {
+            SetTarget(packet.instigator.transform);
+        }
     }
 
     private void OnDrawGizmosSelected()
