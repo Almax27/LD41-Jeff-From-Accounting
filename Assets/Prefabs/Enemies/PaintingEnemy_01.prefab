@@ -297,6 +297,9 @@ MonoBehaviour:
   m_aggroRange: 10
   m_attackRange: 5
   m_attackRate: 1.5
+  m_knockbacfkSpeed: 5
+  m_knockbackfDuration: 0.1
+  m_knockbackSftunDuration: 0.25
   m_shakeCurve:
     serializedVersion: 2
     m_Curve:

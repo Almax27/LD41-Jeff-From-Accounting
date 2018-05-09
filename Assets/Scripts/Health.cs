@@ -9,12 +9,16 @@ using UnityEngine.Audio;
 public struct DamagePacket
 {
     public GameObject instigator;
+
+    public Vector3 hitNormal;
+
     public char letter;
     public bool forceLetterMatch;
 
-    public DamagePacket(GameObject _instigator = null, char _letter = (char)0, bool _forceMatch = false)
+    public DamagePacket(GameObject _instigator = null, Vector3 _hitNormal = new Vector3(), bool _forceMatch = false, char _letter = (char)0)
     {
         instigator = _instigator;
+        hitNormal = _hitNormal;
         letter = _letter;
         forceLetterMatch = _forceMatch;
     }
@@ -75,16 +79,16 @@ public class Health : MonoBehaviour {
                 m_healthValue--;
                 m_recentlyDamagedCount++;
                 StartCoroutine(WaitForRecentDamage());
-                OnDamage(packet);
+                HandleDamage(packet);
                 if (m_healthValue == 0)
                 {
-                    OnDeath(packet);
+                    HandleDeath(packet);
                 }
                 return true;
             }
             else
             {
-                OnHitNoDamage(packet);
+                HandleHitNoDamage(packet);
             }
         }
         return false;
@@ -208,15 +212,16 @@ public class Health : MonoBehaviour {
         }
     }
 
-    void OnHitNoDamage(DamagePacket packet)
+    void HandleHitNoDamage(DamagePacket packet)
     {
         if(m_SFXOnHitNoDamage)
         {
             m_SFXOnHitNoDamage.Play(transform.position);
         }
+        SendMessage("OnHitNoDamage", packet, SendMessageOptions.DontRequireReceiver);
     }
 
-    void OnDamage(DamagePacket packet)
+    void HandleDamage(DamagePacket packet)
     {
         Debug.Log(gameObject.name + " Took damage: " + packet.letter);
         OnHealthChanged();
@@ -234,9 +239,10 @@ public class Health : MonoBehaviour {
                 melee.SetTarget(GameManager.Instance.Player.transform);
             }
         }
+        SendMessage("OnDamage", packet, SendMessageOptions.DontRequireReceiver);
     }
 
-    void OnDeath(DamagePacket packet)
+    void HandleDeath(DamagePacket packet)
     {
         if(destroyOnDeathDelay >= 0)
         {
@@ -256,6 +262,7 @@ public class Health : MonoBehaviour {
         {
             m_SFXOnDeath.Play(transform.position);
         }
+        SendMessage("OnDeath", packet, SendMessageOptions.DontRequireReceiver);
     }
 
     private void Start()

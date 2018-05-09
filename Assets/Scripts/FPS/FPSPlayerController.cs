@@ -76,19 +76,6 @@ public class FPSPlayerController : MonoBehaviour
         {
             TryJump();
         }
-        if(Application.isEditor)
-        {
-            if(Input.GetKeyDown(KeyCode.Insert))
-            {
-                Health health = GetComponent<Health>();
-                if(health)
-                {
-                    DamagePacket dmg = new DamagePacket();
-                    dmg.forceLetterMatch = true;
-                    health.TakeDamage(dmg);
-                }
-            }
-        }
     }
 
     private void FixedUpdate()

@@ -414,7 +414,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 1
-  m_inputSource: 2
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23477038655155754}
   m_subTextObjects:
@@ -477,6 +477,9 @@ MonoBehaviour:
   m_aggroRange: 15
   m_attackRange: 3
   m_attackRate: 1.5
+  m_knockbacfkSpeed: 5
+  m_knockbackfDuration: 0.1
+  m_knockbackSftunDuration: 0.25
   m_shakeCurve:
     serializedVersion: 2
     m_Curve:

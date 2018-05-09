@@ -109,7 +109,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
         {
             if (Input.GetKeyDown(KeyCode.KeypadMinus))
             {
-                if (Player) Player.GetComponent<Health>().TakeDamage(new DamagePacket(null, '!', true));
+                if (Player) Player.GetComponent<Health>().TakeDamage(new DamagePacket(null, Vector3.zero, true));
             }
             if (Input.GetKeyDown(KeyCode.KeypadPlus))
             {

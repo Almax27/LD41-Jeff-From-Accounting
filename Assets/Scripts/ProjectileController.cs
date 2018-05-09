@@ -134,10 +134,7 @@ public class ProjectileController : MonoBehaviour {
         Health health = hitInfo.collider.GetComponentInParent<Health>();
         if (health)
         {
-            DamagePacket packet = new DamagePacket();
-            packet.instigator = instigator;
-            packet.letter = letter;
-            if (health.TakeDamage(packet))
+            if (health.TakeDamage(new DamagePacket(instigator, -m_direction, false, letter)))
             {
                 onDamagedSpawner.ProcessSpawns(transform, hitInfo.point, Quaternion.LookRotation(hitInfo.normal), Vector3.one);
                 dealtDamage = true;
