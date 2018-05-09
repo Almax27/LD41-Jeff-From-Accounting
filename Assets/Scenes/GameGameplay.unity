@@ -234,7 +234,7 @@ Prefab:
     - target: {fileID: 114231381109132646, guid: 44877ba9c9eb5694aa3b8ec3984012bb,
         type: 2}
       propertyPath: spawnAtSceneViewCamera
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114231381109132646, guid: 44877ba9c9eb5694aa3b8ec3984012bb,
         type: 2}
@@ -244,7 +244,7 @@ Prefab:
     - target: {fileID: 114231381109132646, guid: 44877ba9c9eb5694aa3b8ec3984012bb,
         type: 2}
       propertyPath: firstStageIndex
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 44877ba9c9eb5694aa3b8ec3984012bb, type: 2}
@@ -604,7 +604,7 @@ Prefab:
     - target: {fileID: 114126667999660880, guid: a74884f666ec73b4f9dbb1396afb1c95,
         type: 2}
       propertyPath: m_inputSource
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4323336161085484, guid: a74884f666ec73b4f9dbb1396afb1c95, type: 2}
       propertyPath: m_LocalScale.x
