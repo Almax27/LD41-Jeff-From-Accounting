@@ -76,6 +76,14 @@ public class FPSPlayerController : MonoBehaviour
         {
             TryJump();
         }
+
+        if(m_fpsHUD)
+        {
+            if(m_desiredVelocity.sqrMagnitude > 0)
+            {
+                m_fpsHUD.OnTryMove();
+            }
+        }
     }
 
     private void FixedUpdate()

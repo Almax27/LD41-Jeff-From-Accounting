@@ -18,6 +18,7 @@ public class PromptSetup
     public float delay = 0;
     public float duration = 3;
     public int eventsToTrigger = 0;
+    public int maxTimesToShow = -1;
 
     [System.NonSerialized]
     public int triggerCount = 0;
@@ -30,6 +31,7 @@ public class FPSHUD : MonoBehaviour {
     public PromptSetup m_reloadPrompt = new PromptSetup("Press R To Reload");
     public PromptSetup m_deathPrompt = new PromptSetup("YOU DIED");
     public PromptSetup m_pausePrompt = new PromptSetup("Paused...");
+    public PromptSetup m_sprintPrompt = new PromptSetup("Press SHIFT to sprint");
 
     [Header("Widgets")]
     public RectTransform m_crosshair = null;
@@ -62,6 +64,10 @@ public class FPSHUD : MonoBehaviour {
         {
             prompt.triggerCount++;
             if (prompt.triggerCount < prompt.eventsToTrigger)
+            {
+                return;
+            }
+            if(prompt.triggerCount < prompt.maxTimesToShow)
             {
                 return;
             }
@@ -127,5 +133,10 @@ public class FPSHUD : MonoBehaviour {
     public void OnUnpaused()
     {
         TryShowPrompt(null);
+    }
+
+    public void OnTryMove()
+    {
+        TryShowPrompt(m_sprintPrompt);
     }
 }
