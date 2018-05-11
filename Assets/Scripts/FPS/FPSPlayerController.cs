@@ -76,14 +76,6 @@ public class FPSPlayerController : MonoBehaviour
         {
             TryJump();
         }
-
-        if(m_fpsHUD)
-        {
-            if(m_desiredVelocity.sqrMagnitude > 0)
-            {
-                m_fpsHUD.OnTryMove();
-            }
-        }
     }
 
     private void FixedUpdate()
@@ -154,6 +146,11 @@ public class FPSPlayerController : MonoBehaviour
         {
             StopAllCoroutines();
             StartCoroutine(!isRunning ? m_FovKick.FOVKickUp() : m_FovKick.FOVKickDown());
+        }
+
+        if (m_fpsHUD)
+        {
+            m_fpsHUD.OnMove(Time.deltaTime, inputVelocity, isRunning);
         }
     }
 
