@@ -12,14 +12,15 @@ public class IntroStage : GameStage {
     {
         base.OnStageBegan();
 
-        if(m_waitForIntroRoutine != null)
+        if (m_waitForIntroRoutine != null)
             StopCoroutine(m_waitForIntroRoutine);
 
         FPSPlayerController player = GameManager.Instance.Player;
         if (player)
         {
             Animation animation = player.GetComponent<Animation>();
-            if (animation && (!Application.isEditor || !GameManager.Instance.spawnAtSceneViewCamera))
+            bool canPlayIntroCutscene = !Application.isEditor || !GameManager.Instance.spawnAtSceneViewCamera || !GameManager.Instance.skipCutscenes;
+            if (animation && canPlayIntroCutscene)
             {
                 player.m_isInputEnabled = false;
                 player.m_gunController.gameObject.SetActive(false);

@@ -86,6 +86,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1510711423358780
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4924912682300828}
+  - component: {fileID: 82810870473118500}
+  m_Layer: 9
+  m_Name: AmbientSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4323336161085484
 Transform:
   m_ObjectHideFlags: 1
@@ -98,6 +114,7 @@ Transform:
   m_Children:
   - {fileID: 4751223752569460}
   - {fileID: 224166043107306844}
+  - {fileID: 4924912682300828}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 157.796, z: 0}
@@ -128,6 +145,19 @@ Transform:
   m_Father: {fileID: 4323336161085484}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -109.836, y: -155.663, z: 64.32099}
+--- !u!4 &4924912682300828
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1510711423358780}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4323336161085484}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23033431262465302
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -265,6 +295,87 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 56fc0a1a467157c4ab6896fd9f5e88a3, type: 3}
+--- !u!82 &82810870473118500
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1510711423358780}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243817623265731474, guid: 22ebe517a927c904b825455383b9d44b,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 1129e4e5b0aa87341aea5491639ac091, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 2
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95744364141898000
 Animator:
   serializedVersion: 3
@@ -465,12 +576,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f86c1c02fa608438acd3c8c4a7733d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_aggroRange: 30
+  m_aggroOnDamage: 0
+  m_aggroOnHitNoDamage: 0
+  m_aggroRange: 0
   m_attackRange: 7
   m_attackRate: 1.5
-  m_knockbacfkSpeed: 5
-  m_knockbackfDuration: 0.1
-  m_knockbackSftunDuration: 0.25
+  m_knockbackSpeed: 5
+  m_knockbackDuration: 0.1
+  m_knockbackStunDuration: 0.25
   m_shakeCurve:
     serializedVersion: 2
     m_Curve:
@@ -509,7 +622,11 @@ MonoBehaviour:
     m_RotationOrder: 4
   transformToShake: {fileID: 4751223752569460}
   shakeMag: 0.05
+  m_bobSpeed: 2
+  m_bobSpeedVariance: 0.5
+  m_bobHeight: 0.2
   m_eyes: {fileID: 1090906218023688}
+  m_ambientAudioSource: {fileID: 82810870473118500}
 --- !u!195 &195557385391251546
 NavMeshAgent:
   m_ObjectHideFlags: 1

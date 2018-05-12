@@ -87,6 +87,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1748274096819802
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4890958444308522}
+  - component: {fileID: 82914541667528564}
+  m_Layer: 9
+  m_Name: AmbientSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4072275532916812
 Transform:
   m_ObjectHideFlags: 1
@@ -108,11 +124,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1107841725212350}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -18.82, y: -5.1589556, z: 41.01}
+  m_LocalPosition: {x: 4.22, y: 5.13, z: 170.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4072275532916812}
   - {fileID: 224461615923784740}
+  - {fileID: 4890958444308522}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 218.90599, z: 0}
@@ -129,6 +146,19 @@ Transform:
   m_Father: {fileID: 4072275532916812}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4890958444308522
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1748274096819802}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4276971479108454}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &23166642806290138
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -136,12 +166,12 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1396558755202794}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: b48c590221c9fbe4f9559a5640c69508, type: 2}
   m_StaticBatchInfo:
@@ -266,6 +296,87 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 56fc0a1a467157c4ab6896fd9f5e88a3, type: 3}
+--- !u!82 &82914541667528564
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1748274096819802}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243817623265731474, guid: 22ebe517a927c904b825455383b9d44b,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 07421747ee358ea4c81490b59cc26b6c, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 2
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95224484798054768
 Animator:
   serializedVersion: 3
@@ -311,12 +422,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f86c1c02fa608438acd3c8c4a7733d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_aggroOnDamage: 1
+  m_aggroOnHitNoDamage: 1
   m_aggroRange: 20
   m_attackRange: 3
   m_attackRate: 1.5
-  m_knockbacfkSpeed: 5
-  m_knockbackfDuration: 0.1
-  m_knockbackSftunDuration: 0.25
+  m_knockbackSpeed: 5
+  m_knockbackDuration: 0.1
+  m_knockbackStunDuration: 0.25
   m_shakeCurve:
     serializedVersion: 2
     m_Curve:
@@ -355,7 +468,11 @@ MonoBehaviour:
     m_RotationOrder: 4
   transformToShake: {fileID: 4072275532916812}
   shakeMag: 0.05
+  m_bobSpeed: 2
+  m_bobSpeedVariance: 0.5
+  m_bobHeight: 0.2
   m_eyes: {fileID: 1396558755202794}
+  m_ambientAudioSource: {fileID: 82914541667528564}
 --- !u!114 &114249198261354762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -517,26 +634,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   names:
-  - Gerrald
-  - Frank
-  - Henry
-  - Cheese
-  - Salmon
-  - Leggy
-  - Duncan
-  - Bert
-  - Jim the Great
-  - Harrold Of Pit
-  - Half Pipe
-  - Little bean
-  - Big Bean
-  - Mother goose
-  - Chocolate teapot
-  - Father Ted
-  - Bangers and Mash
-  - Pisspot
-  - Fanny
-  - Derp
+  - Jazz Hands
+  - Rocking
+  - Garden
+  - Deck
+  - Armless
+  - Couch Potato
+  - Lazy Git
+  - Seating
+  - Comfort
+  - Pillow Fort
+  - Clanker
+  - Cousin Darren
+  - Cousin Barry
+  - Cousin Fabian
+  - Cousin Duncan
+  - Cousin Greg
+  - Cousin Aaron
+  - Cousin Dale
+  - Auntie Tricia
+  - Uncle Keith
 --- !u!195 &195236769765525984
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -545,12 +662,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 1107841725212350}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.5
+  m_Radius: 1
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 240
-  m_StoppingDistance: 3
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1

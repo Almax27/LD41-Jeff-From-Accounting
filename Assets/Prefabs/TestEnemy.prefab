@@ -261,9 +261,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f86c1c02fa608438acd3c8c4a7733d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_aggroOnDamage: 1
+  m_aggroOnHitNoDamage: 1
   m_aggroRange: 10
   m_attackRange: 3
   m_attackRate: 1
+  m_knockbackSpeed: 5
+  m_knockbackDuration: 0.1
+  m_knockbackStunDuration: 0.25
   m_shakeCurve:
     serializedVersion: 2
     m_Curve:
@@ -302,7 +307,11 @@ MonoBehaviour:
     m_RotationOrder: 4
   transformToShake: {fileID: 0}
   shakeMag: 0.05
+  m_bobSpeed: 2
+  m_bobSpeedVariance: 0.5
+  m_bobHeight: 0.2
   m_eyes: {fileID: 0}
+  m_ambientAudioSource: {fileID: 0}
 --- !u!114 &114168568416360802
 MonoBehaviour:
   m_ObjectHideFlags: 1

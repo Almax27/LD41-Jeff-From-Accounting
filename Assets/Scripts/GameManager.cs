@@ -63,6 +63,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     [Header("Editor")]
     public bool spawnAtSceneViewCamera = true;
+    public bool skipCutscenes = true;
 
     [Header("Player")]
     public FPSPlayerController playerPrefab = null;
@@ -79,7 +80,6 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     // Use this for initialization
     protected void Awake () {
-
         m_player = FindObjectOfType<FPSPlayerController>();
         if(!m_player && playerPrefab)
         {
@@ -96,11 +96,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
         base.Start();
 
         //Start first stage
-        AdvanceToStage(firstStageIndex);
-        if (m_currentStageIndex >= 0 && m_currentStageIndex < gameStages.Count)
-        {
-            gameStages[m_currentStageIndex].RespawnPlayer(Player);
-        }
+        AdvanceToStage(firstStageIndex, true);
     }
 
     protected void Update()
@@ -147,9 +143,9 @@ public class GameManager : SingletonBehaviour<GameManager> {
     {
         if(Player.m_fpsHUD)
         {
-            Player.m_fpsHUD.TryShowPrompt(new PromptSetup("You killed all the things. Thanks for playing!", 0, 10.0f));
+            Player.m_fpsHUD.TryShowPrompt(new PromptSetup("And so it was\nJeff vanquished the mighty Sittatron\nBringing peace to the Accounting Department\nOr something like that...\nThanks for playing!", 2.0f, 10.0f));
         }
-        yield return new WaitForSecondsRealtime(1.0f);
+        yield return new WaitForSecondsRealtime(10.0f);
         for(int i = 5; i > 0; i--)
         {
             if (Player.m_fpsHUD)
@@ -170,11 +166,11 @@ public class GameManager : SingletonBehaviour<GameManager> {
         m_currentStageIndex = stageIndex;
         if (m_currentStageIndex >= 0 && m_currentStageIndex < gameStages.Count)
         {
-            gameStages[m_currentStageIndex].OnStageBegan();
-            if(forceRespawn)
+            if (forceRespawn)
             {
                 gameStages[m_currentStageIndex].RespawnPlayer(Player);
             }
+            gameStages[m_currentStageIndex].OnStageBegan();
             return true;
         }
         return false;
@@ -185,8 +181,8 @@ public class GameManager : SingletonBehaviour<GameManager> {
         if (m_currentStageIndex >= 0 && m_currentStageIndex < gameStages.Count)
         {
             gameStages[m_currentStageIndex].OnStageEnded();
-            gameStages[m_currentStageIndex].OnStageBegan();
             gameStages[m_currentStageIndex].RespawnPlayer(Player);
+            gameStages[m_currentStageIndex].OnStageBegan();
         }
     }
 

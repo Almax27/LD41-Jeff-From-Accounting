@@ -17,7 +17,7 @@ public class ElevatorController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.tag == "Player" && !GameManager.Instance.spawnAtSceneViewCamera)
         {
             if (m_director && !m_triggered)
             {

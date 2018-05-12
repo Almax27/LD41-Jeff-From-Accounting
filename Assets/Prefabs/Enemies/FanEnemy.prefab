@@ -49,6 +49,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1374644304459690
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4030632698603476}
+  - component: {fileID: 82069933397057986}
+  m_Layer: 9
+  m_Name: AmbientSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1517649204418812
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,21 +102,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4030632698603476
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1374644304459690}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4056867519423712}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4056867519423712
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1517649204418812}
-  m_LocalRotation: {x: -0, y: 0.9429158, z: -0, w: -0.33303127}
-  m_LocalPosition: {x: 6.56, y: -2.8, z: 110.44}
+  m_LocalRotation: {x: -0, y: 0.99983555, z: -0, w: -0.018139193}
+  m_LocalPosition: {x: 8.31, y: 5.095, z: 126.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224486880486713932}
   - {fileID: 4942092779485748}
+  - {fileID: 4030632698603476}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 144.71501, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180.26498, z: 0}
 --- !u!4 &4401152707443206
 Transform:
   m_ObjectHideFlags: 1
@@ -120,14 +150,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1121933040679370}
-  m_LocalRotation: {x: -0.46533078, y: 0.5002767, z: 0.46937743, w: 0.5593526}
-  m_LocalPosition: {x: 0.279, y: 1.406, z: 0.671}
-  m_LocalScale: {x: 3.1033785, y: 3.1033797, z: 3.1033797}
+  m_LocalRotation: {x: -0.52573013, y: 0.48566735, z: 0.49223712, w: 0.4954167}
+  m_LocalPosition: {x: -0.15, y: 1.72, z: 1.2}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children:
   - {fileID: 4401152707443206}
   m_Father: {fileID: 4056867519423712}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -81.97401, y: 61.612003, z: 25.227001}
+  m_LocalEulerAnglesHint: {x: -87.48701, y: 235.98898, z: -148.468}
 --- !u!23 &23477038655155754
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -169,12 +199,12 @@ MeshRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1788381750868538}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 2100000, guid: b48c590221c9fbe4f9559a5640c69508, type: 2}
   m_StaticBatchInfo:
@@ -265,6 +295,87 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: a54f2f53b4a1ed242832364b3683e83a, type: 3}
+--- !u!82 &82069933397057986
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1374644304459690}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 243817623265731474, guid: 22ebe517a927c904b825455383b9d44b,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 07421747ee358ea4c81490b59cc26b6c, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 2
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &95993315893962212
 Animator:
   serializedVersion: 3
@@ -297,11 +408,11 @@ MonoBehaviour:
   - Your Biggest Fan
   - Blown
   - Windy
-  - Sour Puss
+  - Chance of Meatballs
   - Little gust
   - Huff Puff
   - Gust of Wind
-  - Bang Tidy
+  - Full Sail
   - Jim the Great
   - Harrold Of Pit
   - Half Pipe
@@ -311,9 +422,9 @@ MonoBehaviour:
   - Chocolate teapot
   - Father Ted
   - Bangers and Mash
-  - Pisspot
+  - Not a Fan
   - Fanny
-  - Derp
+  - Always watching
 --- !u!114 &114491578665004508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -414,7 +525,7 @@ MonoBehaviour:
   m_isVolumetricText: 0
   m_spriteAnimator: {fileID: 0}
   m_isInputParsingRequired: 1
-  m_inputSource: 2
+  m_inputSource: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 23477038655155754}
   m_subTextObjects:
@@ -474,51 +585,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4f86c1c02fa608438acd3c8c4a7733d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_aggroOnDamage: 1
+  m_aggroOnHitNoDamage: 1
   m_aggroRange: 15
   m_attackRange: 3
   m_attackRate: 1.5
-  m_knockbacfkSpeed: 5
-  m_knockbackfDuration: 0.1
-  m_knockbackSftunDuration: 0.25
+  m_knockbackSpeed: 5
+  m_knockbackDuration: 0.1
+  m_knockbackStunDuration: 0.25
   m_shakeCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 0.005050659
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.25
-      value: 1
+      time: 0.60467374
+      value: -0.003557384
+      inSlope: -0.027043605
+      outSlope: -0.027043605
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.70637584
+      value: 1.0050507
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.5
-      value: 0
+      time: 0.7902684
+      value: 0.005050659
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.75
-      value: -1
+      time: 0.89261746
+      value: -0.9898988
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
       time: 1
-      value: 0
+      value: 0.005050659
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   transformToShake: {fileID: 4942092779485748}
   shakeMag: 0.05
+  m_bobSpeed: 2
+  m_bobSpeedVariance: 0.5
+  m_bobHeight: 0.2
   m_eyes: {fileID: 1788381750868538}
+  m_ambientAudioSource: {fileID: 82069933397057986}
 --- !u!195 &195468294049599340
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -527,12 +650,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 1517649204418812}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 1.5
+  m_Radius: 1
   m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 240
-  m_StoppingDistance: 3
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 0
   m_AutoBraking: 1
   m_AutoRepath: 1

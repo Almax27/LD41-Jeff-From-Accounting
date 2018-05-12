@@ -8,9 +8,13 @@ public class GameStage : MonoBehaviour {
     public GameObject enemiesRoot = null;
     public List<MusicSetup> stageMusic = new List<MusicSetup>();
 
-    GameObject m_activeEnemies = null;
+    public bool IsStageActive { get { return m_isStageActive; } }
 
-    public void Start()
+    bool m_isStageActive = false;
+    GameObject m_enemiesRootInstance = null;
+    List<Health> m_activeEnemies = new List<Health>();
+
+    protected virtual void Awake()
     {
         if (enemiesRoot)
         {
@@ -20,24 +24,40 @@ public class GameStage : MonoBehaviour {
 
     public virtual bool IsStageFinished()
     {
-        return m_activeEnemies == null || m_activeEnemies.transform.childCount <= 0;
+        foreach(Health enemy in m_activeEnemies)
+        {
+            if (enemy && enemy.isActiveAndEnabled)
+                return false;
+        }
+        return true;
     }
 
     public virtual void OnStageBegan()
     {
         Debug.Log("OnStageBegan: " + gameObject.name);
-        if (m_activeEnemies)
+
+        m_isStageActive = true;
+
+        m_activeEnemies.Clear();
+        if (m_enemiesRootInstance)
         {
-            Destroy(m_activeEnemies);
+            Destroy(m_enemiesRootInstance);
         }
         if(enemiesRoot)
         { 
-            m_activeEnemies = new GameObject("ActiveEnemies");
-            m_activeEnemies.transform.parent = this.transform;
+            m_enemiesRootInstance = new GameObject("ActiveEnemies");
+            m_enemiesRootInstance.transform.parent = this.transform;
             foreach (Transform t in enemiesRoot.transform)
             {
                 GameObject e = Instantiate<GameObject>(t.gameObject);
-                e.transform.parent = m_activeEnemies.transform;
+                e.transform.parent = m_enemiesRootInstance.transform;
+                foreach (Health enemy in e.GetComponentsInChildren<Health>())
+                {
+                    if (enemy.isActiveAndEnabled)
+                    {
+                        m_activeEnemies.Add(enemy);
+                    }
+                }
             }
         }
         for(int i = 0; i < stageMusic.Count; i++)
@@ -48,8 +68,10 @@ public class GameStage : MonoBehaviour {
 
     public virtual void OnStageEnded()
     {
+        m_isStageActive = false;
+
         Debug.Log("OnStageEnded: " + gameObject.name);
-        Destroy(m_activeEnemies);
+        Destroy(m_enemiesRootInstance);
     }
 
     public virtual void RespawnPlayer(FPSPlayerController player)

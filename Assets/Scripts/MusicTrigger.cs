@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MusicTrigger : MonoBehaviour {
 
+    public bool TriggerOnce = true;
     public List<MusicSetup> musicOnEnter = new List<MusicSetup>();
     public List<MusicSetup> musicOnExit = new List<MusicSetup>();
 
@@ -21,5 +22,6 @@ public class MusicTrigger : MonoBehaviour {
         {
             FAFAudio.Instance.TryPlayMusic(musicOnExit);
         }
+        if (TriggerOnce) gameObject.SetActive(false);
     }
 }

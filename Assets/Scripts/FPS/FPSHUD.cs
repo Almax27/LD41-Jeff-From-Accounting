@@ -54,6 +54,15 @@ public class FPSHUD : MonoBehaviour {
         }
     }
 
+    private void OnEnable()
+    {
+        if(m_pendingPrompt != null)
+        {
+            StopCoroutine(m_pendingPrompt);
+        }
+        m_pendingPrompt = StartCoroutine(DoShowPrompt(m_displayedPrompt));
+    }
+
     public void SetCrosshairVisible(bool isVisible)
     {
         if(m_crosshair)
