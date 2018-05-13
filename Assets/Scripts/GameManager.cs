@@ -159,6 +159,7 @@ public class GameManager : SingletonBehaviour<GameManager> {
 
     public bool AdvanceToStage(int stageIndex, bool forceRespawn = false)
     {
+        SetPaused(false, false);
         if (m_currentStageIndex >= 0 && m_currentStageIndex < gameStages.Count)
         {
             gameStages[m_currentStageIndex].OnStageEnded();
@@ -186,9 +187,9 @@ public class GameManager : SingletonBehaviour<GameManager> {
         }
     }
 
-    public void SetPaused(bool pause)
+    public void SetPaused(bool pause, bool force = false)
     {
-        if (m_isPaused == pause) return;
+        if (!force && m_isPaused == pause) return;
         m_isPaused = pause;
         if (pause)
         {
