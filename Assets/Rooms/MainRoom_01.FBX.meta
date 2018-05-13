@@ -14,6 +14,21 @@ ModelImporter:
     100012: Object008
     100014: Object014
     100016: Object021
+    100018: CorridoorStart
+    100020: JeffOffice
+    100022: Lift_01
+    100024: MainRoom_02
+    100026: MainRoom_03
+    100028: MainRoom_Dome
+    100030: MainRoom_Side_01
+    100032: MainRoom_Side_02
+    100034: MianRoom_01
+    100036: SecondRoom_Corridor
+    100038: SecondRoom_Large
+    100040: SecondRoom_Pyramid
+    100042: SecondRoom_Stairs
+    100044: SecondRoom_StartEnd
+    100046: SecondRoom_Twist
     400000: //RootNode
     400002: Line002
     400004: Object002
@@ -23,6 +38,21 @@ ModelImporter:
     400012: Object008
     400014: Object014
     400016: Object021
+    400018: CorridoorStart
+    400020: JeffOffice
+    400022: Lift_01
+    400024: MainRoom_02
+    400026: MainRoom_03
+    400028: MainRoom_Dome
+    400030: MainRoom_Side_01
+    400032: MainRoom_Side_02
+    400034: MianRoom_01
+    400036: SecondRoom_Corridor
+    400038: SecondRoom_Large
+    400040: SecondRoom_Pyramid
+    400042: SecondRoom_Stairs
+    400044: SecondRoom_StartEnd
+    400046: SecondRoom_Twist
     2300000: //RootNode
     2300002: Line002
     2300004: Object002
@@ -32,6 +62,21 @@ ModelImporter:
     2300012: Object008
     2300014: Object014
     2300016: Object021
+    2300018: CorridoorStart
+    2300020: JeffOffice
+    2300022: Lift_01
+    2300024: MainRoom_02
+    2300026: MainRoom_03
+    2300028: MainRoom_Dome
+    2300030: MainRoom_Side_01
+    2300032: MainRoom_Side_02
+    2300034: MianRoom_01
+    2300036: SecondRoom_Corridor
+    2300038: SecondRoom_Large
+    2300040: SecondRoom_Pyramid
+    2300042: SecondRoom_Stairs
+    2300044: SecondRoom_StartEnd
+    2300046: SecondRoom_Twist
     3300000: //RootNode
     3300002: Line002
     3300004: Object002
@@ -41,6 +86,21 @@ ModelImporter:
     3300012: Object008
     3300014: Object014
     3300016: Object021
+    3300018: CorridoorStart
+    3300020: JeffOffice
+    3300022: Lift_01
+    3300024: MainRoom_02
+    3300026: MainRoom_03
+    3300028: MainRoom_Dome
+    3300030: MainRoom_Side_01
+    3300032: MainRoom_Side_02
+    3300034: MianRoom_01
+    3300036: SecondRoom_Corridor
+    3300038: SecondRoom_Large
+    3300040: SecondRoom_Pyramid
+    3300042: SecondRoom_Stairs
+    3300044: SecondRoom_StartEnd
+    3300046: SecondRoom_Twist
     4300000: Line002
     4300002: Object002
     4300004: Object003
@@ -49,6 +109,21 @@ ModelImporter:
     4300010: Object008
     4300012: Object014
     4300014: Object021
+    4300016: Lift_01
+    4300018: MainRoom_02
+    4300020: MianRoom_01
+    4300022: CorridoorStart
+    4300024: JeffOffice
+    4300026: MainRoom_Dome
+    4300028: MainRoom_03
+    4300030: MainRoom_Side_01
+    4300032: SecondRoom_Large
+    4300034: SecondRoom_Pyramid
+    4300036: SecondRoom_Stairs
+    4300038: SecondRoom_Twist
+    4300040: SecondRoom_Corridor
+    4300042: MainRoom_Side_02
+    4300044: SecondRoom_StartEnd
     6400000: //RootNode
     6400002: Line002
     6400004: Object002
@@ -58,6 +133,21 @@ ModelImporter:
     6400012: Object008
     6400014: Object014
     6400016: Object021
+    6400018: CorridoorStart
+    6400020: JeffOffice
+    6400022: Lift_01
+    6400024: MainRoom_02
+    6400026: MainRoom_03
+    6400028: MainRoom_Dome
+    6400030: MainRoom_Side_01
+    6400032: MainRoom_Side_02
+    6400034: MianRoom_01
+    6400036: SecondRoom_Corridor
+    6400038: SecondRoom_Large
+    6400040: SecondRoom_Pyramid
+    6400042: SecondRoom_Stairs
+    6400044: SecondRoom_StartEnd
+    6400046: SecondRoom_Twist
     9500000: //RootNode
     11100000: //RootNode
   externalObjects:
@@ -76,6 +166,36 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: 16 - Default
     second: {fileID: 2100000, guid: eda21c41effbdda4daf0df9e8700babc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brown
+    second: {fileID: 2100000, guid: 604d269ac6079174ca21aa90d92c312f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Carpet_01
+    second: {fileID: 2100000, guid: 0432bc71f6c24134a8e277361d20b821, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Carpet_02
+    second: {fileID: 2100000, guid: 765e27231024f1946a2fadab5eca49f3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Carpet_03
+    second: {fileID: 2100000, guid: e643ccee56a4e134ba220f154273bae1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Carpet_04
+    second: {fileID: 2100000, guid: cc9479640322caa4c948bd34e136934f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Carpet_Emissive
+    second: {fileID: 2100000, guid: def638281d97208498ef517724c1a680, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -101,10 +221,70 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: 'Material #13'
     second: {fileID: 2100000, guid: c9c339e5fda75864cbaa525b03d09691, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #14'
+    second: {fileID: 2100000, guid: 470297aa82f81f840a0d54113aa75291, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #15'
+    second: {fileID: 2100000, guid: 95047fa0f7bb2a34285f0b305a5918a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #16'
+    second: {fileID: 2100000, guid: 75092a13cd4113e44bf853969acea89d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 'Material #19'
+    second: {fileID: 2100000, guid: c308ac37dd5f78a40bd8e4aad8d6b54b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Orange
+    second: {fileID: 2100000, guid: 587f5b1ddcdf4914ca78a6cbd97a8a7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Red
+    second: {fileID: 2100000, guid: 1ac5722163714de4289df1407ff63079, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Roof_01
+    second: {fileID: 2100000, guid: be1de21e9b433564089fcd47b1d5b06f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_01
+    second: {fileID: 2100000, guid: 8cfc39128d70ad74c99d783fdf4c0bbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_02
+    second: {fileID: 2100000, guid: 53b79fc64e0450448af55ec0d738889d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_03
+    second: {fileID: 2100000, guid: f153186403ab85f4b87fa469d380ad05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_04
+    second: {fileID: 2100000, guid: b44cedaa3e6bcf343a0f56212635fa3f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_05
+    second: {fileID: 2100000, guid: 7500bdb6ef1dc3442a094b5a5025841b, type: 2}
   materials:
     importMaterials: 1
-    materialName: 0
-    materialSearch: 1
+    materialName: 1
+    materialSearch: 2
     materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
