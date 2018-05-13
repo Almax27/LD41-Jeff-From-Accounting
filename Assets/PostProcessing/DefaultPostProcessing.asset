@@ -42,8 +42,8 @@ MonoBehaviour:
   ambientOcclusion:
     m_Enabled: 1
     m_Settings:
-      intensity: 0.67
-      radius: 0.3
+      intensity: 1
+      radius: 0.1
       sampleCount: 3
       downsampling: 1
       forceForwardCompatibility: 0
@@ -79,7 +79,7 @@ MonoBehaviour:
   motionBlur:
     m_Enabled: 1
     m_Settings:
-      shutterAngle: 32
+      shutterAngle: 40
       sampleCount: 5
       frameBlending: 0
   eyeAdaptation:
@@ -121,11 +121,11 @@ MonoBehaviour:
         neutralWhiteClip: 10
       basic:
         postExposure: 0.7
-        temperature: 0.9
+        temperature: 1
         tint: 0
         hueShift: 0
-        saturation: 1.041
-        contrast: 1.032
+        saturation: 1.2
+        contrast: 1.1
       channelMixer:
         red: {x: 1, y: 0, z: 0}
         green: {x: 0, y: 1, z: 0}

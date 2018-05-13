@@ -1874,7 +1874,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -1910,7 +1910,7 @@ Camera:
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
   m_TargetEye: 3
-  m_HDR: 0
+  m_HDR: 1
   m_AllowMSAA: 1
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
@@ -2509,8 +2509,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 23af539826eda9a4eb94e42a53ad7bc4, type: 2}
-  - {fileID: 2100000, guid: 75fffa6626b83a843b6793702e22cb23, type: 2}
+  - {fileID: 2100000, guid: b1569821c09797442a645ca58da5131f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3190,8 +3189,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 23af539826eda9a4eb94e42a53ad7bc4, type: 2}
-  - {fileID: 2100000, guid: 3720601ca052bea46bad560c6aa3f442, type: 2}
+  - {fileID: 2100000, guid: b1569821c09797442a645ca58da5131f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
