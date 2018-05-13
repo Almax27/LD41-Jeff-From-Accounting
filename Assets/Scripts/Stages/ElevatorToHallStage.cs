@@ -10,6 +10,7 @@ public class ElevatorToHallStage : GameStage {
     {
         if (elevatorController)
         {
+            elevatorController.enabled = true;
             elevatorController.Reset();
         }
         base.OnStageBegan();
@@ -18,6 +19,10 @@ public class ElevatorToHallStage : GameStage {
     public override void OnStageEnded()
     {
         base.OnStageEnded();
+        if (elevatorController)
+        {
+            elevatorController.enabled = false;
+        }
     }
 
     public override bool IsStageFinished()
@@ -30,6 +35,7 @@ public class ElevatorToHallStage : GameStage {
         if (elevatorController)
         {
             elevatorController.OpenExit();
+            elevatorController.enabled = false;
         }
         base.RespawnPlayer(player);
     }

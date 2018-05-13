@@ -17,16 +17,20 @@ public class ElevatorController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player" && !GameManager.Instance.spawnAtSceneViewCamera)
+        if(other.tag == "Player")
         {
-            if (m_director && !m_triggered)
-            {
-                m_director.time = 0;
-                m_director.Play();
-                m_triggered = true;
-            }
             m_playerInside = true;
             FAFAudio.Instance.TryPlayMusic(musicOnEnter);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(this.enabled && m_director && m_playerInside && !m_triggered)
+        {
+            m_director.time = 0;
+            m_director.Play();
+            m_triggered = true;
         }
     }
 
