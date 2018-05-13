@@ -265,46 +265,17 @@ MonoBehaviour:
   m_aggroOnHitNoDamage: 1
   m_aggroRange: 10
   m_attackRange: 3
-  m_attackRate: 1
-  m_knockbackSpeed: 5
-  m_knockbackDuration: 0.1
-  m_knockbackStunDuration: 0.25
-  m_shakeCurve:
+  m_attackDelay: 1
+  m_attackSFX: {fileID: 0}
+  m_attackShakeCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 2
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.25
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.5
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 0.75
-      value: -1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  m_knockbackSpeed: 5
+  m_knockbackDuration: 0.1
+  m_knockbackStunDuration: 0.25
   transformToShake: {fileID: 0}
   shakeMag: 0.05
   m_bobSpeed: 2

@@ -25,6 +25,23 @@ public class BulbAnimator : MonoBehaviour {
         }
     }
 
+    private void OnEnable()
+    {
+        m_tick = 0.0f;
+        foreach (GameObject bulb in bulbGroups)
+        {
+            SetBulbEmission(bulb, 0);
+        }
+    }
+
+    private void OnDisable()
+    {
+        foreach(GameObject bulb in bulbGroups)
+        {
+            SetBulbEmission(bulb, 0);
+        }
+    }
+
 
     // Update is called once per frame
     void Update ()
