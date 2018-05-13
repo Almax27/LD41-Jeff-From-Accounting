@@ -574,48 +574,43 @@ MonoBehaviour:
   m_aggroOnHitNoDamage: 1
   m_aggroRange: 10
   m_attackRange: 3
-  m_attackRate: 1.5
-  m_knockbackSpeed: 5
-  m_knockbackDuration: 0.1
-  m_knockbackStunDuration: 0.25
-  m_shakeCurve:
+  m_attackDelay: 1
+  m_attackSFX: {fileID: 11400000, guid: 4336c7fa0c39b244dbeae18750fddff1, type: 2}
+  m_attackShakeCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 2
       time: 0
-      value: 0
+      value: 0.005050659
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.25
-      value: 1
-      inSlope: 0
-      outSlope: 0
+      time: 0.19583786
+      value: 2.974975
+      inSlope: -0.027420435
+      outSlope: -0.027420435
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.5
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      time: 0.32347193
+      value: -0.5488275
+      inSlope: -0.17614414
+      outSlope: -0.17614414
       tangentMode: 0
     - serializedVersion: 2
-      time: 0.75
-      value: -1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-    - serializedVersion: 2
-      time: 1
-      value: 0
+      time: 0.4435953
+      value: -0.007085802
       inSlope: 0
       outSlope: 0
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
+  m_knockbackSpeed: 5
+  m_knockbackDuration: 0.1
+  m_knockbackStunDuration: 0.25
   transformToShake: {fileID: 4041971288095512}
-  shakeMag: 0.05
+  shakeMag: 0.2
   m_bobSpeed: 2
   m_bobSpeedVariance: 0.5
   m_bobHeight: 0.2

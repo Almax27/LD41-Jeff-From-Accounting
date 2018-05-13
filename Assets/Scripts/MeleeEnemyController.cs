@@ -17,15 +17,15 @@ public class MeleeEnemyController : EnemyController {
     public bool m_aggroOnHitNoDamage = true;
     public float m_aggroRange = 10;
     public float m_attackRange = 3.0f;
-    public float m_attackRate = 1.0f;
+    public float m_attackDelay = 1.0f; //delay between attacks
+    public FAFAudioSFXSetup m_attackSFX = null;
+    public AnimationCurve m_attackShakeCurve = new AnimationCurve();
 
     public float m_knockbackSpeed = 5.0f;
     public float m_knockbackDuration = 0.1f;
     public float m_knockbackStunDuration = 0.25f;
 
-    public AnimationCurve m_shakeCurve = new AnimationCurve(new Keyframe(0f, 0f), new Keyframe(0.25f, 1f),
-                                                            new Keyframe(0.5f, 0f), new Keyframe(0.75f, -1f),
-                                                            new Keyframe(1f, 0f)); // sin curve for head bob
+    
     public Transform transformToShake = null;
     public float shakeMag = 0.05f;
 
@@ -80,8 +80,7 @@ public class MeleeEnemyController : EnemyController {
             originalShakePos = transformToShake.localPosition;
         }
         m_bobSpeed += Random.Range(-m_bobSpeedVariance, m_bobSpeedVariance);
-        m_attackTick = m_attackRate;
-        m_shakeCurve.postWrapMode = WrapMode.Loop;
+        m_attackShakeCurve.postWrapMode = WrapMode.Loop;
         if (m_agent)
         {
             m_baseSpeed = m_agent.speed;
@@ -92,7 +91,7 @@ public class MeleeEnemyController : EnemyController {
     {
         SetTarget(null);
         SetState(MeleeEnemyState.Moving, true);
-        m_attackTick = m_attackRate;
+        m_attackTick = 0;
         m_knockbackTick = float.MaxValue;
         m_knockbackTargetPosition = transform.position;
     }
@@ -148,7 +147,11 @@ public class MeleeEnemyController : EnemyController {
     }
 
     void UpdateMoving(float deltaTime)
-    {      
+    {
+        m_bobTick += deltaTime;
+        Vector3 pos = originalShakePos;
+        pos += Vector3.up * Easing.Ease01(Mathf.PingPong(m_bobTick * m_bobSpeed, 1.0f), Easing.Method.QuadInOut) * m_bobHeight;
+
         if (m_target)
         {
             Vector3 targetVector = m_target.position - transform.position;
@@ -160,18 +163,34 @@ public class MeleeEnemyController : EnemyController {
                 Quaternion targetRotation = Quaternion.LookRotation(targetVector, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, 180.0f * deltaTime);
 
-                m_attackTick += deltaTime;
-                if (m_attackTick > m_attackRate)
+                if(m_attackTick < m_attackDelay)
                 {
+                    //start attack
+                    if (m_attackTick + deltaTime >= m_attackDelay)
+                    {
+                        m_attackSFX.Play(transform.position, 2);
+                    }
+                }
+                else if(m_attackShakeCurve.length > 0 && m_attackTick < m_attackDelay + m_attackShakeCurve.keys[m_attackShakeCurve.length - 1].time)
+                {
+                    //attacking
+                    float shake = m_attackShakeCurve.Evaluate(m_attackTick - m_attackDelay);
+                    pos += new Vector3(0.0f, 1.0f, 1.0f) * shake * shakeMag;
+                }
+                else
+                {
+                    //do damage and reset attack
                     Health health = m_target.GetComponent<Health>();
                     if (health)
                     {
                         Vector3 hitNormal = transform.position - m_target.position;
                         hitNormal.Normalize();
                         health.TakeDamage(new DamagePacket(this.gameObject, hitNormal, true));
-                        m_attackTick = 0;
                     }
+                    m_attackTick = 0;
                 }
+
+                m_attackTick += deltaTime;
             }
             else
             {
@@ -187,14 +206,6 @@ public class MeleeEnemyController : EnemyController {
 
             if (transformToShake)
             {
-                m_bobTick += deltaTime;
-                Vector3 pos = originalShakePos;
-                pos += Vector3.up * Easing.Ease01(Mathf.PingPong(m_bobTick * m_bobSpeed, 1.0f), Easing.Method.QuadInOut) * m_bobHeight;
-                if (m_attackTick > 0 && m_attackTick < m_attackRate)
-                {
-                    float shake = m_shakeCurve.Evaluate(m_attackTick / m_attackRate);
-                    pos += new Vector3(0.7f, 1.2f, 0.5f) * shake * shakeMag;
-                }
                 transformToShake.localPosition = pos;
             }
         }
